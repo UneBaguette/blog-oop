@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Controllers;
+
+use App\models\User;
+use App\Validation\Validator;
+
+class UserController extends Controller {
+    public function login()
+    {
+        return $this->view('auth.login');
+    }
+
+    public function register()
+    {
+        return $this->view('auth.register');
+    }
+
+    public function loginPost()
+    {
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'username' => ['required', 'min:3'],
+            'password' => ['required']
+        ]);
+
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /login');
+            exit(1);
+        }
+        $user = (new User($this->getDB()))->getByUsername($_POST['username']);
+
+        if (password_verify($_POST['password'], $user->password)) {
+            $_SESSION['auth'] = (int) $user->admin;
+            return header('Location: /admin/posts?success=true');
+        }
+        return header('Location: /login');
+    }
+
+    public function registerPost()
+    {
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'username' => ['required', 'min:3'],
+            'password' => ['required'],
+            'passwordverify' => ['required']
+        ]);
+        $username = $_POST['username'];
+        $pass = $_POST['password'];
+        if ($errors) {
+            $_SESSION['errors'][] = $errors;
+            header('Location: /register');
+            exit(1);
+        }
+        
+        $user = new User($this->getDB());
+
+        if ($pass === $_POST['passwordverify']){
+            $hashpwd = password_hash($pass, PASSWORD_BCRYPT);
+            if ($user->register($username, $hashpwd)) {
+                $_SESSION['auth'] = (int) $user->getAdminByUsername($username);
+                return header('Location: /admin/posts?success=true&registered=true');
+            }
+            return header('Location: /register');
+        }
+        return header('Location: /register');
+    }
+
+    public function logout()
+    {
+        session_destroy();
+
+        return header('Location: /');
+    }
+}
