@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : lun. 30 jan. 2023 à 10:04
--- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.1.12
+-- Host: localhost
+-- Generation Time: Feb 05, 2023 at 04:27 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,33 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `myapp`
+-- Database: `blog_oop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `posts`
+-- Table structure for table `media`
+--
+
+CREATE TABLE `media` (
+  `id` int(11) NOT NULL,
+  `name` varchar(124) NOT NULL,
+  `alt` varchar(124) DEFAULT NULL,
+  `filename` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`id`, `name`, `alt`, `filename`) VALUES
+(1, 'Batman', 'batman qui réfléchit', 'bat.gif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
@@ -35,7 +55,7 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `posts`
+-- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `content`, `created_at`) VALUES
@@ -45,12 +65,24 @@ INSERT INTO `posts` (`id`, `title`, `content`, `created_at`) VALUES
 (14, 'Franz Schubert', '   Compositeur emblématique de la musique romantique allemande, il est reconnu comme le maître incontesté du lied. Il s\'est particulièrement consacré à la musique de chambre, et a aussi écrit de nombreuses œuvres pour piano, une dizaine de symphonies, ainsi que de la musique chorale et sacrée.\r\n\r\nBien qu\'il soit mort précocement, à 31 ans, Schubert est l\'un des compositeurs les plus prolifiques du xixe siècle. Le catalogue de ses œuvres compte plus de mille compositions, dont une partie importante est publiée après sa mort et révèle des chefs-d\'œuvre qui contribuent à sa renommée posthume. ', '2022-12-05 10:10:07'),
 (25, 'Léonard de Vinci', 'Léonard de Vinci (italien : Leonardo di ser Piero da VinciÉcouter, dit Leonardo da Vinci), né le 14 avril 1452 du calendrier actuel à Vinci (Toscane) et mort le 2 mai 1519 à Amboise (Touraine), est un peintre italien polymathe, à la fois artiste, organisateur de spectacles et de fêtes, scientifique, ingénieur, inventeur, anatomiste, sculpteur, peintre, architecte, urbaniste, botaniste, musicien, philosophe et écrivain.\r\n\r\nEnfant naturel d\'une paysanne, Caterina di Meo Lippi et d\'un notaire, Pierre de Vinci, il est élevé auprès de ses grands-parents paternels dans la maison familiale de Vinci jusqu’à l’âge de dix ans. À Florence, son père l\'inscrit pour deux ans d’apprentissage dans une scuola d’abaco et ensuite à l\'atelier d\'Andrea del Verrocchio où il côtoie Botticelli, Le Pérugin et Domenico Ghirlandaio.\r\n\r\nIl quitte l’atelier en 1482 et se présente principalement comme ingénieur au duc de Milan Ludovic Sforza. Introduit à la cour, il obtient quelques commandes de peinture et ouvre un atelier. Il étudie les mathématiques et le corps humain. Il rencontre également Gian Giacomo Caprotti, dit Salai, un enfant de dix ans, turbulent élève de son atelier, qu’il prend sous son aile.\r\n\r\nEn septembre 1499, Léonard part à Mantoue, à Venise et retourne à Florence. Il y repeint et s\'adonne à l’architecture ainsi qu\'à l\'ingénierie militaire. Pendant un an, il confectionne des cartes géographiques pour César Borgia.\r\n\r\nEn 1503, la ville de Florence lui commande une fresque, mais il en est déchargé par le roi de France Louis XII qui l\'appelle à Milan où, de 1506 à 1511, il est « peintre et ingénieur ordinaire » du souverain. Il rencontre Francesco Melzi, son élève, ami et exécuteur testamentaire. En 1504, son père meurt, mais il est exclu du testament. En 1507, il est usufruitier des terres de son oncle décédé.', '2023-01-27 11:25:27'),
 (26, 'Giorgio Vasari', 'Giorgio Vasari (30 juillet 1511 à Arezzo - 27 juin 1574 à Florence) est un peintre, architecte et écrivain toscan. Son recueil biographique Les Vies des meilleurs peintres, sculpteurs et architectes, particulièrement sa seconde édition de 1568, est considéré comme une des publications fondatrices de l\'histoire de l\'art.\r\n\r\n...', '2023-01-27 11:26:46'),
-(27, 'Jehan-Rictus', 'Gabriel Randon de Saint-Amand, initialement Gabriel Randon, qui prit le pseudonyme de Jehan Rictus ([ʒeã ʁiktys] ou [ʒøã ʁiktys] ou [ʒã ʁiktys]) (Jehan-Rictus avec un trait d\'union à partir de 19221), est né à Boulogne-sur-Mer le 21 septembre 1867 et mort à Paris le 6 novembre 1933. C\'est un poète français, célèbre pour ses œuvres composées dans la langue du peuple du Paris de son époque.\r\n</br></br>\r\nSes poèmes se trouvent principalement réunis dans deux livres, Les Soliloques du pauvre et ... le Cœur populaire. Le premier fait soliloquer un sans-logis contraint d\'errer dans Paris, le second divers personnages : prostituées, enfants battus, ouvriers, cambrioleurs, etc.\r\n</br></br>\r\nhttps://fr.wikipedia.org/wiki/Jehan-Rictus', '2023-01-27 11:35:40');
+(27, 'Jehan-Rictus', 'Gabriel Randon de Saint-Amand, initialement Gabriel Randon, qui prit le pseudonyme de Jehan Rictus ([ʒeã ʁiktys] ou [ʒøã ʁiktys] ou [ʒã ʁiktys]) (Jehan-Rictus avec un trait d\'union à partir de 19221), est né à Boulogne-sur-Mer le 21 septembre 1867 et mort à Paris le 6 novembre 1933. C\'est un poète français, célèbre pour ses œuvres composées dans la langue du peuple du Paris de son époque.\r\n</br></br>\r\nSes poèmes se trouvent principalement réunis dans deux livres, Les Soliloques du pauvre et ... le Cœur populaire. Le premier fait soliloquer un sans-logis contraint d\'errer dans Paris, le second divers personnages : prostituées, enfants battus, ouvriers, cambrioleurs, etc.\r\n</br></br>\r\nhttps://fr.wikipedia.org/wiki/Jehan-Rictus', '2023-01-27 11:35:40'),
+(28, 'Les trois petits canards', 'Il était une fois, trois petits canards, le premier, très rapide mais très con, le deuxième, moins con que le premier mais obèse puis le troisème tout petit, presque microscopique. C\'est aussi une famille de dégénérés.', '2023-01-31 15:43:41');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `post_tag`
+-- Table structure for table `post_media`
+--
+
+CREATE TABLE `post_media` (
+  `post_id` int(11) NOT NULL,
+  `media_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_tag`
 --
 
 CREATE TABLE `post_tag` (
@@ -59,7 +91,7 @@ CREATE TABLE `post_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `post_tag`
+-- Dumping data for table `post_tag`
 --
 
 INSERT INTO `post_tag` (`post_id`, `tag_id`) VALUES
@@ -73,12 +105,13 @@ INSERT INTO `post_tag` (`post_id`, `tag_id`) VALUES
 (25, 1),
 (25, 3),
 (26, 1),
-(27, 5);
+(27, 5),
+(28, 5);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -87,7 +120,7 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `tags`
+-- Dumping data for table `tags`
 --
 
 INSERT INTO `tags` (`id`, `name`) VALUES
@@ -100,81 +133,109 @@ INSERT INTO `tags` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `admin` int(11) NOT NULL
+  `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `admin`) VALUES
 (1, 'admin', '$2y$10$x1HaLhyop9TKKX3DzcCgCO./OZQNwgL9jzffWF49jN85dDwtx31C6', 1),
-(2, 'user1', '$2y$10$sin9mDJwXNtkA0g5krhbsOCxAV/I74KKEbuC1z5ErQzoFaOYyK7Fm', 0);
+(2, 'user1', '$2y$10$sin9mDJwXNtkA0g5krhbsOCxAV/I74KKEbuC1z5ErQzoFaOYyK7Fm', 0),
+(3, 'prout', '$2y$10$8YV6O8qFfFs8lpOGsS8J4eper8I91dilOi0tIIMOAe/Wy5TqCX1E2', 1),
+(4, 'caca', '$2y$10$nPC6qh4ffBNoXav5WItLguI4Z9DHdgsJjCUIX9fBvHk/YVB5ODKTu', 0);
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `posts`
+-- Indexes for table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `post_tag`
+-- Indexes for table `post_media`
+--
+ALTER TABLE `post_media`
+  ADD KEY `post_id` (`post_id`),
+  ADD KEY `media_id` (`media_id`);
+
+--
+-- Indexes for table `post_tag`
 --
 ALTER TABLE `post_tag`
   ADD KEY `post_tag_ibfk_1` (`post_id`),
   ADD KEY `post_tag_ibfk_2` (`tag_id`);
 
 --
--- Index pour la table `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `posts`
+-- AUTO_INCREMENT for table `media`
+--
+ALTER TABLE `media`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT pour la table `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `post_tag`
+-- Constraints for table `post_media`
+--
+ALTER TABLE `post_media`
+  ADD CONSTRAINT `post_media_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `post_media_ibfk_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`);
+
+--
+-- Constraints for table `post_tag`
 --
 ALTER TABLE `post_tag`
   ADD CONSTRAINT `post_tag_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
