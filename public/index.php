@@ -11,7 +11,7 @@ define('HREF_ROOT', '/' );
 define('VIEWS_FORM_ROOT', '../../../' );
 
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
-define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR); // Code original
+define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 //define('SCRIPTS', 'public/');
 define('DB_NAME', 'blog_oop');
 define('DB_HOST', '127.0.0.1');

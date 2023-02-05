@@ -34,7 +34,10 @@ class UserController extends Controller {
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['connectedas'] = $_POST['username'];
             $_SESSION['auth'] = (int) $user->admin;
-            return header('Location: /admin/posts?success=true');
+            if ($_SESSION['auth'] === 1) {
+                return header('Location: /admin/posts?success=true');
+            }
+            return header('Location: /');
         }
         return header('Location: /login');
     }
@@ -60,8 +63,12 @@ class UserController extends Controller {
         if ($pass === $_POST['passwordverify']){
             $hashpwd = password_hash($pass, PASSWORD_BCRYPT);
             if ($user->register($username, $hashpwd)) {
+                $_SESSION['connectedas'] = $_POST['username'];
                 $_SESSION['auth'] = (int) $user->getAdminByUsername($username);
-                return header('Location: /admin/posts?success=true&registered=true');
+                if ($_SESSION['auth'] === 1) {
+                    return header('Location: /admin/posts?success=true&registered=true');
+                }
+                return header('Location: /');
             }
             return header('Location: /register');
         }
