@@ -1,7 +1,7 @@
 <h1>Administration des articles</h1>
 
 <?php if(isset($_GET['success'])): ?>
-    <div class="alert alert-success">Vous êtes connecté !</div>
+    <div class="alert alert-success">Vous êtes connecté ! (Connecté en tant que "<?= $_SESSION['connectedas'] ?>")</div>
     <?php if (isset($_GET['registered'])): ?>
         <div class="alert alert-success">Vous êtes enregistré avec succès !</div>
     <?php endif; ?>

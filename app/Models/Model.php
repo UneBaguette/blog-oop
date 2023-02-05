@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Exception;
 use PDO;
 use Database\DBConnection;
 
 abstract class Model {
 
+    /**
+     * Contient la connection avec la base de donnée
+     * @var DBConnection
+     */
     protected $db;
     protected $table;
     private $id;
@@ -17,21 +20,42 @@ abstract class Model {
         $this->db = $db;
     }
 
+    /**
+     * Récupère toute les colonnes de la table appelé
+     * @return array Les données de la table appelé
+     */
     public function all(): array
     {
         if ($this->table === "posts"){
+            // TODO: investigate bug with ORDER by
             return $this->query("SELECT * FROM {$this->table} ORDER By created_at DESC;");
         }
-        return $this->query("SELECT * FROM {$this->table};"); //BUG avec tag ORDER BY created_at DESC
+        return $this->query("SELECT * FROM {$this->table};");
     }
 
+    public function resetAI(): bool{
+        $max = $this->query("SELECT MAX( `id` ) as id_max FROM `{$this->table}`;");
+        $n = array("n" => $max[0]->id_max + 1);
+        // TODO: fix query not working
+        $st = $this->query("ALTER TABLE `{$this->table}` AUTO_INCREMENT = :n;", $n, true);
+        if ($st){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Récupère tout d'une table via son id
+     * @param int $id 
+     * @return Model 
+     */
     public function findByid(int $id): Model
     {
         return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
     }
 
     public function create(array $data, ?array $relations = null)
-    {
+    {;
         $firstParenthesis = "";
         $secondParenthesis = "";
         $i = 1;
@@ -43,8 +67,7 @@ abstract class Model {
             $i++;
         }
 
-        return $this->query("INSERT INTO {$this->table} ($firstParenthesis)
-        VALUES($secondParenthesis)", $data);
+        return $this->query("INSERT INTO {$this->table} ($firstParenthesis) VALUES ($secondParenthesis)", $data);
     }
 
     public function update(int $id, array $data, ?array $relations = null)
@@ -70,8 +93,6 @@ abstract class Model {
 
     public function query(string $sql, array $param = null, bool $single = null)
     {
-       // echo "</br>Model query: " . $sql;
-       // var_dump( "</br>Model param: " , $param);
         $method = is_null($param) ? 'query' : 'prepare';
 
         if (

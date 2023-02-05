@@ -31,13 +31,20 @@ $router->get('/register', 'App\Controllers\UserController@register');
 $router->post('/register', 'App\Controllers\UserController@registerPost');
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
+// POST
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
-$router->get('/admin/tags', 'App\Controllers\Admin\PostController@tags');
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
 $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
 $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
+// TAG
+$router->get('/admin/tags', 'App\Controllers\Admin\TagController@index');
+$router->get('/admin/tags/create', 'App\Controllers\Admin\TagController@create');
+$router->post('/admin/tags/create', 'App\Controllers\Admin\TagController@createTag');
+$router->post('/admin/tags/delete/:id', 'App\Controllers\Admin\TagController@destroy');
+$router->get('/admin/tags/edit/:id', 'App\Controllers\Admin\TagController@edit');
+$router->post('/admin/tags/edit/:id', 'App\Controllers\Admin\TagController@update');
 
 try {
     $router->run();

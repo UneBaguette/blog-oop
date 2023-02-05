@@ -2,26 +2,7 @@ h1 {
     margin: 15px 0;
 }
 
-.card-body {
-    position: relative;
-}
-
-.card-body img {
-    z-index: 9;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 140px;
-}
-
-.edit {
-    background-color: #C40405; border-color:#C40405;
-}
-
-.edit:hover {
-    background-color: #D30405;
-    border-color:#d60404;
-}
+/* Header - Navigation  */
 
 .navbar-light, .bg-light {
     background: #f0f0f0 !important;
@@ -65,8 +46,117 @@ h1 {
     background: #aaaaaa;
 }
 
+/* Body elements */
+
+.container{
+    margin-top: 9px;
+    margin-bottom: 140px;
+}
+
+.card-body {
+    position: relative;
+}
+
+.card-body img {
+    z-index: 9;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 140px;
+}
+
+.edit {
+    background-color: #C40405; border-color:#C40405;
+}
+
+.edit:hover {
+    background-color: #D30405;
+    border-color:#d60404;
+}
+
 .current {
     background: #bebebe;
+}
+
+/* Blog - Images Section */
+
+.section-img {
+    margin-bottom: 50px;
+}
+
+.section-img h2 {
+    margin-top: 10px;
+}
+
+/* ---- OVERLAY ---- */
+
+.section-img .overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: #00000063;
+    width: 100%;
+    height: 100%;
+}
+
+.section-img .overlay.hidden {
+    display: none;
+}
+
+/*  ---- OVERLAY ---- */
+
+.section-img #count-img{
+    margin: 0 5px;
+}
+
+.img-container {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 20px;
+    list-style: none;
+}
+
+.img-container li {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.img-container img {
+    width: 400px;
+    height: 300px;
+}
+
+.img-container .overlay-vignette{
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.5984594521402311) 70%);
+    background: -webkit-linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.5984594521402311) 70%);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.5984594521402311) 70%);
+    text-align: center;
+    color: #dfdfdf;
+    transition: 200ms ease all;
+    font-size: 1.2rem;
+}
+
+.img-container li:hover .overlay-vignette{
+    opacity: 1;
 }
 
 @keyframes beat {

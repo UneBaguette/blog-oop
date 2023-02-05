@@ -42,8 +42,4 @@ class User extends Model {
         $st->execute(['user' => $user, 'pass' => $pass, 'admin' => $admin]);
         return true;
     }
-
-    public static function test () {
-        echo __METHOD__, PHP_EOL;
-    }
 }

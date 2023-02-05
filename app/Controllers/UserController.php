@@ -32,6 +32,7 @@ class UserController extends Controller {
         $user = (new User($this->getDB()))->getByUsername($_POST['username']);
 
         if (password_verify($_POST['password'], $user->password)) {
+            $_SESSION['connectedas'] = $_POST['username'];
             $_SESSION['auth'] = (int) $user->admin;
             return header('Location: /admin/posts?success=true');
         }

@@ -11,3 +11,33 @@
 
 <?php endif; ?>
 <a href="<?= HREF_ROOT ?>posts" class="btn btn-secondary">Retourner en arrière</a>
+
+<section class="section-img">
+    <h2>Images<span id="count-img">(2)</span></h2>
+    <ul class="img-container">
+        <!-- MODEL -->
+        <!-- <li>
+            <img src="/public/images/lonely.gif">
+            <div class="overlay">
+                <p>Test</p>
+            </div>
+        </li> -->
+        <!-- MODEL -->
+        <li>
+            <img src="/public/images/lonely.gif">
+            <div class="overlay-vignette">
+                <p>Bob</p>
+            </div>
+        </li>
+        <li>
+            <img src="/public/images/bat.gif">
+            <div class="overlay-vignette">
+                <p>Batman</p>
+            </div>
+        </li>
+    </ul>
+    <div class="overlay hidden">
+        
+    </div>
+</section>
+

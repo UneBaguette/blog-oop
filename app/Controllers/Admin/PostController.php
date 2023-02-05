@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Image;
 
 class PostController extends Controller {
 
@@ -43,16 +44,13 @@ class PostController extends Controller {
 
     public function edit(int $id)
     {
-       // var_dump("Model edit:", $id);
         $this->isAdmin();
 
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
+        $image = (new Image($this->getDB()))->all();
         
-        //var_dump("Model edit:", $post);
-        //var_dump("Model edit:", $tags);
-        return $this->view('admin.post.form', compact('post', 'tags'));
-        //return $this->view('admin.post.form', compact('post'));
+        return $this->view('admin.post.form', compact('post', 'tags', 'image'));
     }
 
     public function update(int $id)
@@ -63,9 +61,7 @@ class PostController extends Controller {
 
         $post = new Post($this->getDB());
 
-        // var_dump("PostController update:",$_POST);
         $tags = array_pop($_POST);
-       // var_dump("PostController update:",$_POST, $tags);
 
         $result = $post->update($id, $_POST, $tags);
 

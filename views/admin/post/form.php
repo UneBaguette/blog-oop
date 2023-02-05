@@ -40,10 +40,15 @@ function submitPostLink()
             <?php endforeach ?>
         </select>
     </div>
+
+    <div class="form-group">
+        <label for="tags">Images de l'article</label>
+        
+    </div>
     
     <button type="submit"  class="btn btn-primary"><?= isset($params['post']) ? "Enregistrer les modifications" : "Enregistrer mon article" ?></button>
     
-    </form>
+</form>
 
 
 

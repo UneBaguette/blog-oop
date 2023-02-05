@@ -31,7 +31,7 @@ class Post extends Model {
 
     public function getImage(): string
     {
-        return '<img width="200" src='.'../public/images/bat.gif'.' id='. $this->id .'" >';
+        return '<img width="200" src='.'/public/images/bat.gif'.' id='. $this->id .'>';
     }
 
     /**
@@ -48,6 +48,14 @@ class Post extends Model {
         return $this->query("
             SELECT t.* FROM tags t
             INNER JOIN post_tag pt ON pt.tag_id = t.id
+            WHERE pt.post_id = ?
+        ", [$this->id]);
+    }
+    public function getImages()
+    {
+        return $this->query("
+            SELECT i.* FROM media AS i
+            INNER JOIN post_media AS pt ON pt.media_id = i.id
             WHERE pt.post_id = ?
         ", [$this->id]);
     }
@@ -81,6 +89,7 @@ class Post extends Model {
         if ($result) {
             return true;
         }
+        return false;
 
     }
 }
