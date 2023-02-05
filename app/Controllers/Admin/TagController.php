@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Models\Post;
 use App\Models\Tag;
 
 class TagController extends Controller {
@@ -52,7 +51,6 @@ class TagController extends Controller {
         $tag = (new Tag($this->getDB()))->findById($id);
 
         return $this->view('admin.tag.form', compact('tag'));
-        //return $this->view('admin.post.form', compact('post'));
     }
 
     public function update(int $id)

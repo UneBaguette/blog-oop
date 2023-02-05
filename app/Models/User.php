@@ -23,19 +23,19 @@ class User extends Model {
         return $this->query("SELECT admin FROM {$this->table} WHERE username = ?", [$username], true);
     }
 
-    public function checkUsername(string $username): bool
+    public function exist(string $username): bool
     {
-        $st = $this->query("SELECT * FROM {$this->table} WHERE username = ?", [$username], true);
+        $st = $this->query("SELECT id, username as user FROM {$this->table} WHERE username = ?", [$username], true);
         foreach($st as $v){
-            if ($v['id'] === $username){
-                return false;
+            if ($v === $username){
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public function register($user, $pass, $admin = 1): bool{
-        if (!$this->checkUsername($user)){
+        if ($this->exist($user)){
             return false;
         }
         $st = $this->db->getPDO()->prepare("INSERT INTO {$this->table}(id, username, password, admin) VALUES (NULL, :user, :pass, :admin)");

@@ -1,24 +1,22 @@
 <?php
 
-$currentPage = $_SERVER['REQUEST_URI'];
-
 $navbarLink = [
     "left" => array(
         HREF_ROOT => "Accueil", 
         HREF_ROOT . "posts" => "Les derniers articles"
     ),
     "right" => array(
-        HREF_ROOT . "login" => "Se connecter",
-        HREF_ROOT . "register" => "S'enregistrer",
+        HREF_ROOT . "login" => array("class" => "", "title" => "Se connecter"),
+        HREF_ROOT . "register" => array("class" => "", "title" => "S'enregistrer"),
     )
 ];
 
 if (isset($_SESSION['auth'])) {
     $authlink = array();
     if ($_SESSION['auth'] === 1 && (!str_contains($_SERVER['REQUEST_URI'], "admin") || (isset($_GET['onpage']) && $_GET['onpage']))) {
-        $authlink = array(HREF_ROOT . "admin/posts" => "Panneau Administrateur") + $authlink;
+        $authlink = array(HREF_ROOT . "admin/posts" => array("class" => "", "title" => "Panneau Administrateur")) + $authlink;
     }
-    $authlink += array(HREF_ROOT . "logout" => "Se déconnecter");
+    $authlink += array(HREF_ROOT . "logout" => array("class" => "disconnect", "title" => "Se déconnecter"));
     $navbarLink['right'] = $authlink;
 }
 
@@ -59,19 +57,18 @@ $navbarAdminLink = [
                     <?php endforeach; ?>
                 </ul>
                 <ul class="navbar-list">
-                    <?php foreach($navbarLink["right"] as $link => $title): ?>
+                    <?php foreach($navbarLink["right"] as $link => $el): ?>
                         <li class="navbar-item">
                             <a 
-                            class="navbar-link <?php if (explode("/", $link)[1] === (explode("/", strtok($_SERVER["REQUEST_URI"], '?'))[1])) {echo "active";}; ?>" href="<?= $link ?>">
-                                <?= $title ?>
+                            class="navbar-link <?= $el['class'] ?> <?php if (explode("/", $link)[1] === (explode("/", strtok($_SERVER["REQUEST_URI"], '?'))[1])) {echo "active";};?>" href="<?= $link ?>">
+                                <?= $el['title'] ?>
                             </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         </nav>
-    </header>
-    <?php if(str_contains($_SERVER['REQUEST_URI'], "admin") && !(bool)(filter_var(($_GET['onpage'] ?? false), FILTER_VALIDATE_BOOLEAN))): ?>
+        <?php if(str_contains($_SERVER['REQUEST_URI'], "admin") && !(bool)(filter_var(($_GET['onpage'] ?? false), FILTER_VALIDATE_BOOLEAN))): ?>
         <nav class="navbar-admin">
             <ul>
                 <?php foreach($navbarAdminLink as $link => $title): ?>
@@ -87,9 +84,11 @@ $navbarAdminLink = [
             </ul>
         </nav>
     <?php endif; ?>
+    </header>
     <div class="container">
         <?= $content ?>
     </div>
+    <?php //TODO: Fix footer height problem with the layout ?>
     <footer>
         <span>Copyright 2023</span>
         <div class="theme">

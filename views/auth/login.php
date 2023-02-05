@@ -16,6 +16,12 @@
 
 <h1>Se connecter</h1>
 
+<?php if (isset($_GET['error'])): ?>
+
+    <p class="wrong">Wrong username or password</p>
+
+<?php endif; ?>
+
 <form action="<?= HREF_ROOT ?>login" method="POST">
     <div class="form-group">
         <label for="username">Nom d'utilisateur</label>

@@ -10,7 +10,9 @@ h1 {
 
 .navbar-admin ul{
     background: #D3D3D3;
+    width: 100%;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -51,6 +53,10 @@ h1 {
 .container{
     margin-top: 9px;
     margin-bottom: 140px;
+}
+
+.wrong {
+    font-weight: bold;
 }
 
 .card-body {

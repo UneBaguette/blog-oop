@@ -3,6 +3,7 @@
     --white-black: #ffffff;
     --black: #0f0f0f;
     --rose: #ffbefa;
+    --red: #910000;
 }
 
 *, ::before ::after {
@@ -25,11 +26,6 @@ body {
     margin: 0;
 }
 
-header {
-    padding: 0 10px;
-    background: var(--black);
-}
-
 nav {
     display: flex;
     width: 100%;
@@ -42,6 +38,10 @@ nav ul {
 nav a {
     color: var(--white);
     text-decoration: none;
+}
+
+.navbar {
+    background: var(--black);
 }
 
 .navbar-title {
@@ -93,6 +93,11 @@ nav a {
 .navbar-link:hover {
     color: var(--black);
     background: var(--white);
+}
+
+.navbar-link.disconnect:hover {
+    background: var(--red);
+    color: var(--white);
 }
 
 .navbar-link.active:hover {

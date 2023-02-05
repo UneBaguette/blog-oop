@@ -35,6 +35,11 @@ class Validator {
         return $this->getErrors();
     }
 
+    /**
+     * Vérifie le nom et la valeur du champ
+     * @param string $name Le nom du champ
+     * @param string $value La valeur du champ
+     */
     private function required(string $name, string $value)
     {
         $value = trim($value);

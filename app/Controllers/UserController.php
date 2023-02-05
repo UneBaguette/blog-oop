@@ -29,6 +29,9 @@ class UserController extends Controller {
             header('Location: /login');
             exit(1);
         }
+        if (!(new User($this->getDB()))->exist($_POST['username'])) {
+            return header('Location: /login?error=true');
+        }
         $user = (new User($this->getDB()))->getByUsername($_POST['username']);
 
         if (password_verify($_POST['password'], $user->password)) {
@@ -39,7 +42,7 @@ class UserController extends Controller {
             }
             return header('Location: /');
         }
-        return header('Location: /login');
+        return header('Location: /login?error=true');
     }
 
     public function registerPost()
