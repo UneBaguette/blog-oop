@@ -37,6 +37,7 @@ $navbarAdminLink = [
     <title>Blog</title>
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/app.css' ?>">
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/home.css' ?>">
+    <?php if (str_contains($_SERVER['REQUEST_URI'], "admin")) {echo '<link rel="stylesheet" href="'.SCRIPTS.'css/panel.css">';}; ?>
 </head>
 <body>
     <noscript>

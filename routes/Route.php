@@ -31,9 +31,8 @@ class Route {
         if (preg_match($pathToMatch, $url, $matches)) {
             $this->matches = $matches;
             return true;
-        } else {
-            return false;
-        }
+        } 
+        return false;
     }
 
     public function execute()

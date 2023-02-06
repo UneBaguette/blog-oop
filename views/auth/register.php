@@ -1,8 +1,10 @@
+<h1>S'enregistrer</h1>
+
 <?php $registered_permitted = false; if (isset($_SESSION['errors'])):?>
 
 <?php foreach($_SESSION['errors'] as $errorsArray): ?>
     <?php foreach($errorsArray as $errors): ?>
-        <div class="alert alert-danger">
+        <div class="alert">
             <?php foreach($errors as $error): ?>
                 <li><?= $error ?></li>
             <?php endforeach ?>
@@ -14,22 +16,20 @@
 
 <?php if ($registered_permitted){ ?>
 
-<h1>S'enregistrer</h1>
-
 <form action="" method="POST">
-    <div class="form-group">
+    <div class="form-element">
         <label for="username">Nom d'utilisateur</label>
-        <input type="text" class="form-control" name="username" id="username">
+        <input type="text" class="form-input" name="username" id="username">
     </div>
-    <div class="form-group">
+    <div class="form-element">
         <label for="password">Mot de passe</label>
-        <input type="password" class="form-control" name="password" id="password">
+        <input type="password" class="form-input" name="password" id="password">
     </div>
-    <div class="form-group">
+    <div class="form-element">
         <label for="passwordverify">Confirmez le mot de passe</label>
-        <input type="password" class="form-control" name="passwordverify" id="passwordverify">
+        <input type="password" class="form-input" name="passwordverify" id="passwordverify">
     </div>
-    <button type="submit" class="btn btn-primary">S'enregistrer</button>
+    <button type="submit" class="btn-form">S'enregistrer</button>
 </form>
 
 <?php } else { ?>

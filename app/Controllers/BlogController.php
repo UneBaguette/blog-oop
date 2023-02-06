@@ -22,8 +22,7 @@ class BlogController extends Controller {
 
     public function show(int $id)
     {
-        $post = new Post($this->getDB());
-        $post = $post->findById($id);
+        $post = (new Post($this->getDB()))->findById($id);
 
         return $this->view('blog.show', compact('post'));
     }

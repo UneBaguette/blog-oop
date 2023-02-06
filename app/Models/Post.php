@@ -23,7 +23,7 @@ class Post extends Model {
 
     public function getButton(): string
     {
-        return '<a href="'.HREF_ROOT.'posts/'.$this->id.'" class="btn btn-primary">Lire l\'article</a>';
+        return '<a href="'.HREF_ROOT.'posts/'.$this->id.'" class="btn btn-post">Lire l\'article</a>';
         // return <<<HTML
         // <a href="http://localhost/oop-php-framework/posts/$this->id" class="btn btn-primary">Lire l'article</a>
         // HTML;

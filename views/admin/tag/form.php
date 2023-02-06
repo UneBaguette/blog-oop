@@ -3,12 +3,11 @@
 <h1><?= $params['tag']->name ?? 'Créer un nouveau tag' ?></h1>
 
 <form method="POST" name="postlink" action="<?= isset($params['tag']) ? HREF_ROOT."admin/tags/edit/{$params['tag']->id}"  :  "../../admin/tags/create" ?>" >
-    <div class="form-group">
+    <div class="form-element">
         <label for="name">Nom du tag</label>
-        <input type="text" class="form-control" name="name" id="name" value="<?= $params['tag']->name ?? '' ?>">
+        <input type="text" class="form-input" name="name" id="name" value="<?= $params['tag']->name ?? '' ?>">
     </div>
-    
-    <button type="submit"  class="btn btn-primary"><?= isset($params['tag']) ? "Enregistrer les modifications" : "Enregistrer mon tag" ?></button>
+    <button type="submit" class="btn-form"><?= isset($params['tag']) ? "Enregistrer les modifications" : "Enregistrer mon tag" ?></button>
 </form>
 
 

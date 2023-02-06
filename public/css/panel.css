@@ -1,0 +1,124 @@
+/* ADMIN - header */
+
+.navbar-admin ul{
+    background: #D3D3D3;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-admin li{
+    list-style: none;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar-admin a{
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    padding: 5px;
+    transition: 120ms ease all;
+}
+
+.navbar-admin a:hover{
+    background: #c9c9c9;
+}
+
+.navbar-admin a.current {
+    font-weight: bold;
+    border-bottom: 2px solid #222222;
+    margin-bottom: -2px;
+}
+
+.navbar-admin a.current:hover {
+    background: #aaaaaa;
+}
+
+/* ADMIN - body */
+
+
+.msg {
+    margin: 15px 0;
+    background: var(--rose);
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-rose);
+    border-radius: 5px;
+}
+
+.msg::before {
+    content: var(--success-logo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    font-size: 1.6rem;
+    margin-right: 10px;
+}
+
+.msg.success {
+    background: var(--success);
+    border: 1px solid var(--border-success);
+}
+
+.btn.success {
+    background: var(--success);
+    color: var(--black);
+}
+
+.btn.success:hover {
+    background: var(--darker-success);
+}
+
+.btn.success:active {
+    background: var(--success);
+}
+
+.btn.warning {
+    background: var(--warning);
+    color: var(--black);
+}
+
+.btn.warning:hover {
+    background: var(--darker-warning);
+}
+
+.btn.warning:active {
+    background: var(--warning);
+}
+
+.btn.danger {
+    background: var(--danger);
+    color: var(--black);
+}
+
+.btn.danger:hover {
+    background: var(--darker-danger);
+}
+
+.btn.danger:active {
+    background: var(--danger);
+}
+
+
+.table {
+    margin: 30px 0;
+    width: 100%;
+}
+
+thead, tbody {
+    text-align: left;
+}
+
+tr {
+}
+
+td:last-child {
+}

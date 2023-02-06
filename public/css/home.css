@@ -8,46 +8,6 @@ h1 {
     background: #f0f0f0 !important;
 }
 
-.navbar-admin ul{
-    background: #D3D3D3;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.navbar-admin li{
-    list-style: none;
-    text-align: center;
-    width: 100%;
-}
-
-.navbar-admin a{
-    display: block;
-    color: #000000;
-    text-decoration: none;
-    padding: 5px;
-    width: 100%;
-    transition: 120ms ease all;
-}
-
-.navbar-admin a:hover{
-    background: #c9c9c9;
-}
-
-.navbar-admin a.current {
-    font-weight: bold;
-    border-bottom: 2px solid #222222;
-    margin-bottom: -2px;
-}
-
-.navbar-admin a.current:hover {
-    background: #aaaaaa;
-}
-
 /* Body elements */
 
 .container{
@@ -59,11 +19,11 @@ h1 {
     font-weight: bold;
 }
 
-.card-body {
+.post-body {
     position: relative;
 }
 
-.card-body img {
+.post-body img {
     z-index: 9;
     position: absolute;
     top: 0;

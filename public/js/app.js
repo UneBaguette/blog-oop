@@ -22,7 +22,7 @@
 
     function appendImg() {
         imgs.forEach((img) => {
-            overlay.appendChild(img);
+            
         });
     };
 
