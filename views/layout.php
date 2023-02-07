@@ -1,5 +1,7 @@
 <?php
 
+$adminPage = str_contains($_SERVER['REQUEST_URI'], "admin") && ($_SESSION['auth'] ?? "") === 1;
+
 $navbarLink = [
     "left" => array(
         HREF_ROOT => "Accueil", 
@@ -13,7 +15,7 @@ $navbarLink = [
 
 if (isset($_SESSION['auth'])) {
     $authlink = array();
-    if ($_SESSION['auth'] === 1 && (!str_contains($_SERVER['REQUEST_URI'], "admin") || (isset($_GET['onpage']) && $_GET['onpage']))) {
+    if ($_SESSION['auth'] === 1 && (!$adminPage || (isset($_GET['onpage']) && $_GET['onpage']))) {
         $authlink = array(HREF_ROOT . "admin/posts" => array("class" => "", "title" => "Panneau Administrateur")) + $authlink;
     }
     $authlink += array(HREF_ROOT . "logout" => array("class" => "disconnect", "title" => "Se déconnecter"));
@@ -37,7 +39,7 @@ $navbarAdminLink = [
     <title>Blog</title>
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/app.css' ?>">
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/home.css' ?>">
-    <?php if (str_contains($_SERVER['REQUEST_URI'], "admin")) {echo '<link rel="stylesheet" href="'.SCRIPTS.'css/panel.css">';}; ?>
+    <?php if ($adminPage) {echo '<link rel="stylesheet" href="'.SCRIPTS.'css/panel.css">';}; ?>
 </head>
 <body>
     <noscript>
@@ -69,7 +71,7 @@ $navbarAdminLink = [
                 </ul>
             </div>
         </nav>
-        <?php if(str_contains($_SERVER['REQUEST_URI'], "admin") && !(bool)(filter_var(($_GET['onpage'] ?? false), FILTER_VALIDATE_BOOLEAN))): ?>
+        <?php if($adminPage && !(bool)(filter_var(($_GET['onpage'] ?? false), FILTER_VALIDATE_BOOLEAN))): ?>
         <nav class="navbar-admin">
             <ul>
                 <?php foreach($navbarAdminLink as $link => $title): ?>
@@ -91,11 +93,12 @@ $navbarAdminLink = [
     </div>
     <?php //TODO: Fix footer height problem with the layout ?>
     <footer>
-        <span>Copyright 2023</span>
+        <span>Copyright &#169;	&#174;	&#8482; 2023</span>
         <div class="theme">
-            <button><img src="<?= SCRIPTS . "content/sun-60.png" ?>" ></button>
+            <button class="change-theme"></button>
         </div>
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
+    <?php if ($adminPage) {echo '<script src="'.SCRIPTS.'js/panel.js"></script>';}; ?>
 </body>
 </html>

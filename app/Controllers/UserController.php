@@ -36,7 +36,7 @@ class UserController extends Controller {
 
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['connectedas'] = $_POST['username'];
-            $_SESSION['auth'] = (int) $user->admin;
+            $_SESSION['auth'] = ((int) $user->admin ?? 0);
             if ($_SESSION['auth'] === 1) {
                 return header('Location: /admin/posts?success=true');
             }
@@ -73,9 +73,9 @@ class UserController extends Controller {
                 }
                 return header('Location: /');
             }
-            return header('Location: /register');
+            return header('Location: /register?error=true');
         }
-        return header('Location: /register');
+        return header('Location: /register?error=true');
     }
 
     public function logout()

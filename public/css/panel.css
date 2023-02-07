@@ -122,3 +122,62 @@ tr {
 
 td:last-child {
 }
+
+
+/* EDIT -- ADMIN */
+
+.form-input.select {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.tag.admin {
+    position: relative;
+    z-index: 1;
+    margin: 0 2px;
+    padding: 7px;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #979797;
+}
+
+.tag.admin.active {
+    background: var(--rose);
+    padding-right: 5px;
+}
+
+.tag.admin.active:hover {
+    background: var(--border-rose);
+}
+
+.tag.admin.active:active {
+    background: var(--rose);
+}
+
+.tag.admin.active::after{
+    display: flex;
+    margin-left: 5px;
+    justify-content: center;
+    min-width: 15px;
+    align-items: center;
+    content: "\1f5d9";
+}
+
+.tag.admin label {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
+.tag.admin input {
+    position: absolute;
+    opacity: 0;
+    left: -20px;
+    bottom: -20px;
+    width: 0;
+    display: none;
+}

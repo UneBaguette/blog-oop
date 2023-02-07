@@ -15,6 +15,10 @@ function submitPostLink()
 
 <?php } ?>
 
+<?php
+
+?>
+
 <h1><?= $params['post']->title ?? 'Créer un nouvel article' ?></h1>
 
 <form method="POST" name="postlink" action="<?= isset($params['post']) ? HREF_ROOT."admin/posts/edit/{$params['post']->id}?onpage=" . ($onpage ? "true":"false")  :  "../../admin/posts/create" ?>" >
@@ -28,22 +32,43 @@ function submitPostLink()
     </div>
     <div class="form-element">
         <label for="tags">Tags de l'article</label>
-        <?php // TODO: Replace 'select' with something to toggle every tag of each post ?>
-        <select multiple class="form-input" id="tags" name="tags[]">
-            <?php foreach ($params['tags'] as $tag) : ?>
-                <option value="<?= $tag->id ?>"
-                <?php if (isset($params['post'])) : ?>
-                <?php foreach ($params['post']->getTags() as $postTag) {
-                    echo ($tag->id === $postTag->id) ? 'selected' : '';
-                }
-                ?>
-                <?php endif ?>><?= $tag->name ?></option>
-            <?php endforeach ?>
-        </select>
+        <fieldset class="form-input select" id="tags" name="tags">
+            <?php //TODO: Fix tags not being in POST array ?>
+            <?php foreach($params['tags'] as $tag): ?>
+                <div class="tag admin <?php if (isset($params['post'])) : ?>
+                        
+                        <?php foreach ($params['post']->getTags() as $postTag) {
+                            echo ($tag->id === $postTag->id) ? 'active' : '';
+                        }
+                    ?>">
+                    <?php endif; ?>
+                    <label for="tag"><?= $tag->name ?></label>
+                    <input name="tag" class="box" 
+                    <?php if (isset($params['post'])) : ?>
+                        
+                        <?php foreach ($params['post']->getTags() as $postTag) {
+                            echo ($tag->id === $postTag->id) ? 'checked="checked"' : '';
+                        }
+                    ?>
+                    <?php endif; ?> 
+                    type="checkbox" value="<?= $tag->id ?>">
+                </div>
+            <?php endforeach; ?>
+        </fieldset>
     </div>
     <div class="form-element">
         <label for="tags">Images de l'article</label>
-        
+        <div class="form-input">
+            <section class="imgs-uploaded">
+                <?php if (isset($params['post'])) : ?>
+                <?php foreach ($params['post']->getImages() as $postImg) {
+                    echo "<img alt='". $postImg->alt ."' src='".SCRIPTS."images/". $postImg->filename ."' >";
+                };
+                ?>
+                <?php endif; ?>
+            </section>
+            <input type="file" class="img-add">
+        </div>
     </div>
     <button type="submit"  class="btn-form"><?= isset($params['post']) ? "Enregistrer les modifications" : "Enregistrer mon article" ?></button>
 </form>

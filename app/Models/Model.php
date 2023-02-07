@@ -33,17 +33,6 @@ abstract class Model {
         return $this->query("SELECT * FROM {$this->table};");
     }
 
-    public function resetAI(): bool{
-        $max = $this->query("SELECT MAX( `id` ) as id_max FROM `{$this->table}`;");
-        $n = array("n" => $max[0]->id_max + 1);
-        // TODO: fix query not working
-        $st = $this->query("ALTER TABLE `{$this->table}` AUTO_INCREMENT = :n;", $n, true);
-        if ($st){
-            return true;
-        }
-        return false;
-    }
-
     /**
      * Récupère tout d'une table via son id
      * @param int $id 

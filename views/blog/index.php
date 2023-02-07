@@ -15,8 +15,10 @@
             <p><?= $post->getExcerpt(); ?></p>
             <?= $post->getButton(); ?>
         </div>
-        <div class="post-img">
+        <?php if(!empty($post->getImage())): ?>
+            <div class="post-img">
             <?= $post->getImage(); ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
 <?php endforeach ?>

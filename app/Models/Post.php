@@ -31,7 +31,14 @@ class Post extends Model {
 
     public function getImage(): string
     {
-        return '<img width="200" src='.'/public/images/bat.gif'.' id='. $this->id .'>';
+        $imgs = $this->getImages();
+        if (!empty($imgs)){
+            foreach($imgs as $img){
+                return '<img width="200" alt="'. $img->alt .'" src="'.SCRIPTS.'images/'.$img->filename.'" >';
+            }
+        }
+        return "";
+
     }
 
     /**

@@ -16,6 +16,12 @@
 
 <?php if ($registered_permitted){ ?>
 
+    <?php if (isset($_GET['error'])): ?>
+
+        <p class="wrong">Wrong username or password</p>
+
+    <?php endif; ?>
+
 <form action="" method="POST">
     <div class="form-element">
         <label for="username">Nom d'utilisateur</label>
