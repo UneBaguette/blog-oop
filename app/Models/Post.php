@@ -38,13 +38,11 @@ class Post extends Model {
             }
         }
         return "";
-
     }
 
     /**
      * Summary of getTags
      * 
-     * A Remplacer par  Models/Tag.php
      * @return mixed
      */
     public function getTags()
@@ -65,6 +63,20 @@ class Post extends Model {
             INNER JOIN post_media AS pt ON pt.media_id = i.id
             WHERE pt.post_id = ?
         ", [$this->id]);
+    }
+
+    public function getTagById(int $id)
+    {
+        $st = $this->query("
+            SELECT t.* FROM tags t
+            INNER JOIN post_tag pt ON pt.tag_id = t.id
+            WHERE pt.post_id = ?
+        ", [$id]);
+        $tags = array();
+        foreach ($st as $v){
+            array_push($tags, $v->name);
+        }
+        return $tags;
     }
 
     public function create(array $data, ?array $relations = null)

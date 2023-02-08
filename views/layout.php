@@ -24,7 +24,8 @@ if (isset($_SESSION['auth'])) {
 
 $navbarAdminLink = [
     HREF_ROOT . "admin/posts" => "Posts",
-    HREF_ROOT . "admin/tags" => "Tags"
+    HREF_ROOT . "admin/tags" => "Tags",
+    HREF_ROOT . "admin/images" => "Images"
 ];
 
 ?>
@@ -91,7 +92,6 @@ $navbarAdminLink = [
     <div class="container">
         <?= $content ?>
     </div>
-    <?php //TODO: Fix footer height problem with the layout ?>
     <footer>
         <span>Copyright &#169;	&#174;	&#8482; 2023</span>
         <div class="theme">

@@ -13,7 +13,8 @@
 <a href="<?= HREF_ROOT ?>admin/posts/edit/<?= $params['post']->id ?>?onpage=true" class="edit btn">Éditer</a>
 
 <?php endif; ?>
-<a href="<?= HREF_ROOT ?>posts" class="btn">Retourner en arrière</a>
+
+<a href="<?= HREF_ROOT ?>posts" onclick="history.back()" class="btn">Retourner en arrière</a>
 
 <?php if ($imgs): ?>
 

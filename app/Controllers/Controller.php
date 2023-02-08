@@ -23,8 +23,6 @@ abstract class Controller {
     {
         ob_start();
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
-        // var_dump("Controller view",VIEWS , $path);
-        //die();
         require VIEWS . $path . '.php';
         $content = ob_get_clean();
         require VIEWS . 'layout.php';

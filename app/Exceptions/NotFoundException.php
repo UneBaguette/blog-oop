@@ -13,11 +13,12 @@ class NotFoundException extends Exception {
     }
 
     public function error404()
-    {
-       // echo VIEWS;
-       // die();
+    {   
+        ob_start();
         http_response_code(404);
       
         require VIEWS . 'errors/404.php';
+        $content = ob_get_clean();
+        require VIEWS . 'layout.php';
     }
 }

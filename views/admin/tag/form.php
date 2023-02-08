@@ -17,4 +17,3 @@ function submitPostLink()
     document.postlink.submit();
 }
 </script>
-

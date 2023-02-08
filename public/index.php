@@ -45,6 +45,13 @@ $router->post('/admin/tags/create', 'App\Controllers\Admin\TagController@createT
 $router->post('/admin/tags/delete/:id', 'App\Controllers\Admin\TagController@destroy');
 $router->get('/admin/tags/edit/:id', 'App\Controllers\Admin\TagController@edit');
 $router->post('/admin/tags/edit/:id', 'App\Controllers\Admin\TagController@update');
+// IMAGE
+$router->get('/admin/images', 'App\Controllers\Admin\ImageController@index');
+$router->get('/admin/images/create', 'App\Controllers\Admin\ImageController@create');
+$router->post('/admin/images/create', 'App\Controllers\Admin\ImageController@createImage');
+$router->post('/admin/images/delete/:id', 'App\Controllers\Admin\ImageController@destroy');
+$router->get('/admin/images/edit/:id', 'App\Controllers\Admin\ImageController@edit');
+$router->post('/admin/images/edit/:id', 'App\Controllers\Admin\ImageController@update');
 
 try {
     $router->run();

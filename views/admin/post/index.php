@@ -14,16 +14,21 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Titre</th>
+            <th scope="col">Tags</th>
             <th scope="col">Publié le</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php // TODO: Show Tags of Post in this foreach post ?>
         <?php foreach($params['posts'] as $post): ?>
             <tr>
                 <th scope="row"><?= $post->id; ?></th>
                 <td><?= $post->title; ?></td>
+                <td>
+                    <?php foreach($post->tags as $tag): ?>
+                        <p><?= $tag ?></p>
+                    <?php endforeach; ?>
+                </td>
                 <td><?= $post->getCreatedAt(); ?></td>
                 <td>
                     <a href="<?= HREF_ROOT ?>admin/posts/edit/<?= $post->id ?>?onpage=false" class="btn warning">Modifier</a>

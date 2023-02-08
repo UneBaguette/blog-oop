@@ -233,6 +233,10 @@ form {
     height: 280px;
 }
 
+.post.row {
+    height: auto;
+}
+
 .post-body {
     padding: 25px 30px;
     border-radius: 5px;
@@ -302,6 +306,12 @@ form {
 
 .btn-post:active {
     background: #308aff;
+}
+
+.imgs-uploaded img {
+    width: 300px;
+    height: 220px;
+    object-fit: cover;
 }
 
 /* Footer elements */

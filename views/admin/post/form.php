@@ -33,7 +33,6 @@ function submitPostLink()
     <div class="form-element">
         <label for="tags">Tags de l'article</label>
         <fieldset class="form-input select" id="tags" name="tags">
-            <?php //TODO: Fix tags not being in POST array ?>
             <?php foreach($params['tags'] as $tag): ?>
                 <div class="tag admin <?php if (isset($params['post'])) : ?>
                         
@@ -42,8 +41,8 @@ function submitPostLink()
                         }
                     ?>">
                     <?php endif; ?>
-                    <label for="tag"><?= $tag->name ?></label>
-                    <input name="tag" class="box" 
+                    <label for="tags[]"><?= $tag->name ?></label>
+                    <input name="tags[]" class="box" 
                     <?php if (isset($params['post'])) : ?>
                         
                         <?php foreach ($params['post']->getTags() as $postTag) {
@@ -62,7 +61,7 @@ function submitPostLink()
             <section class="imgs-uploaded">
                 <?php if (isset($params['post'])) : ?>
                 <?php foreach ($params['post']->getImages() as $postImg) {
-                    echo "<img alt='". $postImg->alt ."' src='".SCRIPTS."images/". $postImg->filename ."' >";
+                    echo "<img alt='". htmlspecialchars($postImg->alt) ."' src='".SCRIPTS."images/". $postImg->filename ."' >";
                 };
                 ?>
                 <?php endif; ?>

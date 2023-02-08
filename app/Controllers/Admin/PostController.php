@@ -17,6 +17,10 @@ class PostController extends Controller {
 
         $posts = $post->all();
 
+        foreach ($posts as $p){
+            $p->tags = $post->getTagById($p->id);
+        }
+
         return $this->view('admin.post.index', compact('posts'));
     }
 
@@ -62,7 +66,6 @@ class PostController extends Controller {
         $onpage = (bool)(filter_var(($_GET['onpage'] ?? ""), FILTER_VALIDATE_BOOLEAN));
 
         $post = new Post($this->getDB());
-        var_dump($_POST);
 
         $tags = array_pop($_POST);
 

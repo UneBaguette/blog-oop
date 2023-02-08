@@ -1,4 +1,4 @@
-// Version 0.1
+// Version 0.1 WIP
 
 (() => {
     'use strict';
@@ -18,7 +18,6 @@
             
         });
     });
-
 
     function appendImg() {
         imgs.forEach((img) => {
