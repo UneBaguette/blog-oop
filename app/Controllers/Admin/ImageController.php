@@ -29,7 +29,7 @@ class ImageController extends Controller {
     {
         $this->isAdmin();
 
-        $tag = new Image($this->getDB());
+        $image = new Image($this->getDB());
 
         $images = null;
 
@@ -37,7 +37,7 @@ class ImageController extends Controller {
             $images = array_pop($_POST);
         }
 
-        $result = $tag->create($_POST, $images);
+        $result = $image->create($_POST, $images);
 
         if ($result) {
             return header('Location: /admin/images');
