@@ -147,6 +147,7 @@ form {
 }
 
 .form-input {
+    overflow: hidden;
     margin: 10px 0;
     padding: 7px 10px;
     font-size: 1.1rem;
@@ -306,12 +307,6 @@ form {
 
 .btn-post:active {
     background: #308aff;
-}
-
-.imgs-uploaded img {
-    width: 300px;
-    height: 220px;
-    object-fit: cover;
 }
 
 /* Footer elements */

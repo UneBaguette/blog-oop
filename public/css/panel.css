@@ -96,7 +96,6 @@
 
 .btn.danger {
     background: var(--danger);
-    color: var(--black);
 }
 
 .btn.danger:hover {
@@ -111,10 +110,67 @@
 .table {
     margin: 30px 0;
     width: 100%;
+    border-bottom: 3px solid var(--rose);
+}
+
+.table form {
+    margin: 0;
+    padding: 0;
 }
 
 thead, tbody {
     text-align: left;
+}
+
+thead tr th {
+    padding: 10px 0;
+    background: var(--rose);
+}
+
+thead tr th:last-child {
+    border-top-right-radius: 5px;
+}
+
+thead tr th:first-child {
+    border-top-left-radius: 5px;
+}
+
+th, tr, td, thead tr th {
+    padding-left: 8px;
+}
+
+tbody {
+    box-shadow: 0px 6px 8px #0f0f0f11;
+}
+
+tbody tr {
+    background: #fafafa;
+}
+
+tbody tr td {
+    margin: 15px 0;
+    }
+
+table .id {
+    padding-left: 5px;
+    text-align: center;
+}
+
+.table-tags {
+    max-width: 200px;
+}
+
+.table-tags .tag {
+    user-select: none;
+    color: #f5f5f5;
+    line-height: 1.5rem;
+    white-space: nowrap;
+}
+
+.table .actions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 /* EDIT -- ADMIN */
@@ -173,4 +229,95 @@ thead, tbody {
     bottom: -20px;
     width: 0;
     display: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Images */
+
+.imgs-uploaded img {
+    width: 300px;
+    height: 220px;
+    object-fit: cover;
+}
+
+input[type="file"]{
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.btn-file {
+    border: 2px dotted #000000;
+    background: none;   
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    height: 100px;
+}
+
+.btn-file:hover {
+    background: #b3b3b38c;
+}
+
+.btn-file.drag {
+    background: #dadada8c;
+}
+
+.img-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #86868656;
+    padding: 10px;
+    margin: 2px 0;
+}
+
+.img-content img {
+    object-fit: cover;
+    height: 70px;
+    width: 100px;
+}
+
+.img-content button {
+    color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 150ms all ease;
+}
+
+.img-content .trash {
+    background: var(--danger);
+}
+
+.img-content .img-trash:hover {
+    background: var(--darker-danger);
+}
+
+.img-content .img-trash:active {
+    background: var(--danger);
+}
+
+.img-content .img-trash::after {
+    font-size: 1.3rem;
+    margin-left: 5px;
+    margin-right: 2px;
+    content: "\01F5D1";
 }

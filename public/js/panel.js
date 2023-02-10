@@ -1,4 +1,4 @@
-// Version 0.1
+// Version 0.2
 
 (() => {
     'use strict';
@@ -19,7 +19,21 @@
             tag.classList.remove("active");
             return tag.parentNode.append(tag);
         });
-    })
+    });
+
+    const imgAdd = document.querySelector("input[type=file]");
+
+    imgAdd.addEventListener("dragenter", (ev) => {
+        ev.dataTransfer.dropEffect = "copy";
+        imgAdd.parentNode.firstChild.style.opacity = "0";
+    });
+
+    imgAdd.addEventListener("dragleave", (ev) => {
+        imgAdd.parentNode.firstChild.style.opacity = "1";
+        imgAdd.parentNode.classList.remove("drag");
+    });
+
+
 
 
 

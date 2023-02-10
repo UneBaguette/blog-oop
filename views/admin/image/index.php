@@ -1,11 +1,11 @@
 <h1>Administration des images</h1>
 
-<a href="<?= HREF_ROOT ?>admin/images/create" class="btn success">Créer une nouvelle image</a>
+<a href="<?= HREF_ROOT ?>admin/images/create" class="btn">Créer une nouvelle image</a>
 
-<table class="table">
+<table class="table" cellspacing="0">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="id">#</th>
             <th scope="col">Nom</th>
             <th scope="col">Alt text</th>
             <th scope="col">Filename</th>
@@ -15,13 +15,13 @@
     <tbody>
         <?php foreach ($params['images'] as $img) : ?>
             <tr>
-                <th scope="row"><?= $img->id; ?></th>
+                <th scope="row" class="id"><?= $img->id; ?></th>
                 <td><?= $img->name; ?></td>
                 <td><?= $img->alt; ?></td>
                 <td><?= $img->filename; ?></td>
-                <td>
+                <td class="actions">
                     <a href="<?= HREF_ROOT ?>admin/images/edit/<?= $img->id ?>" class="btn warning">Modifier</a>
-                    <form action="<?= HREF_ROOT ?>admin/images/delete/<?= $img->id ?>" method="POST" class="d-inline">
+                    <form action="<?= HREF_ROOT ?>admin/images/delete/<?= $img->id ?>" method="POST">
                         <button type="submit" class="btn danger">Supprimer</button>
                     </form>
                 </td>

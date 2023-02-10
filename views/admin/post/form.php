@@ -21,7 +21,7 @@ function submitPostLink()
 
 <h1><?= $params['post']->title ?? 'Créer un nouvel article' ?></h1>
 
-<form method="POST" name="postlink" action="<?= isset($params['post']) ? HREF_ROOT."admin/posts/edit/{$params['post']->id}?onpage=" . ($onpage ? "true":"false")  :  "../../admin/posts/create" ?>" >
+<form method="POST" name="postlink" action="<?= isset($params['post']) ? HREF_ROOT."admin/posts/edit/{$params['post']->id}?onpage=" . ($onpage ? "true":"false")  :  HREF_ROOT."admin/posts/create" ?>" >
     <div class="form-element">
         <label for="title">Titre de l'article</label>
         <input type="text" class="form-input" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
@@ -58,16 +58,30 @@ function submitPostLink()
     <div class="form-element">
         <label for="tags">Images de l'article</label>
         <div class="form-input">
-            <section class="imgs-uploaded">
-                <?php if (isset($params['post'])) : ?>
-                <?php foreach ($params['post']->getImages() as $postImg) {
-                    echo "<img alt='". htmlspecialchars($postImg->alt) ."' src='".SCRIPTS."images/". $postImg->filename ."' >";
-                };
-                ?>
-                <?php endif; ?>
-            </section>
-            <input type="file" class="img-add">
+            <?php if (isset($params['post'])) { ?>
+                <?php foreach ($params['post']->getImages() as $postImg): ?>
+                    <div class="img-content">
+                        <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= SCRIPTS . "images/" . $postImg->filename  ?>">
+                        <p class="uploaded-filename"><?= $postImg->filename ?></p>
+                        <div class="actions">
+                            <button class="img-edit">
+                                Edit
+                            </button>
+                            <button class="img-trash">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    <input style="display: none;" type="text" name="filename[]" id="filename" value="<?= $postImg->filename ?>">
+                <?php endforeach; ?>
+            <?php } else { ?>
+                <p>No image uploaded</p>
+            <?php }; ?>
         </div>
+        <span class="btn btn-file">
+            <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">
+            <input type="file" class="img-add">
+        </span>
     </div>
     <button type="submit"  class="btn-form"><?= isset($params['post']) ? "Enregistrer les modifications" : "Enregistrer mon article" ?></button>
 </form>

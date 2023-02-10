@@ -2,8 +2,7 @@
 
 /**
  * 
- * TODO
- * Remplacer les constant dans l'index 
+ * TODO: Remplacer les constant dans l'index 
  * 
  */
 namespace App;

@@ -79,7 +79,7 @@ $navbarAdminLink = [
                     <li>
                         <a 
                             <?php 
-                                if (explode("/", $link)[2] === (explode("/", strtok($_SERVER["REQUEST_URI"], '?'))[2])) {echo "class='current'";};
+                                if (explode("/", $link)[2] === (explode("/", strtok($_SERVER["REQUEST_URI"], "?"))[2])) {echo "class='current'";};
                             ?> 
                             href=<?= $link ?>><?= $title ?>
                         </a>

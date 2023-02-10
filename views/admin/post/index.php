@@ -7,12 +7,12 @@
     <?php endif; ?>
 <?php endif; ?>
 
-<a href="<?= HREF_ROOT ?>admin/posts/create" class="btn success">Créer un nouvel article</a>
+<a href="<?= HREF_ROOT ?>admin/posts/create" class="btn">Créer un nouvel article</a>
 
-<table class="table">
+<table class="table" cellspacing="0">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="id">#</th>
             <th scope="col">Titre</th>
             <th scope="col">Tags</th>
             <th scope="col">Publié le</th>
@@ -22,15 +22,15 @@
     <tbody>
         <?php foreach($params['posts'] as $post): ?>
             <tr>
-                <th scope="row"><?= $post->id; ?></th>
+                <th scope="row" class="id"><?= $post->id; ?></th>
                 <td><?= $post->title; ?></td>
-                <td>
+                <td class="table-tags">
                     <?php foreach($post->tags as $tag): ?>
-                        <p><?= $tag ?></p>
+                        <span class="tag"><?= $tag ?></span>
                     <?php endforeach; ?>
                 </td>
                 <td><?= $post->getCreatedAt(); ?></td>
-                <td>
+                <td class="actions">
                     <a href="<?= HREF_ROOT ?>admin/posts/edit/<?= $post->id ?>?onpage=false" class="btn warning">Modifier</a>
                     <form action="<?= HREF_ROOT ?>admin/posts/delete/<?= $post->id ?>" method="POST">
                         <button type="submit" class="btn danger">Supprimer</button>

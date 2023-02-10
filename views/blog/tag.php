@@ -6,4 +6,4 @@
             <a><a href="<?= HREF_ROOT ?>posts/<?= $post->id ?>"><?= $post->title ?></a></a>
         </div>
     </div>
-<?php endforeach ?>
+<?php endforeach; ?>

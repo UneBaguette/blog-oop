@@ -23,7 +23,7 @@
     <ul class="img-container">
         <?php foreach($imgs as $img): ?>
             <li>
-            <img alt="<?= $img->alt ?>" src="/public/images/<?= $img->filename ?>">
+                <img alt="<?= $img->alt ?>" src="/public/images/<?= $img->filename ?>">
                 <div class="overlay-vignette">
                     <p><?= $img->name ?></p>
                 </div>

@@ -1,11 +1,11 @@
 <h1>Administration des tags</h1>
 
-<a href="<?= HREF_ROOT ?>admin/tags/create" class="btn success">Créer un nouveau tag</a>
+<a href="<?= HREF_ROOT ?>admin/tags/create" class="btn">Créer un nouveau tag</a>
 
-<table class="table">
+<table class="table" cellspacing="0">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="id">#</th>
             <th scope="col">Nom</th>
             <th scope="col">Actions</th>
         </tr>
@@ -13,11 +13,11 @@
     <tbody>
         <?php foreach ($params['tags'] as $tag) : ?>
             <tr>
-                <th scope="row"><?= $tag->id; ?></th>
+                <th scope="row" class="id"><?= $tag->id; ?></th>
                 <td><?= $tag->name; ?></td>
-                <td>
+                <td class="actions">
                     <a href="<?= HREF_ROOT ?>admin/tags/edit/<?= $tag->id ?>" class="btn warning">Modifier</a>
-                    <form action="<?= HREF_ROOT ?>admin/tags/delete/<?= $tag->id ?>" method="POST" class="d-inline">
+                    <form action="<?= HREF_ROOT ?>admin/tags/delete/<?= $tag->id ?>" method="POST">
                         <button type="submit" class="btn danger">Supprimer</button>
                     </form>
                 </td>
