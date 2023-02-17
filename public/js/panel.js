@@ -1,4 +1,4 @@
-// Version 0.2
+// Version 0.4 WIP
 
 (() => {
     'use strict';
@@ -21,20 +21,25 @@
         });
     });
 
-    const imgAdd = document.querySelector("input[type=file]");
+    const actionsBtn = document.querySelectorAll(".actions .btn");
 
-    imgAdd.addEventListener("dragenter", (ev) => {
-        ev.dataTransfer.dropEffect = "copy";
-        imgAdd.parentNode.firstChild.style.opacity = "0";
+    actionsBtn.forEach((btn) => {
+        if (btn.id === "delete") {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const response = fetch("/admin/posts/delete/" + btn.dataset.id);
+                console.log(response);
+            });
+        }
+        else {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const response = fetch("/admin/posts/edit/" + btn.dataset.id + "?onpage=false", {
+    
+                })
+            });
+        }
     });
-
-    imgAdd.addEventListener("dragleave", (ev) => {
-        imgAdd.parentNode.firstChild.style.opacity = "1";
-        imgAdd.parentNode.classList.remove("drag");
-    });
-
-
-
 
 
 })();

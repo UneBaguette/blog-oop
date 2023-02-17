@@ -1,3 +1,5 @@
+<a href="" onclick="window.history.back()">⬅ Back</a>
+
 <h1><?= ucfirst($params['tag']->name) ?></h1>
 
 <?php foreach ($params['tag']->getPosts() as $post) : ?>

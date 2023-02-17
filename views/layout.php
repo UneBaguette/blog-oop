@@ -92,6 +92,19 @@ $navbarAdminLink = [
     <div class="container">
         <?= $content ?>
     </div>
+    <?php if ($adminPage): ?>
+        <div class="overlay-container">
+            <div class="popup">
+                <span></span>
+                <h3 class="popup-title">Supprimer "<span>...</span>" ?</h3>
+                <p class="popup-text">Vous ne pourrez pas revenir en arrière.</p>
+                <div class="actions-overlay">
+                    <button class="btn" id="cancel">Annuler</button>
+                    <button class="btn danger" id ="confirm">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <footer>
         <span>Copyright &#169;	&#174;	&#8482; 2023</span>
         <div class="theme">
@@ -100,5 +113,6 @@ $navbarAdminLink = [
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
     <?php if ($adminPage) {echo '<script src="'.SCRIPTS.'js/panel.js"></script>';}; ?>
+    <?php if ($adminPage && str_contains($_SERVER['REQUEST_URI'], "edit")) {echo '<script src="'.SCRIPTS.'js/edit.js"></script>';}; ?>
 </body>
 </html>

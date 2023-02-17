@@ -169,8 +169,12 @@ table .id {
 
 .table .actions {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: left;
     align-items: center;
+}
+
+.table .actions > * {
+    margin-right: 5px;
 }
 
 /* EDIT -- ADMIN */
@@ -303,11 +307,15 @@ input[type="file"]{
     transition: 150ms all ease;
 }
 
-.img-content .trash {
+.img-content .img-trash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: var(--danger);
+    height: 100%;
 }
 
-.img-content .img-trash:hover {
+.img-content .img-trash:hover{
     background: var(--darker-danger);
 }
 
@@ -317,7 +325,77 @@ input[type="file"]{
 
 .img-content .img-trash::after {
     font-size: 1.3rem;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-right: 2px;
     content: "\01F5D1";
+    margin-top: 5px;
+}
+
+.img-content .img-infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* OVERLAY */
+
+
+.overlay-container {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    background: #0c0c0cc9;
+    opacity: 0;
+}
+
+.overlay-container.show {
+    display: block;
+}
+
+.popup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white);
+    padding: 20px 35px;
+    border-radius: 5px;
+    min-width: 250px;
+    max-width: 500px;
+}
+
+.popup > span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.popup > span::after {
+    content: "\2715";
+    font-size: 1.5rem;
+}
+
+.popup-text {
+    color: #00000070;
+    margin: 30px 0;
+}
+
+.popup .btn {
+    width: 100%;
+    font-weight: 600;
+}
+
+.popup .btn:not(:last-child){
+    margin-right: 10px;
+}
+
+.popup > .actions-overlay {
+    display: flex;
 }

@@ -58,18 +58,20 @@ function submitPostLink()
     <div class="form-element">
         <label for="tags">Images de l'article</label>
         <div class="form-input">
-            <?php if (isset($params['post'])) { ?>
+            <?php if (isset($params['post']) && !empty($params['post']->getImages())) { ?>
                 <?php foreach ($params['post']->getImages() as $postImg): ?>
                     <div class="img-content">
-                        <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= SCRIPTS . "images/" . $postImg->filename  ?>">
-                        <p class="uploaded-filename"><?= $postImg->filename ?></p>
-                        <div class="actions">
-                            <button class="img-edit">
-                                Edit
-                            </button>
-                            <button class="img-trash">
-                                Delete
-                            </button>
+                        <div class="img-infos">
+                            <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= SCRIPTS . "images/" . $postImg->filename  ?>">
+                            <p class="uploaded-filename"><?= $postImg->filename ?></p>
+                            <div class="actions">
+                                <button class="img-edit">
+                                    Edit
+                                </button>
+                                <button class="img-trash">
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <input style="display: none;" type="text" name="filename[]" id="filename" value="<?= $postImg->filename ?>">
@@ -80,7 +82,7 @@ function submitPostLink()
         </div>
         <span class="btn btn-file">
             <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">
-            <input type="file" class="img-add">
+            <input type="file" class="img-add" accept="image/*">
         </span>
     </div>
     <button type="submit"  class="btn-form"><?= isset($params['post']) ? "Enregistrer les modifications" : "Enregistrer mon article" ?></button>

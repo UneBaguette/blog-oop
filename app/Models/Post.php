@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use DateTime;
-use App\Models\Tag;
 
 class Post extends Model {
 
@@ -24,9 +23,6 @@ class Post extends Model {
     public function getButton(): string
     {
         return '<a href="'.HREF_ROOT.'posts/'.$this->id.'" class="btn btn-post">Lire l\'article</a>';
-        // return <<<HTML
-        // <a href="http://localhost/oop-php-framework/posts/$this->id" class="btn btn-primary">Lire l'article</a>
-        // HTML;
     }
 
     public function getImage(): string
@@ -47,9 +43,6 @@ class Post extends Model {
      */
     public function getTags()
     {
-        //  $tag = new Tag($this->db);
-
-        // return $tag->getPosts();
         return $this->query("
             SELECT t.* FROM tags t
             INNER JOIN post_tag pt ON pt.tag_id = t.id

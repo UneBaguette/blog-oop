@@ -31,10 +31,8 @@
                 </td>
                 <td><?= $post->getCreatedAt(); ?></td>
                 <td class="actions">
-                    <a href="<?= HREF_ROOT ?>admin/posts/edit/<?= $post->id ?>?onpage=false" class="btn warning">Modifier</a>
-                    <form action="<?= HREF_ROOT ?>admin/posts/delete/<?= $post->id ?>" method="POST">
-                        <button type="submit" class="btn danger">Supprimer</button>
-                    </form>
+                    <button data-id="<?= $post->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <button data-id="<?= $post->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach; ?>

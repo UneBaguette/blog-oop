@@ -13,24 +13,26 @@
     </div>
     <div class="form-element">
         <label for="name">Image</label>
-        <div class="form-input">
-            <?php if (isset($params['image'])) { ?>
-                <div class="img-content">
-                    <img src="<?= SCRIPTS . "images/" . $params['image']->filename  ?>">
-                    <p class="uploaded-filename"><?= $params['image']->filename ?></p>
-                    <span class="trash">
-                        Delete
-                    </span>
-                </div>
-            <?php } else { ?>
-                <p>No image uploaded</p>
-            <?php }; ?>
-            <input style="display: none;" type="text" name="filename" id="filename" value="">
+        <div class="form-input" id="img-container">
+            <div class="img-content">
+                <?php if (isset($params['image'])) { ?>
+                    <div class="img-infos">
+                        <img src="<?= SCRIPTS . "images/" . $params['image']->filename  ?>">
+                        <p class="uploaded-filename" style="width: 100%; text-align:center;"><?= $params['image']->filename ?></p>
+                        <button class="img-trash trash">
+                            Delete
+                        </button>
+                    </div>
+                <?php } else { ?>
+                    <p>No image uploaded</p>
+                <?php }; ?>
+                <input style="display: none;" type="text" name="filename" id="filename" value="">
+            </div>
         </div>
         <?php if (!isset($params['image']->filename)): ?>
             <span class="btn btn-file">
                 <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">
-                <input type="file" class="img-add">
+                <input type="file" class="img-add" accept="image/*">
             </span>
         <?php endif; ?>
     </div>
