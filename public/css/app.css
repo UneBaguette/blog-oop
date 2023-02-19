@@ -5,6 +5,7 @@
     --light-black: #242424;
     --black: #0f0f0f;
     --rose: #ffbefa;
+    --light-rose: #ffbefa69;
     --border-rose: #ffacf8;
     --red: #910000;
 
@@ -18,20 +19,17 @@
     --warning: #ffce2f;
     --darker-warning: #f5c013;
     --danger: #f50000;
-    --darker-danger: #da0000;
+    --darker-danger: rgb(146, 0, 0);
 
     --error-logo:'\2bbf';
     --success-logo:'\01F7C9';
+    --plus-logo:'\002B';
 }
 
 *, ::before ::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
 }
 
 html {

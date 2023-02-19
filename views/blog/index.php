@@ -7,7 +7,7 @@
             <div class='post-info'>
                 <div>
                     <?php foreach ($post->getTags() as $tag) : ?>
-                        <span class="tag"><a href="<?= HREF_ROOT ?>tags/<?= $tag->id ?>" class="link"><?= $tag->name ?></a></span>
+                        <span><a href="<?= HREF_ROOT ?>tags/<?= $tag->id ?>" class="link tag"><?= $tag->name ?></a></span>
                     <?php endforeach ?>
                 </div>
                 <small class="published">Publié le <?= $post->getCreatedAt(); ?></small>

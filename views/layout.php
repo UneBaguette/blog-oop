@@ -41,6 +41,35 @@ $navbarAdminLink = [
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/app.css' ?>">
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/home.css' ?>">
     <?php if ($adminPage) {echo '<link rel="stylesheet" href="'.SCRIPTS.'css/panel.css">';}; ?>
+    <script>
+
+        const toggleOverlay = (title) => {
+            const overlay = document.querySelector(".overlay-container");
+            const popup = document.querySelector(".popup");
+            const popupTitle = document.querySelector(".popup-title");
+
+            if (!overlay.classList.contains("show")) {
+                popupTitle.textContent = title.textContent;
+                overlay.classList.toggle("show");
+                setTimeout(() => {
+                    overlay.classList.toggle("transition");
+                    setTimeout(() => {
+                        return popup.classList.toggle("show");
+                    }, 50)
+                }, 100);
+            }
+            else {
+                popup.classList.toggle("show");
+                setTimeout(() => {
+                    overlay.classList.toggle("transition");
+                    setTimeout(() => {
+                        return overlay.classList.toggle("show");
+                    }, 100)
+                }, 100);
+            }
+        }
+
+    </script>
 </head>
 <body>
     <noscript>
@@ -96,7 +125,7 @@ $navbarAdminLink = [
         <div class="overlay-container">
             <div class="popup">
                 <span></span>
-                <h3 class="popup-title">Supprimer "<span>...</span>" ?</h3>
+                <h3>Supprimer "<span class="popup-title">...</span>" ?</h3>
                 <p class="popup-text">Vous ne pourrez pas revenir en arrière.</p>
                 <div class="actions-overlay">
                     <button class="btn" id="cancel">Annuler</button>
@@ -107,12 +136,39 @@ $navbarAdminLink = [
     <?php endif; ?>
     <footer>
         <span>Copyright &#169;	&#174;	&#8482; 2023</span>
-        <div class="theme">
+        <!-- WIP -->
+        <!-- <div class="theme">
             <button class="change-theme"></button>
-        </div>
+        </div> -->
+        <!-- WIP -->
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
-    <?php if ($adminPage) {echo '<script src="'.SCRIPTS.'js/panel.js"></script>';}; ?>
-    <?php if ($adminPage && str_contains($_SERVER['REQUEST_URI'], "edit")) {echo '<script src="'.SCRIPTS.'js/edit.js"></script>';}; ?>
+    <?php if ($adminPage): echo '<script src="'.SCRIPTS.'js/panel.js"></script>'; ?>
+        <?php if (!str_contains($_SERVER['REQUEST_URI'], "edit")): ?>
+            <script>
+
+                const edit = (e) => {
+                    e.preventDefault();
+                    window.location.href =  window.location.pathname + "/edit/" + e.target.dataset.id;
+                };
+
+                const del = (e) => {
+                    e.preventDefault();
+                    document.querySelector(".actions-overlay #confirm").setAttribute("data-id", e.target.dataset.id);
+                    toggleOverlay(e.target.parentNode.parentNode.children[1]);
+                };
+
+                document.addEventListener("click", (e) => {
+                    if (e.target.classList.contains("overlay-container")) {
+                        toggleOverlay();
+                    };
+                });
+
+                document.querySelector(".popup > span").addEventListener("click", toggleOverlay);
+
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($adminPage && (str_contains($_SERVER['REQUEST_URI'], "images/") || str_contains($_SERVER['REQUEST_URI'], "posts/edit"))) {echo '<script src="'.SCRIPTS.'js/editImg.js"></script>';}; ?>
 </body>
 </html>

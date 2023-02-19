@@ -20,10 +20,8 @@
                 <td><?= $img->alt; ?></td>
                 <td><?= $img->filename; ?></td>
                 <td class="actions">
-                    <a href="<?= HREF_ROOT ?>admin/images/edit/<?= $img->id ?>" class="btn warning">Modifier</a>
-                    <form action="<?= HREF_ROOT ?>admin/images/delete/<?= $img->id ?>" method="POST">
-                        <button type="submit" class="btn danger">Supprimer</button>
-                    </form>
+                    <button data-id="<?= $img->id ?>" class="btn warning" id="edit" onclick="edit(event)">Modifier</button>
+                    <button data-id="<?= $img->id; ?>" type="submit" class="btn danger" id="delete" onclick="del(event)">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach ?>

@@ -65,8 +65,7 @@ INSERT INTO `posts` (`id`, `title`, `content`, `created_at`) VALUES
 (14, 'Franz Schubert', '   Compositeur emblématique de la musique romantique allemande, il est reconnu comme le maître incontesté du lied. Il s\'est particulièrement consacré à la musique de chambre, et a aussi écrit de nombreuses œuvres pour piano, une dizaine de symphonies, ainsi que de la musique chorale et sacrée.\r\n\r\nBien qu\'il soit mort précocement, à 31 ans, Schubert est l\'un des compositeurs les plus prolifiques du xixe siècle. Le catalogue de ses œuvres compte plus de mille compositions, dont une partie importante est publiée après sa mort et révèle des chefs-d\'œuvre qui contribuent à sa renommée posthume. ', '2022-12-05 10:10:07'),
 (25, 'Léonard de Vinci', 'Léonard de Vinci (italien : Leonardo di ser Piero da VinciÉcouter, dit Leonardo da Vinci), né le 14 avril 1452 du calendrier actuel à Vinci (Toscane) et mort le 2 mai 1519 à Amboise (Touraine), est un peintre italien polymathe, à la fois artiste, organisateur de spectacles et de fêtes, scientifique, ingénieur, inventeur, anatomiste, sculpteur, peintre, architecte, urbaniste, botaniste, musicien, philosophe et écrivain.\r\n\r\nEnfant naturel d\'une paysanne, Caterina di Meo Lippi et d\'un notaire, Pierre de Vinci, il est élevé auprès de ses grands-parents paternels dans la maison familiale de Vinci jusqu’à l’âge de dix ans. À Florence, son père l\'inscrit pour deux ans d’apprentissage dans une scuola d’abaco et ensuite à l\'atelier d\'Andrea del Verrocchio où il côtoie Botticelli, Le Pérugin et Domenico Ghirlandaio.\r\n\r\nIl quitte l’atelier en 1482 et se présente principalement comme ingénieur au duc de Milan Ludovic Sforza. Introduit à la cour, il obtient quelques commandes de peinture et ouvre un atelier. Il étudie les mathématiques et le corps humain. Il rencontre également Gian Giacomo Caprotti, dit Salai, un enfant de dix ans, turbulent élève de son atelier, qu’il prend sous son aile.\r\n\r\nEn septembre 1499, Léonard part à Mantoue, à Venise et retourne à Florence. Il y repeint et s\'adonne à l’architecture ainsi qu\'à l\'ingénierie militaire. Pendant un an, il confectionne des cartes géographiques pour César Borgia.\r\n\r\nEn 1503, la ville de Florence lui commande une fresque, mais il en est déchargé par le roi de France Louis XII qui l\'appelle à Milan où, de 1506 à 1511, il est « peintre et ingénieur ordinaire » du souverain. Il rencontre Francesco Melzi, son élève, ami et exécuteur testamentaire. En 1504, son père meurt, mais il est exclu du testament. En 1507, il est usufruitier des terres de son oncle décédé.', '2023-01-27 11:25:27'),
 (26, 'Giorgio Vasari', 'Giorgio Vasari (30 juillet 1511 à Arezzo - 27 juin 1574 à Florence) est un peintre, architecte et écrivain toscan. Son recueil biographique Les Vies des meilleurs peintres, sculpteurs et architectes, particulièrement sa seconde édition de 1568, est considéré comme une des publications fondatrices de l\'histoire de l\'art.\r\n\r\n...', '2023-01-27 11:26:46'),
-(27, 'Jehan-Rictus', 'Gabriel Randon de Saint-Amand, initialement Gabriel Randon, qui prit le pseudonyme de Jehan Rictus ([ʒeã ʁiktys] ou [ʒøã ʁiktys] ou [ʒã ʁiktys]) (Jehan-Rictus avec un trait d\'union à partir de 19221), est né à Boulogne-sur-Mer le 21 septembre 1867 et mort à Paris le 6 novembre 1933. C\'est un poète français, célèbre pour ses œuvres composées dans la langue du peuple du Paris de son époque.\r\n</br></br>\r\nSes poèmes se trouvent principalement réunis dans deux livres, Les Soliloques du pauvre et ... le Cœur populaire. Le premier fait soliloquer un sans-logis contraint d\'errer dans Paris, le second divers personnages : prostituées, enfants battus, ouvriers, cambrioleurs, etc.\r\n</br></br>\r\nhttps://fr.wikipedia.org/wiki/Jehan-Rictus', '2023-01-27 11:35:40'),
-(28, 'Les trois petits canards', 'Il était une fois, trois petits canards, le premier, très rapide mais très con, le deuxième, moins con que le premier mais obèse puis le troisème tout petit, presque microscopique. C\'est aussi une famille de dégénérés.', '2023-01-31 15:43:41');
+(27, 'Jehan-Rictus', 'Gabriel Randon de Saint-Amand, initialement Gabriel Randon, qui prit le pseudonyme de Jehan Rictus ([ʒeã ʁiktys] ou [ʒøã ʁiktys] ou [ʒã ʁiktys]) (Jehan-Rictus avec un trait d\'union à partir de 19221), est né à Boulogne-sur-Mer le 21 septembre 1867 et mort à Paris le 6 novembre 1933. C\'est un poète français, célèbre pour ses œuvres composées dans la langue du peuple du Paris de son époque.\r\n</br></br>\r\nSes poèmes se trouvent principalement réunis dans deux livres, Les Soliloques du pauvre et ... le Cœur populaire. Le premier fait soliloquer un sans-logis contraint d\'errer dans Paris, le second divers personnages : prostituées, enfants battus, ouvriers, cambrioleurs, etc.\r\n</br></br>\r\nhttps://fr.wikipedia.org/wiki/Jehan-Rictus', '2023-01-27 11:35:40');
 
 -- --------------------------------------------------------
 
@@ -105,8 +104,7 @@ INSERT INTO `post_tag` (`post_id`, `tag_id`) VALUES
 (25, 1),
 (25, 3),
 (26, 1),
-(27, 5),
-(28, 5);
+(27, 5);
 
 -- --------------------------------------------------------
 
@@ -149,9 +147,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `admin`) VALUES
 (1, 'admin', '$2y$10$x1HaLhyop9TKKX3DzcCgCO./OZQNwgL9jzffWF49jN85dDwtx31C6', 1),
-(2, 'user1', '$2y$10$sin9mDJwXNtkA0g5krhbsOCxAV/I74KKEbuC1z5ErQzoFaOYyK7Fm', 0),
-(3, 'prout', '$2y$10$8YV6O8qFfFs8lpOGsS8J4eper8I91dilOi0tIIMOAe/Wy5TqCX1E2', 1),
-(4, 'caca', '$2y$10$nPC6qh4ffBNoXav5WItLguI4Z9DHdgsJjCUIX9fBvHk/YVB5ODKTu', 0);
+(2, 'user1', '$2y$10$sin9mDJwXNtkA0g5krhbsOCxAV/I74KKEbuC1z5ErQzoFaOYyK7Fm', 0);
 
 --
 -- Indexes for dumped tables

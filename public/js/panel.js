@@ -20,26 +20,30 @@
             return tag.parentNode.append(tag);
         });
     });
-
-    const actionsBtn = document.querySelectorAll(".actions .btn");
-
-    actionsBtn.forEach((btn) => {
-        if (btn.id === "delete") {
-            btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                const response = fetch("/admin/posts/delete/" + btn.dataset.id);
-                console.log(response);
-            });
-        }
-        else {
-            btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                const response = fetch("/admin/posts/edit/" + btn.dataset.id + "?onpage=false", {
     
-                })
-            });
-        }
-    });
+    const confirmOverlay = document.querySelector(".actions-overlay #confirm");
 
+    document.querySelector(".actions-overlay #cancel").addEventListener("click", toggleOverlay);
+
+    confirmOverlay.addEventListener("click", () => {
+        const itemId = confirmOverlay.dataset.id;
+        
+        fetch(window.location.pathname + "/delete/" + itemId, {
+            method: "POST"
+        }).then((res) => {
+            if (res.ok){
+                const tr = document.querySelectorAll("tr .id");
+                tr.forEach((id) => {
+                    if (id.textContent === itemId) {
+                        id.parentNode.remove();
+                    };
+                });
+                toggleOverlay();
+            }
+        }).catch((err) => {
+            console.error(err);
+        });
+        
+    });
 
 })();

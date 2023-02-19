@@ -16,10 +16,8 @@
                 <th scope="row" class="id"><?= $tag->id; ?></th>
                 <td><?= $tag->name; ?></td>
                 <td class="actions">
-                    <a href="<?= HREF_ROOT ?>admin/tags/edit/<?= $tag->id ?>" class="btn warning">Modifier</a>
-                    <form action="<?= HREF_ROOT ?>admin/tags/delete/<?= $tag->id ?>" method="POST">
-                        <button type="submit" class="btn danger">Supprimer</button>
-                    </form>
+                    <button data-id="<?= $tag->id ?>" class="btn warning" id="edit" onclick="edit(event)">Modifier</button>
+                    <button data-id="<?= $tag->id; ?>" type="submit" class="btn danger" id="delete" onclick="del(event)">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach ?>

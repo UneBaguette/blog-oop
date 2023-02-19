@@ -55,9 +55,10 @@ function submitPostLink()
             <?php endforeach; ?>
         </fieldset>
     </div>
-    <div class="form-element">
-        <label for="tags">Images de l'article</label>
-        <div class="form-input">
+    <div class="form-element img">
+        <button class="btn add">Ajouter une image existante</button>
+        <label for="images">Images de l'article</label>
+        <div class="form-input" id="img-container">
             <?php if (isset($params['post']) && !empty($params['post']->getImages())) { ?>
                 <?php foreach ($params['post']->getImages() as $postImg): ?>
                     <div class="img-content">
@@ -76,8 +77,10 @@ function submitPostLink()
                     </div>
                     <input style="display: none;" type="text" name="filename[]" id="filename" value="<?= $postImg->filename ?>">
                 <?php endforeach; ?>
-            <?php } else { ?>
-                <p>No image uploaded</p>
+            <?php } else {?>
+                <div class="img-content">
+                    <input style="display: none;" type="text" name="filename[]" id="filename" value="">
+                </div>
             <?php }; ?>
         </div>
         <span class="btn btn-file">

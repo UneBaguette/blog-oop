@@ -1,4 +1,4 @@
-<a href="" onclick="window.history.back()">⬅ Back</a>
+<a href="" onclick="history.back()">⬅ Back</a>
 
 <h1><?= ucfirst($params['tag']->name) ?></h1>
 

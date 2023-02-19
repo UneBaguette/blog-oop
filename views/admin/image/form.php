@@ -15,17 +15,17 @@
         <label for="name">Image</label>
         <div class="form-input" id="img-container">
             <div class="img-content">
-                <?php if (isset($params['image'])) { ?>
-                    <div class="img-infos">
-                        <img src="<?= SCRIPTS . "images/" . $params['image']->filename  ?>">
-                        <p class="uploaded-filename" style="width: 100%; text-align:center;"><?= $params['image']->filename ?></p>
-                        <button class="img-trash trash">
-                            Delete
-                        </button>
-                    </div>
-                <?php } else { ?>
-                    <p>No image uploaded</p>
-                <?php }; ?>
+                <div class="img-infos">
+                    <?php if (isset($params['image'])) { ?>
+                            <img src="<?= SCRIPTS . "images/" . $params['image']->filename  ?>">
+                            <p class="uploaded-filename" style="width: 100%; text-align:center;"><?= $params['image']->filename ?></p>
+                            <button class="img-trash trash">
+                                Delete
+                            </button>
+                    <?php } else { ?>
+                        <p>No image uploaded</p>
+                    <?php }; ?>
+                </div>
                 <input style="display: none;" type="text" name="filename" id="filename" value="">
             </div>
         </div>

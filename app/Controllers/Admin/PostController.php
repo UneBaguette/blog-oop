@@ -67,9 +67,11 @@ class PostController extends Controller {
 
         $post = new Post($this->getDB());
 
-        array_pop($_POST);
+        $tags = array();
 
-        $tags = array_pop($_POST);
+        if (!empty($_POST['tags'])) {
+            $tags = array_pop($_POST);
+        }
 
         $result = $post->update($id, $_POST, $tags);
 

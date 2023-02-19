@@ -140,11 +140,15 @@ th, tr, td, thead tr th {
 }
 
 tbody {
-    box-shadow: 0px 6px 8px #0f0f0f11;
+    box-shadow: 0px 6px 8px #0f0f0f21;
 }
 
 tbody tr {
     background: #fafafa;
+}
+
+tbody tr:nth-child(even) {
+    background: var(--light-rose);
 }
 
 tbody tr td {
@@ -179,22 +183,34 @@ table .id {
 
 /* EDIT -- ADMIN */
 
+.form-element.img {
+    position: relative;
+    margin-top: 20px;
+}
+
 .form-input.select {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .tag.admin {
     position: relative;
     z-index: 1;
-    margin: 0 2px;
+    margin: 1px 2px;
     padding: 7px;
     user-select: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #979797;
+}
+
+.tag.admin:hover {
+    background-color: #757575;
+}
+
+.tag.admin:active {
     background-color: #979797;
 }
 
@@ -224,6 +240,9 @@ table .id {
     cursor: pointer;
     height: 100%;
     width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .tag.admin input {
@@ -240,6 +259,35 @@ textarea {
 }
 
 /* Images */
+
+.btn.add {
+    background: var(--black);
+    border: 2px solid var(--black);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    margin-right: auto; 
+    padding: 5px 10px;
+    top: -15px;
+    right: 0;
+}
+
+.btn.add:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.btn.add::before {
+    content: var(--plus-logo);
+    font-size: 1.5rem;
+    margin-left: 5px;
+    margin-right: 10px;
+    transition: 150ms ease all;
+}
+
+.btn.add:hover::before {
+    color: var(--black);
+}
 
 .imgs-uploaded img {
     width: 300px;
@@ -328,7 +376,6 @@ input[type="file"]{
     margin-left: 10px;
     margin-right: 2px;
     content: "\01F5D1";
-    margin-top: 5px;
 }
 
 .img-content .img-infos {
@@ -351,22 +398,35 @@ input[type="file"]{
     z-index: 8;
     background: #0c0c0cc9;
     opacity: 0;
+    transition: 200ms ease opacity;
 }
 
 .overlay-container.show {
     display: block;
 }
 
+.overlay-container.show.transition {
+    opacity: 1;
+}
+
+.overlay-container.show .popup.show {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
 .popup {
     position: fixed;
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -80%);
     background: var(--white);
     padding: 20px 35px;
     border-radius: 5px;
     min-width: 250px;
     max-width: 500px;
+    opacity: 0;
+    transition: 200ms ease opacity,  200ms ease transform;
+    padding-right: 50px;
 }
 
 .popup > span {
@@ -380,6 +440,12 @@ input[type="file"]{
 .popup > span::after {
     content: "\2715";
     font-size: 1.5rem;
+    font-weight: bolder;
+    transition: color 250ms ease;
+}
+
+.popup > span:hover::after {
+    color: var(--danger);
 }
 
 .popup-text {
@@ -390,6 +456,7 @@ input[type="file"]{
 .popup .btn {
     width: 100%;
     font-weight: 600;
+    padding: 8px 15px;
 }
 
 .popup .btn:not(:last-child){
@@ -398,4 +465,5 @@ input[type="file"]{
 
 .popup > .actions-overlay {
     display: flex;
+    margin: 10px 0;
 }

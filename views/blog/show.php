@@ -4,7 +4,7 @@
 
 <div>
     <?php foreach($params['post']->getTags() as $tag): ?>
-        <span class="tag"><a href="<?= HREF_ROOT ?>tags/<?= $tag->id ?>" class="link"><?= $tag->name ?></a></span>
+        <span><a href="<?= HREF_ROOT ?>tags/<?= $tag->id ?>" class="link tag"><?= $tag->name ?></a></span>
     <?php endforeach ?>
 </div>
 <p style="max-width: 900px"><?= $params['post']->content ?></p>
@@ -14,7 +14,7 @@
 
 <?php endif; ?>
 
-<a href="<?= HREF_ROOT ?>posts" onclick="history.back()" class="btn">Retourner en arrière</a>
+<a href="<?= HREF_ROOT ?>posts" class="btn">Retourner en arrière</a>
 
 <?php if ($imgs): ?>
 

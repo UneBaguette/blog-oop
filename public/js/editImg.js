@@ -1,6 +1,5 @@
 // 0.1
 
-
 (() => {
     'use strict';
 
@@ -17,15 +16,13 @@
     });
 
     const inputImg = document.querySelector(".img-add");
-    const imgContent = document.createElement("div");
-    const imgInfos = document.createElement("div");
+    const imgContent = document.querySelector(".img-content");
+    const imgInfos = document.querySelector(".img-infos");
     const imgPreview = document.createElement("img");
     const imgText = document.createElement("p");
     const imgDelete = document.createElement("button");
     const parentEl = document.getElementById("img-container");
-
-    imgContent.className = "img-content";
-    imgInfos.className = "img-infos";
+    
     imgPreview.id = "img-preview";
     imgText.className = "uploaded-filename";
     imgText.style.width = "100%";
@@ -36,17 +33,21 @@
     const loadFile = (ev) => {
         let reader = new FileReader();
 
-        parentEl.children[0].remove();
+        imgInfos.innerHTML = "";
 
         parentEl.prepend(imgContent);
-        imgContent.appendChild(imgInfos);
+        imgContent.prepend(imgInfos);
         imgInfos.appendChild(imgPreview);
         imgInfos.appendChild(imgText);
         imgInfos.appendChild(imgDelete);
 
+        imgInfos.style.display = "none";
+
+        const output = document.getElementById('img-preview');
+
         reader.onload = function(){
-            let output = document.getElementById('img-preview');
             output.src = reader.result;
+            imgInfos.style.display = "flex";
         };
         imgText.textContent = ev.target.files[0].name;
         reader.readAsDataURL(ev.target.files[0]);
@@ -55,10 +56,12 @@
             e.preventDefault();
             const noImage = document.createElement("p");
             noImage.textContent = "No image uploaded";
+
+            imgInfos.innerHTML = "";
+
             if (inputImg.value.length){
                 inputImg.value = "";
-                imgInfos.remove();
-                imgContent.prepend(noImage);
+                imgInfos.prepend(noImage);
             }
         });
     };

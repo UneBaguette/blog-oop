@@ -33,12 +33,13 @@ h1 {
 }
 
 .edit {
-    background-color: #C40405; border-color:#C40405;
+    background-color: var(--danger); 
+    border-color: var(--danger);
 }
 
 .edit:hover {
-    background-color: #D30405;
-    border-color:#d60404;
+    background-color: var(--darker-danger);
+    border-color:var(--darker-danger);
 }
 
 .current {
