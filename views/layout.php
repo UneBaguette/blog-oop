@@ -40,36 +40,38 @@ $navbarAdminLink = [
     <title>Blog</title>
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/app.css' ?>">
     <link rel="stylesheet" href="<?= SCRIPTS . 'css/home.css' ?>">
-    <?php if ($adminPage) {echo '<link rel="stylesheet" href="'.SCRIPTS.'css/panel.css">';}; ?>
-    <script>
+    <?php if ($adminPage): ?>
+        <link rel="stylesheet" href="<?= SCRIPTS ?>css/panel.css">
+        <script>
 
-        const toggleOverlay = (title) => {
-            const overlay = document.querySelector(".overlay-container");
-            const popup = document.querySelector(".popup");
-            const popupTitle = document.querySelector(".popup-title");
+            const toggleOverlay = (title) => {
+                const overlay = document.querySelector(".overlay-container");
+                const popup = document.querySelector(".popup");
+                const popupTitle = document.querySelector(".popup-title");
 
-            if (!overlay.classList.contains("show")) {
-                popupTitle.textContent = title.textContent;
-                overlay.classList.toggle("show");
-                setTimeout(() => {
-                    overlay.classList.toggle("transition");
+                if (!overlay.classList.contains("show")) {
+                    popupTitle.textContent = title.textContent;
+                    overlay.classList.toggle("show");
                     setTimeout(() => {
-                        return popup.classList.toggle("show");
-                    }, 50)
-                }, 100);
-            }
-            else {
-                popup.classList.toggle("show");
-                setTimeout(() => {
-                    overlay.classList.toggle("transition");
+                        overlay.classList.toggle("transition");
+                        setTimeout(() => {
+                            return popup.classList.toggle("show");
+                        }, 50)
+                    }, 100);
+                }
+                else {
+                    popup.classList.toggle("show");
                     setTimeout(() => {
-                        return overlay.classList.toggle("show");
-                    }, 100)
-                }, 100);
+                        overlay.classList.toggle("transition");
+                        setTimeout(() => {
+                            return overlay.classList.toggle("show");
+                        }, 100)
+                    }, 100);
+                }
             }
-        }
 
-    </script>
+        </script>
+    <?php endif; ?>
 </head>
 <body>
     <noscript>
@@ -129,7 +131,7 @@ $navbarAdminLink = [
                 <p class="popup-text">Vous ne pourrez pas revenir en arrière.</p>
                 <div class="actions-overlay">
                     <button class="btn" id="cancel">Annuler</button>
-                    <button class="btn danger" id ="confirm">Confirmer</button>
+                    <button class="btn danger" id="confirm">Confirmer</button>
                 </div>
             </div>
         </div>
@@ -144,31 +146,32 @@ $navbarAdminLink = [
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
     <?php if ($adminPage): echo '<script src="'.SCRIPTS.'js/panel.js"></script>'; ?>
-        <?php if (!str_contains($_SERVER['REQUEST_URI'], "edit")): ?>
-            <script>
+        <?php foreach($navbarAdminLink as $link => $title): ?>
+            <?php if($_SERVER["REQUEST_URI"] === $link): ?>
+                <script>
 
-                const edit = (e) => {
-                    e.preventDefault();
-                    window.location.href =  window.location.pathname + "/edit/" + e.target.dataset.id;
-                };
-
-                const del = (e) => {
-                    e.preventDefault();
-                    document.querySelector(".actions-overlay #confirm").setAttribute("data-id", e.target.dataset.id);
-                    toggleOverlay(e.target.parentNode.parentNode.children[1]);
-                };
-
-                document.addEventListener("click", (e) => {
-                    if (e.target.classList.contains("overlay-container")) {
-                        toggleOverlay();
+                    const edit = (e) => {
+                        e.preventDefault();
+                        window.location.href =  window.location.pathname + "/edit/" + e.target.dataset.id;
                     };
-                });
 
-                document.querySelector(".popup > span").addEventListener("click", toggleOverlay);
+                    const del = (e) => {
+                        e.preventDefault();
+                        document.querySelector(".actions-overlay #confirm").setAttribute("data-id", e.target.dataset.id);
+                        toggleOverlay(e.target.parentNode.parentNode.children[1]);
+                    };
 
-            </script>
-        <?php endif; ?>
+                    document.addEventListener("click", (e) => {
+                        if (e.target.classList.contains("overlay-container")) {
+                            toggleOverlay();
+                        };
+                    });
+
+                    document.querySelector(".popup > span").addEventListener("click", toggleOverlay);
+
+                </script>
+            <?php endif; ?>
+        <?php endforeach; ?>
     <?php endif; ?>
-    <?php if ($adminPage && (str_contains($_SERVER['REQUEST_URI'], "images/") || str_contains($_SERVER['REQUEST_URI'], "posts/edit"))) {echo '<script src="'.SCRIPTS.'js/editImg.js"></script>';}; ?>
 </body>
 </html>

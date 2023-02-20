@@ -15,20 +15,16 @@ function submitPostLink()
 
 <?php } ?>
 
-<?php
-
-?>
-
 <h1><?= $params['post']->title ?? 'Créer un nouvel article' ?></h1>
 
 <form method="POST" name="postlink" action="<?= isset($params['post']) ? HREF_ROOT."admin/posts/edit/{$params['post']->id}?onpage=" . ($onpage ? "true":"false")  :  HREF_ROOT."admin/posts/create" ?>" >
     <div class="form-element">
         <label for="title">Titre de l'article</label>
-        <input type="text" class="form-input" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
+        <input required="required" type="text" class="form-input" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
     </div>
     <div class="form-element">
         <label for="content">Contenu de l'article</label>
-        <textarea name="content" id="content" rows="8" class="form-input"><?= $params['post']->content ?? '' ?></textarea>
+        <textarea required="required" minlength="1" name="content" id="content" rows="8" class="form-input"><?= $params['post']->content ?? '' ?></textarea>
     </div>
     <div class="form-element">
         <label for="tags">Tags de l'article</label>
@@ -90,3 +86,5 @@ function submitPostLink()
     </div>
     <button type="submit"  class="btn-form"><?= isset($params['post']) ? "Enregistrer les modifications" : "Enregistrer mon article" ?></button>
 </form>
+<script src="<?= SCRIPTS ?>js/load.js"></script>
+<script src="<?= SCRIPTS ?>js/add.js"></script>

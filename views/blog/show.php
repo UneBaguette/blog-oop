@@ -30,7 +30,19 @@
             </li>
         <?php endforeach ?>
     </ul>
-    <div class="overlay hidden">
+    <div class="overlay" style="display: none;">
+        <button></button>
+        <ul>
+            <?php for($i = 0; $i < count($imgs); $i++): ?>
+                <li data-id="<?= $i + 1 ?>">
+                    <img alt="<?= $imgs[$i]->alt ?>" src="/public/images/<?= $imgs[$i]->filename ?>">
+                    <div class="overlay-vignette">
+                        <p><?= $imgs[$i]->name ?></p>
+                    </div>
+                </li>
+            <?php endfor; ?>
+        </ul>
+        <button></button>
     </div>
 </section>
 

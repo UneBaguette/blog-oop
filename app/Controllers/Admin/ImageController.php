@@ -37,12 +37,24 @@ class ImageController extends Controller {
 
         if ($fileIsUploaded) {
             $filename = $_FILES["file"]["name"];
+            $imagePath = ROOT . "/public/images/";
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
-            $name = strtolower(basename($_POST["name"])) . "." . $extension;
-            $name = str_replace(" ", "_", $name);
+            $lowerName = strtolower(basename($_POST["name"])) . "." . $extension;
+            $name = str_replace(" ", "_", $lowerName);
+            if (file_exists($imagePath . $name)) {
+                $increment = 0;
+                while(file_exists($imagePath . $name)) {
+                    $name = $lowerName;
+                    $increment++;
+                    $name = explode(".", $name)[0] . + $increment . "." . $extension;
+                }
+            }
             $_POST["filename"] = $name;
-            move_uploaded_file($_FILES["file"]["tmp_name"], ROOT . "/public/images/" . $name);
+
+            move_uploaded_file($_FILES["file"]["tmp_name"], $imagePath . $name);
+
             $result = $image->create($_POST);
+
             if ($result) {
                 return header('Location: /admin/images');
             }

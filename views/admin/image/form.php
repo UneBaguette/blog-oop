@@ -5,11 +5,11 @@
 <form method="POST" name="postlink" enctype="multipart/form-data" action="<?= isset($params['image']) ? HREF_ROOT."admin/images/edit/{$params['image']->id}"  :  HREF_ROOT."admin/images/create" ?>" >
     <div class="form-element">
         <label for="name">Nom de l'image</label>
-        <input type="text" class="form-input" name="name" id="name" value="<?= $params['image']->name ?? '' ?>">
+        <input required="required" type="text" class="form-input" name="name" id="name" value="<?= $params['image']->name ?? '' ?>">
     </div>
     <div class="form-element">
         <label for="name">Texte alternatif de l'image</label>
-        <input type="text" class="form-input" name="alt" id="alt" value="<?= $params['image']->alt ?? '' ?>">
+        <input required="required" type="text" class="form-input" name="alt" id="alt" value="<?= $params['image']->alt ?? '' ?>">
     </div>
     <div class="form-element">
         <label for="name">Image</label>
@@ -26,7 +26,7 @@
                         <p>No image uploaded</p>
                     <?php }; ?>
                 </div>
-                <input style="display: none;" type="text" name="filename" id="filename" value="">
+                <input style="display: none;" type="text" name="filename" id="filename" value="<?= $params['image']->filename ?? '' ?>">
             </div>
         </div>
         <div>
@@ -48,3 +48,6 @@ function submitPostLink()
     document.postlink.submit();
 }
 </script>
+<?php if (!isset($params['image'])): ?>
+    <script src="<?= SCRIPTS ?>js/load.js"></script>
+<?php endif; ?>
