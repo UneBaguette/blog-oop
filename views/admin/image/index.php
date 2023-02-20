@@ -1,3 +1,7 @@
+<?php if ((bool)filter_var(($_GET['error'] ?? false), FILTER_VALIDATE_BOOLEAN)): ?>
+    <div class="msg error">L'image n'a pas pu être envoyé</div>
+<?php endif; ?>
+
 <h1>Administration des images</h1>
 
 <a href="<?= HREF_ROOT ?>admin/images/create" class="btn">Créer une nouvelle image</a>

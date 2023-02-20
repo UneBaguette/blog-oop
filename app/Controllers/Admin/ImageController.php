@@ -29,19 +29,25 @@ class ImageController extends Controller {
     {
         $this->isAdmin();
 
+        $fileIsUploaded = isset($_FILES['file']) && (file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']));
+
         $image = new Image($this->getDB());
 
-        $images = null;
+        $rename = array_pop($_POST);
 
-        if (count($_POST) > 1) {
-            $images = array_pop($_POST);
+        if ($fileIsUploaded) {
+            $filename = $_FILES["file"]["name"];
+            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+            $name = strtolower(basename($_POST["name"])) . "." . $extension;
+            $name = str_replace(" ", "_", $name);
+            $_POST["filename"] = $name;
+            move_uploaded_file($_FILES["file"]["tmp_name"], ROOT . "/public/images/" . $name);
+            $result = $image->create($_POST);
+            if ($result) {
+                return header('Location: /admin/images');
+            }
         }
-
-        $result = $image->create($_POST, $images);
-
-        if ($result) {
-            return header('Location: /admin/images');
-        }
+        return header('Location: /admin/images?error=true');
     }
 
     public function edit(int $id)

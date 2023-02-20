@@ -17,11 +17,13 @@
     --border-success: #11dd1b;
     --ok: #4bff54;
     --warning: #ffce2f;
-    --darker-warning: #f5c013;
+    --darker-warning: #d4a50a;
     --danger: #f50000;
-    --darker-danger: rgb(146, 0, 0);
+    --darker-danger: #bd0000;
+    --border-danger: #b30404;
 
     --error-logo:'\2bbf';
+    --no-edge-error-logo:'\2715';
     --success-logo:'\01F7C9';
     --plus-logo:'\002B';
 }

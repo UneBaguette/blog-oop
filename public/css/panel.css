@@ -52,7 +52,12 @@
     border-radius: 5px;
 }
 
-.msg::before {
+.msg.success {
+    background: var(--success);
+    border: 1px solid var(--border-success);
+}
+
+.msg.success::before {
     content: var(--success-logo);
     display: flex;
     justify-content: center;
@@ -63,9 +68,20 @@
     margin-right: 10px;
 }
 
-.msg.success {
-    background: var(--success);
-    border: 1px solid var(--border-success);
+.msg.error {
+    background: var(--danger);
+    border: 1px solid var(--border-danger);
+}
+
+.msg.error::before {
+    content: var(--no-edge-error-logo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    font-size: 1.6rem;
+    margin-right: 10px;
 }
 
 .btn.success {
@@ -268,13 +284,18 @@ textarea {
     position: absolute;
     margin-right: auto; 
     padding: 5px 10px;
-    top: -15px;
+    top: -20px;
     right: 0;
 }
 
 .btn.add:hover {
     background: var(--white);
     color: var(--black);
+}
+
+.btn.add:active {
+    background: var(--black);
+    color: var(--white);
 }
 
 .btn.add::before {
@@ -287,6 +308,10 @@ textarea {
 
 .btn.add:hover::before {
     color: var(--black);
+}
+
+.btn.add:active::before {
+    color: var(--white);
 }
 
 .imgs-uploaded img {

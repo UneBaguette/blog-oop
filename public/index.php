@@ -5,7 +5,8 @@ use App\Exceptions\NotFoundException;
 
 
 require_once '../vendor/autoload.php';
-//Indiquer la racine de votre site ici HREF_ROOT. Si votre site en localhost est à la racine indiquer /
+
+define('ROOT',  dirname(__DIR__));
 define('HREF_ROOT', '/' );
 // Not in use now. J'ai utilisé cette constante pour trouvé des bugs dans le les formulaire. Est peut remplacer HREF_ROOT
 define('VIEWS_FORM_ROOT', '../../../' );

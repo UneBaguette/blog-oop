@@ -2,7 +2,7 @@
 
 <h1><?= $params['image']->name ?? 'Créer un nouvelle image' ?></h1>
 
-<form method="POST" name="postlink" action="<?= isset($params['image']) ? HREF_ROOT."admin/images/edit/{$params['image']->id}"  :  HREF_ROOT."admin/images/create" ?>" >
+<form method="POST" name="postlink" enctype="multipart/form-data" action="<?= isset($params['image']) ? HREF_ROOT."admin/images/edit/{$params['image']->id}"  :  HREF_ROOT."admin/images/create" ?>" >
     <div class="form-element">
         <label for="name">Nom de l'image</label>
         <input type="text" class="form-input" name="name" id="name" value="<?= $params['image']->name ?? '' ?>">
@@ -29,10 +29,14 @@
                 <input style="display: none;" type="text" name="filename" id="filename" value="">
             </div>
         </div>
+        <div>
+            <label for="rename">Auto-rename file</label>
+            <input type="checkbox" checked="checked" name="rename" id="rename" value="true">
+        </div>
         <?php if (!isset($params['image']->filename)): ?>
             <span class="btn btn-file">
                 <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">
-                <input type="file" class="img-add" accept="image/*">
+                <input name="file" id="file" type="file" class="img-add" accept="image/*">
             </span>
         <?php endif; ?>
     </div>
