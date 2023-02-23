@@ -12,8 +12,9 @@ class ImageController extends Controller {
         $this->isAdmin();
 
         $images = (new Image($this->getDB()))->all();
+        $path = (new Image($this->getDB()))->path;
 
-        return $this->view('admin.image.index',  compact('images'));
+        return $this->view('admin.image.index',  compact('images', 'path'));
     }
 
     public function create()
@@ -33,17 +34,17 @@ class ImageController extends Controller {
 
         $image = new Image($this->getDB());
 
-        $rename = array_pop($_POST);
-
         if ($fileIsUploaded) {
-            $filename = $_FILES["file"]["name"];
-            $imagePath = ROOT . "/public/images/";
+            $name = $filename = $_FILES["file"]["name"];
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
-            $lowerName = strtolower(basename($_POST["name"])) . "." . $extension;
-            $name = str_replace(" ", "_", $lowerName);
-            if (file_exists($imagePath . $name)) {
+            if (isset($_POST['rename'])){
+                array_pop($_POST);
+                $lowerName = strtolower(basename($_POST["name"])) . "." . $extension;
+                $name = str_replace(" ", "_", $lowerName);
+            }
+            if (file_exists($image->path . $name)) {
                 $increment = 0;
-                while(file_exists($imagePath . $name)) {
+                while(file_exists($image->path . $name)) {
                     $name = $lowerName;
                     $increment++;
                     $name = explode(".", $name)[0] . + $increment . "." . $extension;
@@ -51,7 +52,7 @@ class ImageController extends Controller {
             }
             $_POST["filename"] = $name;
 
-            move_uploaded_file($_FILES["file"]["tmp_name"], $imagePath . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"], $image->path . $name);
 
             $result = $image->create($_POST);
 
@@ -77,11 +78,9 @@ class ImageController extends Controller {
 
         $image = new Image($this->getDB());
 
-        if (count($_POST) > 1) {
-            $post = array_pop($_POST);
-        }
+        //TODO: fix update image
 
-        $result = $image->update($id, $_POST, $post);
+        $result = $image->update($id, $_POST);
 
         if ($result) {
             return header('Location: /admin/images');
@@ -91,12 +90,29 @@ class ImageController extends Controller {
     public function destroy(int $id)
     {
         $this->isAdmin();
+        header('Access-Control-Allow-Methods: DELETE');
+        header('Content-Type: application/json; charset=utf-8');
 
         $image = new Image($this->getDB());
-        $result = $image->destroy($id);
-
-        if ($result) {
-            return header('Location: /admin/images');
+        $filename = $image->getFilenameById($id)->filename;
+        
+        if ($image->destroy($id)) {
+            if (file_exists($image->path . $filename)){
+                if (unlink($image->path . $filename)){
+                    http_response_code(200);
+                    echo json_encode(["success" => 0]);
+                    exit();
+                }
+                http_response_code(207);
+                echo json_encode(["success" => 1]);
+                exit(1);
+            }
+            http_response_code(207);
+            echo json_encode(["success" => 2]);
+            exit(1);
         }
+        http_response_code(404);
+        echo json_encode(["error" => 0]);
+        exit(1);
     }
 }

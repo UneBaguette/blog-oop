@@ -24,6 +24,11 @@ class Router {
         $this->routes['POST'][] = new Route($path, $action);
     }
 
+    public function delete(string $path, string $action)
+    {
+        $this->routes['DELETE'][] = new Route($path, $action);
+    }
+
     public function run()
     {
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {

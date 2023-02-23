@@ -35,22 +35,28 @@
 
     confirmOverlay.addEventListener("click", () => {
         const itemId = confirmOverlay.dataset.id;
+        const error = document.createElement("div");
+        error.className = "msg error";
         
         fetch(window.location.pathname + "/delete/" + itemId, {
-            method: "POST"
-        }).then((res) => {
-            if (res.ok){
-                const tr = document.querySelectorAll("tr .id");
-                tr.forEach((id) => {
-                    if (id.textContent === itemId) {
-                        id.parentNode.remove();
-                    };
-                });
-                toggleOverlay();
+            method: "DELETE"
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            //TODO: Show error
+            if (Number.isInteger(data.error)){
+                document.querySelector(".container").prepend(error);
+                
             }
-        }).catch((err) => {
-            console.error(err);
-        });
+            const tr = document.querySelectorAll("tr .id");
+            tr.forEach((id) => {
+                if (id.textContent === itemId) {
+                    id.parentNode.remove();
+                };
+            });
+            toggleOverlay();
+        })
+        .catch(console.error);
         
     });
 
