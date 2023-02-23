@@ -44,13 +44,13 @@ $navbarAdminLink = [
         <link rel="stylesheet" href="<?= SCRIPTS ?>css/panel.css">
         <script>
 
-            const toggleOverlay = (title) => {
+            const toggleOverlay = (title = "") => {
                 const overlay = document.querySelector(".overlay-container");
                 const popup = document.querySelector(".popup");
-                const popupTitle = document.querySelector(".popup-title");
 
                 if (!overlay.classList.contains("show")) {
-                    popupTitle.textContent = title.textContent;
+                    //TODO: fix for admin
+                    //document.querySelector(".popup-title").textContent = title.textContent;
                     overlay.classList.toggle("show");
                     setTimeout(() => {
                         overlay.classList.toggle("transition");
@@ -160,14 +160,6 @@ $navbarAdminLink = [
                         document.querySelector(".actions-overlay #confirm").setAttribute("data-id", e.target.dataset.id);
                         toggleOverlay(e.target.parentNode.parentNode.children[1]);
                     };
-
-                    document.addEventListener("click", (e) => {
-                        if (e.target.classList.contains("overlay-container")) {
-                            toggleOverlay();
-                        };
-                    });
-
-                    document.querySelector(".popup > span").addEventListener("click", toggleOverlay);
 
                 </script>
             <?php endif; ?>

@@ -23,7 +23,15 @@
     
     const confirmOverlay = document.querySelector(".actions-overlay #confirm");
 
-    document.querySelector(".actions-overlay #cancel").addEventListener("click", toggleOverlay);
+    [document.querySelector(".actions-overlay #cancel"), document.querySelector(".popup > span")].forEach((el) => {
+        el.addEventListener("click", toggleOverlay);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("overlay-container")) {
+            toggleOverlay();
+        };
+    });
 
     confirmOverlay.addEventListener("click", () => {
         const itemId = confirmOverlay.dataset.id;

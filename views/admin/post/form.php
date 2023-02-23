@@ -55,29 +55,30 @@ function submitPostLink()
         <button class="btn add">Ajouter une image existante</button>
         <label for="images">Images de l'article</label>
         <div class="form-input" id="img-container">
-            <?php if (isset($params['post']) && !empty($params['post']->getImages())) { ?>
-                <?php foreach ($params['post']->getImages() as $postImg): ?>
-                    <div class="img-content">
-                        <div class="img-infos">
-                            <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= SCRIPTS . "images/" . $postImg->filename  ?>">
-                            <p class="uploaded-filename"><?= $postImg->filename ?></p>
-                            <div class="actions">
-                                <button class="img-edit">
-                                    Edit
-                                </button>
-                                <button class="img-trash">
-                                    Delete
-                                </button>
+            <div class="img-content">
+                <?php if (isset($params['post']) && !empty($params['post']->getImages())) { ?>
+                    <?php foreach ($params['post']->getImages() as $postImg): ?>
+                            <div class="img-infos">
+                                <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= SCRIPTS . "images/" . $postImg->filename  ?>">
+                                <p class="uploaded-filename"><?= $postImg->filename ?></p>
+                                <div class="actions">
+                                    <button class="img-edit">
+                                        Edit
+                                    </button>
+                                    <button class="img-trash">
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
+                        <input style="display: none;" type="text" name="filename[]" id="filename" value="<?= $postImg->filename ?>">
+                    <?php endforeach; ?>
+                <?php } else {?>
+                        <div class="img-infos">
+                            <p>No image uploaded</p>
                         </div>
-                    </div>
-                    <input style="display: none;" type="text" name="filename[]" id="filename" value="<?= $postImg->filename ?>">
-                <?php endforeach; ?>
-            <?php } else {?>
-                <div class="img-content">
-                    <input style="display: none;" type="text" name="filename[]" id="filename" value="">
-                </div>
-            <?php }; ?>
+                        <input style="display: none;" type="text" name="filename[]" id="filename" value="">
+                <?php }; ?>
+            </div>
         </div>
         <span class="btn btn-file">
             <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">

@@ -52,7 +52,7 @@
         imgText.textContent = ev.target.files[0].name;
         reader.readAsDataURL(ev.target.files[0]);
 
-        imgDelete.addEventListener('click', (e) => {
+        const deleteImg = function(e) {
             e.preventDefault();
             const noImage = document.createElement("p");
             noImage.textContent = "No image uploaded";
@@ -62,8 +62,11 @@
             if (inputImg.value.length){
                 inputImg.value = "";
                 imgInfos.prepend(noImage);
+                imgDelete.removeEventListener('click', deleteImg);
             }
-        });
+        }
+
+        imgDelete.addEventListener('click', deleteImg);
     };
 
     inputImg.addEventListener("change", loadFile);
