@@ -16,8 +16,8 @@
                 <th scope="row" class="id"><?= $tag->id; ?></th>
                 <td><?= $tag->name; ?></td>
                 <td class="actions">
-                    <button data-id="<?= $tag->id ?>" class="btn warning" id="edit" onclick="edit(event)">Modifier</button>
-                    <button data-id="<?= $tag->id; ?>" type="submit" class="btn danger" id="delete" onclick="del(event)">Supprimer</button>
+                    <button data-id="<?= $tag->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <button data-id="<?= $tag->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach ?>

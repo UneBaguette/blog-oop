@@ -44,32 +44,6 @@ $navbarAdminLink = [
         <link rel="stylesheet" href="<?= SCRIPTS ?>css/panel.css">
         <script>
 
-            const toggleOverlay = (title = "") => {
-                const overlay = document.querySelector(".overlay-container");
-                const popup = document.querySelector(".popup");
-
-                if (!overlay.classList.contains("show")) {
-                    //TODO: fix for admin
-                    //document.querySelector(".popup-title").textContent = title.textContent;
-                    overlay.classList.toggle("show");
-                    setTimeout(() => {
-                        overlay.classList.toggle("transition");
-                        setTimeout(() => {
-                            return popup.classList.toggle("show");
-                        }, 50)
-                    }, 100);
-                }
-                else {
-                    popup.classList.toggle("show");
-                    setTimeout(() => {
-                        overlay.classList.toggle("transition");
-                        setTimeout(() => {
-                            return overlay.classList.toggle("show");
-                        }, 100)
-                    }, 100);
-                }
-            }
-
         </script>
     <?php endif; ?>
 </head>
@@ -145,25 +119,6 @@ $navbarAdminLink = [
         <!-- WIP -->
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
-    <?php if ($adminPage): echo '<script src="'.SCRIPTS.'js/panel.js"></script>'; ?>
-        <?php foreach($navbarAdminLink as $link => $title): ?>
-            <?php if($_SERVER["REQUEST_URI"] === $link): ?>
-                <script>
-
-                    const edit = (e) => {
-                        e.preventDefault();
-                        window.location.href =  window.location.pathname + "/edit/" + e.target.dataset.id;
-                    };
-
-                    const del = (e) => {
-                        e.preventDefault();
-                        document.querySelector(".actions-overlay #confirm").setAttribute("data-id", e.target.dataset.id);
-                        toggleOverlay(e.target.parentNode.parentNode.children[1]);
-                    };
-
-                </script>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <?php if ($adminPage){ echo '<script src="'.SCRIPTS.'js/panel.js"></script>';} ?>
 </body>
 </html>

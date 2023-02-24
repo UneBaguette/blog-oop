@@ -86,12 +86,19 @@ class PostController extends Controller {
     public function destroy(int $id)
     {
         $this->isAdmin();
+        header('Access-Control-Allow-Methods: DELETE');
+        header('Content-Type: application/json; charset=utf-8');
 
         $post = new Post($this->getDB());
         $result = $post->destroy($id);
 
         if ($result) {
-            return header('Location: /admin/posts');
+            http_response_code(200);
+            echo json_encode(["success" => 0]);
+            exit;
         }
+        http_response_code(404);
+        echo json_encode(["error" => 0]);
+        exit(1);
     }
 }

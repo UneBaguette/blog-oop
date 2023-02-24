@@ -26,8 +26,8 @@
                     <?= file_exists($params['path'] . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. $img->filename .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?>
                 </td>
                 <td class="actions">
-                    <button data-id="<?= $img->id ?>" class="btn warning" id="edit" onclick="edit(event)">Modifier</button>
-                    <button data-id="<?= $img->id; ?>" type="submit" class="btn danger" id="delete" onclick="del(event)">Supprimer</button>
+                    <button data-id="<?= $img->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <button data-id="<?= $img->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach ?>

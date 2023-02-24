@@ -20,20 +20,11 @@
             return tag.parentNode.append(tag);
         });
     });
-    
+
     const confirmOverlay = document.querySelector(".actions-overlay #confirm");
 
-    [document.querySelector(".actions-overlay #cancel"), document.querySelector(".popup > span")].forEach((el) => {
-        el.addEventListener("click", toggleOverlay);
-    });
-
-    document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("overlay-container")) {
-            toggleOverlay();
-        };
-    });
-
-    confirmOverlay.addEventListener("click", () => {
+    function deleteItem() {
+        //TODO: Fix not working on tag/posts pages
         const itemId = confirmOverlay.dataset.id;
         const error = document.createElement("div");
         error.className = "msg error";
@@ -57,7 +48,71 @@
             toggleOverlay();
         })
         .catch(console.error);
-        
+    };
+
+    const toggleOverlay = (mode = null, title = null) => {
+        const overlay = document.querySelector(".overlay-container");
+        const popup = document.querySelector(".popup");
+
+        if (!overlay.classList.contains("show")) {
+            overlay.classList.toggle("show");
+            setTimeout(() => {
+                overlay.classList.toggle("transition");
+                setTimeout(() => {
+                    return popup.classList.toggle("show");
+                }, 50)
+            }, 100);
+        }
+        else {
+            popup.classList.toggle("show");
+            setTimeout(() => {
+                overlay.classList.toggle("transition");
+                setTimeout(() => {
+                    return overlay.classList.toggle("show");
+                }, 100)
+            }, 100);
+        }
+        switch (mode) {
+            // DELETE MODE
+            case 0:
+                document.querySelector(".popup-title").textContent = title.textContent;
+                confirmOverlay.addEventListener("click", deleteItem);
+                break;
+            //EDIT MODE
+            case 1:
+
+                break;
+            default:
+                break;
+        }
+    };
+
+    [document.querySelector(".actions-overlay #cancel"), document.querySelector(".popup > span")].forEach((el) => {
+        el.addEventListener("click", toggleOverlay);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("overlay-container")) {
+            toggleOverlay();
+        };
+    });
+
+    const edit = (e) => {
+        e.preventDefault();
+        window.location.href =  window.location.pathname + "/edit/" + e.target.dataset.id;
+    };
+
+    const del = (e) => {
+        e.preventDefault();
+        document.querySelector(".actions-overlay #confirm").setAttribute("data-id", e.target.dataset.id);
+        toggleOverlay(0, e.target.parentNode.parentNode.children[1]);
+    };
+
+    document.querySelectorAll(".actions #edit").forEach((btn) => {
+        btn.addEventListener("click", edit);
+    });
+    document.querySelectorAll(".actions #delete").forEach((btn) => {
+        btn.addEventListener("click", del);
     });
 
 })();

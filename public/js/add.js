@@ -7,7 +7,7 @@
 
     add.addEventListener("click", (e) => {
         e.preventDefault();
-        toggleOverlay();
+        toggleOverlay(1);
     });
 
 })();

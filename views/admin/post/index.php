@@ -31,8 +31,8 @@
                 </td>
                 <td><?= $post->getCreatedAt(); ?></td>
                 <td class="actions">
-                    <button data-id="<?= $post->id ?>" class="btn warning" id="edit" onclick="edit(event)">Modifier</button>
-                    <button data-id="<?= $post->id; ?>" type="submit" class="btn danger" id="delete" onclick="del(event)">Supprimer</button>
+                    <button data-id="<?= $post->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <button data-id="<?= $post->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>
         <?php endforeach; ?>
