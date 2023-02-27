@@ -33,12 +33,10 @@
             <label for="rename">Auto-rename file</label>
             <input type="checkbox" checked="checked" name="rename" id="rename" value="true">
         </div>
-        <?php if (!isset($params['image']->filename)): ?>
-            <span class="btn btn-file">
-                <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">
-                <input name="file" id="file" type="file" class="img-add" accept="image/*">
-            </span>
-        <?php endif; ?>
+        <span class="btn btn-file">
+            <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">
+            <input name="file" id="file" type="file" class="img-add" accept="image/*">
+        </span>
     </div>
     <button type="submit" class="btn-form"><?= isset($params['image']) ? "Enregistrer les modifications" : "Enregistrer mon image" ?></button>
 </form>

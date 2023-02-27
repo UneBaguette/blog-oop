@@ -27,7 +27,7 @@ abstract class Model {
     public function all(): array
     {
         if ($this->table === "posts"){
-            // TODO: investigate bug with ORDER by
+            // BUG: investigate bug with ORDER by
             return $this->query("SELECT * FROM {$this->table} ORDER By created_at DESC;");
         }
         return $this->query("SELECT * FROM {$this->table};");

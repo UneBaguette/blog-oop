@@ -78,7 +78,7 @@ class ImageController extends Controller {
 
         $image = new Image($this->getDB());
 
-        //TODO: fix update image
+        //TODO: update image when new one is uploaded
 
         $result = $image->update($id, $_POST);
 
@@ -111,7 +111,7 @@ class ImageController extends Controller {
             echo json_encode(["success" => 2]);
             exit(1);
         }
-        http_response_code(404);
+        http_response_code(403);
         echo json_encode(["error" => 0]);
         exit(1);
     }

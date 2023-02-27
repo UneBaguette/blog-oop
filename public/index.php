@@ -33,19 +33,20 @@ $router->post('/register', 'App\Controllers\UserController@registerPost');
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
 // POST
+$router->get('/admin', 'App\Controllers\Admin\PostController@index');
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
 $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
-$router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
+$router->delete('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
 // TAG
 $router->get('/admin/tags', 'App\Controllers\Admin\TagController@index');
 $router->get('/admin/tags/create', 'App\Controllers\Admin\TagController@create');
 $router->post('/admin/tags/create', 'App\Controllers\Admin\TagController@createTag');
 $router->get('/admin/tags/edit/:id', 'App\Controllers\Admin\TagController@edit');
 $router->post('/admin/tags/edit/:id', 'App\Controllers\Admin\TagController@update');
-$router->post('/admin/tags/delete/:id', 'App\Controllers\Admin\TagController@destroy');
+$router->delete('/admin/tags/delete/:id', 'App\Controllers\Admin\TagController@destroy');
 // IMAGE
 $router->get('/admin/images', 'App\Controllers\Admin\ImageController@index');
 $router->get('/admin/images/create', 'App\Controllers\Admin\ImageController@create');

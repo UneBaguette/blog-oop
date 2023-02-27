@@ -39,7 +39,14 @@ class PostController extends Controller {
 
         $post = new Post($this->getDB());
 
-        $tags = array_pop($_POST);
+        $tags = array();
+
+        // TODO: REPLACE WITH BETTER
+        if (isset($_POST['tags'])) {
+            $tags = $_POST['tags'];
+            unset($_POST['tags']);
+            unset($_POST['filename']);
+        }
 
         $result = $post->create($_POST, $tags);
 
@@ -97,7 +104,7 @@ class PostController extends Controller {
             echo json_encode(["success" => 0]);
             exit;
         }
-        http_response_code(404);
+        http_response_code(403);
         echo json_encode(["error" => 0]);
         exit(1);
     }
