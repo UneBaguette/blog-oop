@@ -54,6 +54,7 @@ $router->post('/admin/images/create', 'App\Controllers\Admin\ImageController@cre
 $router->get('/admin/images/edit/:id', 'App\Controllers\Admin\ImageController@edit');
 $router->post('/admin/images/edit/:id', 'App\Controllers\Admin\ImageController@update');
 $router->delete('/admin/images/delete/:id', 'App\Controllers\Admin\ImageController@destroy');
+$router->get('/admin/images/all', 'App\Controllers\Admin\ImageController@allImages');
 
 try {
     $router->run();

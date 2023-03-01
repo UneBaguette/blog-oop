@@ -94,12 +94,6 @@ $navbarAdminLink = [
     <div class="container">
         <?= $content ?>
     </div>
-    <div class="overlay-container show transition">
-        <div class="popup show">
-            <span></span>
-            
-        </div>
-    </div>
     <footer>
         <span>Copyright &#169;	&#174;	&#8482; 2023</span>
         <!-- WIP -->

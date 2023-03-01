@@ -23,7 +23,7 @@
                 <td><?= $img->name; ?></td>
                 <td><?= $img->alt; ?></td>
                 <td>
-                    <?= file_exists($params['path'] . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. $img->filename .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?>
+                    <?= file_exists($img->getpath() . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. $img->filename .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?>
                 </td>
                 <td class="actions">
                     <button data-id="<?= $img->id ?>" class="btn warning" id="edit">Modifier</button>

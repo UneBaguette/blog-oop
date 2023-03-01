@@ -12,9 +12,8 @@ class ImageController extends Controller {
         $this->isAdmin();
 
         $images = (new Image($this->getDB()))->all();
-        $path = (new Image($this->getDB()))->path;
 
-        return $this->view('admin.image.index',  compact('images', 'path'));
+        return $this->view('admin.image.index',  compact('images'));
     }
 
     public function create()
@@ -113,6 +112,21 @@ class ImageController extends Controller {
         }
         http_response_code(403);
         echo json_encode(["error" => 0]);
+        exit(1);
+    }
+
+    public function allImages()
+    {
+        $this->isAdmin();
+
+        $images = (new Image($this->getDB()))->all();
+
+        if ($images){
+            http_response_code(200);
+            echo json_encode($images);
+            exit;
+        }
+        http_response_code(403);
         exit(1);
     }
 }

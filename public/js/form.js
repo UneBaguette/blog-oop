@@ -24,15 +24,19 @@
     const imgOverlay = document.createElement("div");
     const popup = document.createElement("div");
 
-    const imageOverlay = (title = null, id = null) => {
+    const imageOverlay = async (e) => {
+        e.preventDefault();
         const span = document.createElement("span");
         const h3 = document.createElement("h3");
-        const text = document.createElement("p");
+        const imgContainer = document.createElement("section");
         const actions = document.createElement("div");
         const buttonCancel = document.createElement("button");
         const buttonConfirm = document.createElement("button");
-        document.body.appendChild(imgOverlay);
+        const imgPath = "/public/images/";
+        const images = await getAllImages();
         
+        document.body.appendChild(imgOverlay);
+
         popup.className = "popup";
 
         imgOverlay.classList.add("overlay-container");
@@ -42,7 +46,26 @@
 
         popup.prepend(span);
 
+        h3.textContent = "Sélectionner une ou plusieurs image(s). Total: " + images.length;
+
         popup.appendChild(h3);
+
+        imgContainer.className = "img-container";
+
+        popup.appendChild(imgContainer);
+
+        images.forEach((i) => {
+            const imgDisplay = document.createElement("div");
+            const img = document.createElement("img");
+            const imgText = document.createElement("p");
+            imgDisplay.className = "img-display";
+            img.src = imgPath + i.filename;
+            img.alt = i.alt;
+            imgText.textContent = i.filename;
+            imgContainer.appendChild(imgDisplay);
+            imgDisplay.appendChild(img);
+            imgDisplay.appendChild(imgText);
+        });
 
         actions.className = "actions-overlay";
 
@@ -94,9 +117,12 @@
 
     const add = document.querySelector(".btn.add");
 
-    add.addEventListener("click", (e) => {
-        e.preventDefault();
-        imageOverlay();
-    });
+    add.addEventListener("click", imageOverlay);
+
+    async function getAllImages(){
+        const res = await fetch("/admin/images/all").catch(console.error);
+        const data = await res.json();
+        return data;
+    }
 
 })();

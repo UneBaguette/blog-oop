@@ -441,7 +441,7 @@ input[type="file"]{
 
 .popup {
     position: fixed;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -80%);
     background: var(--white);
@@ -491,3 +491,56 @@ input[type="file"]{
     display: flex;
     margin: 10px 0;
 }
+
+/* OVERLAY - IMAGES */
+
+.img-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #00000089;
+    min-width: 650px;
+    max-width: 700px;
+    min-height: 300px;
+    max-height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 3px;
+    gap: 10px;
+    grid: repeat(auto-fill, minmax(150px,200px)) / repeat(3, minmax(150px,200px));
+    padding: 10px 0px;
+}
+
+.popup:has(+ .img-display)  {
+    font-size: 2rem;
+}
+
+.img-display {
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 3px;
+    max-height: 180px;
+    max-width: 150px;
+    border: 2px solid #36363650;
+    margin: 0 auto;
+    transition: opacity ease 150ms;
+}
+
+.img-display:hover {
+    opacity: 0.4;
+}
+
+.img-display > img {
+    width: 150px;
+    height: 100px;
+}
+
+.img-display > p {
+    min-height: 50px;
+    max-height: 50px;
+    font-size: 0.7rem;
+}
+
+/* OVERLAY - LOADING */
