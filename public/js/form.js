@@ -34,6 +34,7 @@
         const buttonConfirm = document.createElement("button");
         const imgPath = "/public/images/";
         const images = await getAllImages();
+        let selectedImages = [];
         
         document.body.appendChild(imgOverlay);
 
@@ -58,13 +59,28 @@
             const imgDisplay = document.createElement("div");
             const img = document.createElement("img");
             const imgText = document.createElement("p");
+            const input = document.createElement("input");
             imgDisplay.className = "img-display";
             img.src = imgPath + i.filename;
             img.alt = i.alt;
             imgText.textContent = i.filename;
+            input.type = "checkbox";
+            input.value = i.id;
+            input.name = "media[]";
             imgContainer.appendChild(imgDisplay);
             imgDisplay.appendChild(img);
             imgDisplay.appendChild(imgText);
+            imgDisplay.appendChild(input);
+            input.addEventListener("change", (e) => {
+                const value = e.target.value;
+                if (e.target.checked){
+                    if (!selectedImages.includes(value)) {
+                        selectedImages.push(value);
+                    }
+                } else {
+                    selectedImages = selectedImages.filter(i => i !== value);
+                }
+            });
         });
 
         actions.className = "actions-overlay";
@@ -79,6 +95,9 @@
         buttonConfirm.className = "btn danger";
         buttonConfirm.id = "confirm";
         buttonConfirm.textContent = "Confirmer";
+        buttonConfirm.addEventListener("click", () => {
+            
+        });
 
         actions.appendChild(buttonConfirm);
 
@@ -88,26 +107,20 @@
     };
 
     function showImgOverlay() {
-        if (!imgOverlay.classList.contains("show")) {
-            imgOverlay.classList.toggle("show");
-            setTimeout(() => {
-                imgOverlay.classList.toggle("transition");
-                setTimeout(() => {
-                    return popup.classList.toggle("show");
-                }, 50)
-            }, 100);
-        } else {
-            popup.classList.toggle("show");
-            setTimeout(() => {
-                imgOverlay.classList.toggle("transition");
-                setTimeout(() => {
-                    imgOverlay.classList.toggle("show");
-                    popup.innerHTML = "";
-                    return imgOverlay.remove();
-                }, 100)
-            }, 100);
-        }
+        showOverlay(imgOverlay, popup);
     }
+
+    const loading = document.createElement("div");
+    const loader = document.createElement("div");
+
+    function loadingOverlay() {
+        loading.className = "loading-overlay";
+        loader.className = "lds-dual-ring";
+        loading.appendChild(loader);
+        document.body.appendChild(loading);
+        showOverlay(loading, loader);
+    }
+    
 
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("overlay-container")) {
@@ -119,8 +132,34 @@
 
     add.addEventListener("click", imageOverlay);
 
+    function showOverlay(parent, child){
+        if (!parent.classList.contains("show")) {
+            parent.classList.toggle("show");
+            setTimeout(() => {
+                parent.classList.toggle("transition");
+                setTimeout(() => {
+                    return child.classList.toggle("show");
+                }, 50)
+            }, 100);
+        } else {
+            child.classList.toggle("show");
+            setTimeout(() => {
+                parent.classList.toggle("transition");
+                setTimeout(() => {
+                    parent.classList.toggle("show");
+                    child.innerHTML = "";
+                    return parent.remove();
+                }, 100)
+            }, 100);
+        }
+    }
+
     async function getAllImages(){
-        const res = await fetch("/admin/images/all").catch(console.error);
+        loadingOverlay();
+        const res = await fetch("/admin/images/all").catch((err) => {
+            console.error(err);
+            showOverlay(loading, loader);
+        }).finally(() => {showOverlay(loading, loader);});
         const data = await res.json();
         return data;
     }

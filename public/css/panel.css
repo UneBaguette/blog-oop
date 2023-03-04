@@ -532,6 +532,10 @@ input[type="file"]{
     opacity: 0.4;
 }
 
+.img-display:active {
+    opacity: 1;
+}
+
 .img-display > img {
     width: 150px;
     height: 100px;
@@ -544,3 +548,59 @@ input[type="file"]{
 }
 
 /* OVERLAY - LOADING */
+
+.loading-overlay{
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #000000BF;
+    opacity: 0;
+}
+
+.loading-overlay.show {
+    display: flex;
+}
+
+.loading-overlay.show.transition {
+    opacity: 1;
+}
+
+.loading-overlay.show .lds-dual-ring.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    transform: translateY(-10%);
+    opacity: 0;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid var(--rose);
+    border-color: var(--rose) transparent var(--rose) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

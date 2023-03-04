@@ -78,9 +78,11 @@ class Post extends Model {
 
         $id = $this->db->getPDO()->lastInsertId();
 
+        //TODO: Finish tag/images relations
         foreach ($relations as $tagId) {
-            $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
-            $stmt->execute([$id, $tagId]);
+            
+            // $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
+            // $stmt->execute([$id, $tagId]);
         }
 
         return true;
@@ -90,12 +92,23 @@ class Post extends Model {
     {
         parent::update($id, $data);
 
-        $stmt = $this->db->getPDO()->prepare("DELETE FROM post_tag WHERE post_id = ?");
-        $result = $stmt->execute([$id]);
+        $stmt = $this->db->getPDO()->prepare("DELETE FROM post_tag WHERE post_id = ?; DELETE FROM post_media WHERE post_id = ?;");
+        $result = $stmt->execute([$id, $id]);
 
-        foreach ($relations as $tagId) {
-            $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
-            $stmt->execute([$id, $tagId]);
+        foreach ($relations as $k => $v){
+            if ($k == "tags"){
+                foreach($v as $v) {
+                    $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
+                    $stmt->execute([$id, $v]);
+                }
+            } else if ($k == "media"){
+                foreach($v as $v) {
+                    if ($v != ""){
+                        $stmt = $this->db->getPDO()->prepare("INSERT post_media (post_id, media_id) VALUES (?, ?)");
+                        $stmt->execute([$id, $v]);
+                    }
+                }
+            }
         }
 
         if ($result) {

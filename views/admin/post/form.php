@@ -70,7 +70,7 @@ function submitPostLink()
                                 </button>
                             </div>
                         </div>
-                        <input style="display: none;" type="text" name="filename[]" id="filename" value="<?= $postImg->filename ?>">
+                        <input style="display: none;" type="text" name="media[]" id="media" value="<?= $postImg->id ?>">
                     </div>
                 <?php endforeach; ?>
             <?php } else {?>
@@ -78,7 +78,7 @@ function submitPostLink()
                     <div class="img-infos">
                         <p>No image uploaded</p>
                     </div>
-                    <input style="display: none;" type="text" name="filename[]" id="filename" value="">
+                    <input style="display: none;" type="text" name="media[]" id="media" value="">
                 </div>
             <?php }; ?>
         </div>
@@ -89,23 +89,5 @@ function submitPostLink()
     </div>
     <button type="submit"  class="btn-form"><?= isset($params['post']) ? "Enregistrer les modifications" : "Enregistrer mon article" ?></button>
 </form>
-<!-- <div class="overlay-existing">
-    <div class="popup">
-        <span></span>
-        <div class="actions-overlay">
-            <button class="btn" id="cancel">Annuler</button>
-            <button class="btn danger" id="confirm">Confirmer</button>
-        </div>
-    </div>
-</div>
-<div class="overlay-add">
-    <div class="popup">
-        <span></span>
-        <div class="actions-overlay">
-            <button class="btn" id="cancel">Annuler</button>
-            <button class="btn danger" id="confirm">Confirmer</button>
-        </div>
-    </div>
-</div> -->
 <script src="<?= SCRIPTS ?>js/load.js"></script>
 <script src="<?= SCRIPTS ?>js/form.js"></script>

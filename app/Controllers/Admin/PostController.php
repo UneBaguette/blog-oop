@@ -45,10 +45,11 @@ class PostController extends Controller {
         if (isset($_POST['tags'])) {
             $tags = $_POST['tags'];
             unset($_POST['tags']);
-            unset($_POST['filename']);
+            $media = $_POST['media'];
+            unset($_POST['media']);
         }
 
-        $result = $post->create($_POST, $tags);
+        $result = $post->create($_POST, [$tags, $media]);
 
         if ($result) {
             return header('Location: /admin/posts');
@@ -76,11 +77,14 @@ class PostController extends Controller {
 
         $tags = array();
 
-        if (!empty($_POST['tags'])) {
-            $tags = array_pop($_POST);
+        if (isset($_POST['tags'])) {
+            $tags = $_POST['tags'];
+            unset($_POST['tags']);
+            $media = $_POST['media'];
+            unset($_POST['media']);
         }
 
-        $result = $post->update($id, $_POST, $tags);
+        $result = $post->update($id, $_POST, ["tags" => $tags, "media" => $media]);
 
         if ($result) {
             if ($onpage){
