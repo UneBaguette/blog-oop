@@ -29,24 +29,10 @@ function submitPostLink()
     <div class="form-element">
         <label for="tags">Tags de l'article</label>
         <fieldset class="form-input select" id="tags" name="tags">
-            <?php foreach($params['tags'] as $tag): ?>
-                <div class="tag admin <?php if (isset($params['post'])) : ?>
-                        
-                        <?php foreach ($params['post']->getTags() as $postTag) {
-                            echo ($tag->id === $postTag->id) ? 'active' : '';
-                        }
-                    ?>">
-                    <?php endif; ?>
+            <?php foreach($params['tags'] as $tag): $active = ($tag->active ?? false); ?>
+                <div class="tag admin<?= $active ? " active" : "" ?>">
                     <label for="tags[]"><?= $tag->name ?></label>
-                    <input name="tags[]" class="box" 
-                    <?php if (isset($params['post'])) : ?>
-                        
-                        <?php foreach ($params['post']->getTags() as $postTag) {
-                            echo ($tag->id === $postTag->id) ? 'checked="checked"' : '';
-                        }
-                    ?>
-                    <?php endif; ?> 
-                    type="checkbox" value="<?= $tag->id ?>">
+                    <input name="tags[]" class="box" type="checkbox" <?= $active ? "checked='checked'" : "" ?> value="<?= $tag->id ?>">
                 </div>
             <?php endforeach; ?>
         </fieldset>

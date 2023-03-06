@@ -1,10 +1,9 @@
-// Version 0.4 WIP
+// Version 0.5
 
 (() => {
     'use strict';
 
     function deleteItem(e) {
-        //FIXME: Fix not working on tag/posts pages
         const itemId = e.target.dataset.id;
         const error = document.createElement("div");
         error.className = "msg error";
@@ -14,10 +13,8 @@
         })
         .then((res) => res.json())
         .then((data) => {
-            //TODO: Show error
-            if (Number.isInteger(data.error)){
-                document.querySelector(".container").prepend(error);
-                
+            if (data.error) {
+                console.warn(data.msg);
             }
             const tr = document.querySelectorAll("tr .id");
             tr.forEach((id) => {
@@ -101,8 +98,15 @@
                     return delOverlay.remove();
                 }, 100)
             }, 100);
+        };
+    };
+
+    window.start_and_end = function(str,maxlength = 35) {
+        if (str.length > maxlength) {
+            return str.substring(0, 25) + ' ... ' + str.substr(str.length - 10, str.length);
         }
-    }
+        return str;
+    };
 
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("overlay-container")) {
@@ -125,6 +129,12 @@
     });
     document.querySelectorAll(".actions #delete").forEach((btn) => {
         btn.addEventListener("click", del);
+    });
+
+    document.querySelectorAll("td").forEach((t) => {
+        if (!t.className.length) {
+            t.textContent = window.start_and_end(t.textContent, 35);
+        }
     });
 
 })();

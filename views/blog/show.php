@@ -19,7 +19,7 @@
 <?php if ($imgs): ?>
 
 <section class="section-img">
-    <h2>Images<span id="count-img">(<?= count($imgs) ?>)</span></h2>
+    <h2>Images (<?= count($imgs) ?>)</h2>
     <ul class="img-container">
         <?php foreach($imgs as $img): ?>
             <li>

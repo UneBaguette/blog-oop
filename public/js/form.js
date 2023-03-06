@@ -1,4 +1,4 @@
-// Version 0.1
+// Version 0.2
 
 (() => {
     'use strict';
@@ -63,7 +63,13 @@
             imgDisplay.className = "img-display";
             img.src = imgPath + i.filename;
             img.alt = i.alt;
-            imgText.textContent = i.filename;
+            imgText.textContent = window.start_and_end(i.filename, 80);
+            document.querySelectorAll(".img-content > input").forEach((imageId) => {
+                if (+(imageId.value) === i.id) {
+                    input.checked = true;
+                    selectedImages.push(i.id);
+                }
+            });
             input.type = "checkbox";
             input.value = i.id;
             input.name = "media[]";
@@ -75,10 +81,10 @@
                 const value = e.target.value;
                 if (e.target.checked){
                     if (!selectedImages.includes(value)) {
-                        selectedImages.push(value);
+                        selectedImages.push(+(value));
                     }
                 } else {
-                    selectedImages = selectedImages.filter(i => i !== value);
+                    selectedImages = selectedImages.filter(i => i !== +(value));
                 }
             });
         });
@@ -96,7 +102,20 @@
         buttonConfirm.id = "confirm";
         buttonConfirm.textContent = "Confirmer";
         buttonConfirm.addEventListener("click", () => {
-            
+            const parentEl = document.getElementById("img-container");
+            let hasImg = false;
+            parentEl.innerHTML = "";
+            images.forEach((i) => {
+                const image = i.id;
+                if (selectedImages.includes(image)){
+                    hasImg = true;
+                    addImg(parentEl, i.id, i.alt, i.filename, imgPath)
+                }
+            })
+            if (!hasImg) {
+                placeholderImg(parentEl);
+            }
+            showImgOverlay();
         });
 
         actions.appendChild(buttonConfirm);
@@ -105,6 +124,69 @@
 
         showImgOverlay();
     };
+
+    function placeholderImg(parent) {
+        const imgContent = document.createElement("div");
+        const imgInfos = document.createElement("div");
+        const noImage = document.createElement("p");
+        imgContent.className = "img-content";
+        imgInfos.className = "img-infos";
+        noImage.textContent = "No image uploaded";
+
+        imgInfos.innerHTML = "";
+
+        imgInfos.appendChild(noImage);
+
+        imgContent.appendChild(imgInfos);
+
+        parent.prepend(imgContent);
+    }
+
+    function addImg(parent, id, alt, filename, src){
+        const imgContent = document.createElement("div");
+        const imgInfos = document.createElement("div");
+        const imgPreview = document.createElement("img");
+        const imgText = document.createElement("p");
+        const actions = document.createElement("div");
+        const imgEdit = document.createElement("button");
+        const imgDelete = document.createElement("button");
+        const inputImg = document.createElement("input");
+
+        inputImg.id = "media";
+        inputImg.name = "media[]";
+        inputImg.type = "text";
+        inputImg.style.display = "none";
+        inputImg.value = id;
+
+        imgContent.className = "img-content";
+        imgInfos.className = "img-infos";
+        imgText.className = "uploaded-filename";
+        actions.className = "actions";
+        imgEdit.className = "img-edit";
+        imgDelete.className = "img-trash";
+
+        imgPreview.id = id;
+        imgPreview.alt = alt;
+        imgPreview.src = src + filename;
+
+        imgText.textContent = filename;
+
+        imgEdit.textContent = "Edit";
+        imgDelete.textContent = "Delete";
+
+        imgInfos.appendChild(imgPreview);
+        imgInfos.appendChild(imgText);
+
+        actions.appendChild(imgEdit);
+        actions.appendChild(imgDelete);
+        
+        imgInfos.appendChild(actions);
+
+        imgContent.appendChild(imgInfos);
+        imgContent.appendChild(inputImg);
+
+        parent.prepend(imgContent);
+    }
 
     function showImgOverlay() {
         showOverlay(imgOverlay, popup);
@@ -159,9 +241,10 @@
         const res = await fetch("/admin/images/all").catch((err) => {
             console.error(err);
             showOverlay(loading, loader);
-        }).finally(() => {showOverlay(loading, loader);});
-        const data = await res.json();
-        return data;
+        }).finally(() => {setTimeout(() => {
+            showOverlay(loading, loader);
+        }, 250)});
+        return await res.json();
     }
 
 })();

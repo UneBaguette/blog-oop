@@ -22,6 +22,7 @@ h1 {
 
 .post-body {
     position: relative;
+    width: 100%;
 }
 
 .post-body img {
@@ -75,10 +76,6 @@ h1 {
 }
 
 /*  ---- OVERLAY ---- */
-
-.section-img #count-img{
-    margin: 0 5px;
-}
 
 .img-container {
     margin: 0;

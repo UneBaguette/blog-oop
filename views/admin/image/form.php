@@ -1,6 +1,6 @@
 <a href="<?= HREF_ROOT . "admin/images"?>">⬅ Back to panel</a>
 
-<h1><?= $params['image']->name ?? 'Créer un nouvelle image' ?></h1>
+<h1><?= $params['image']->name ?? 'Créer une nouvelle image' ?></h1>
 
 <form method="POST" name="postlink" enctype="multipart/form-data" action="<?= isset($params['image']) ? HREF_ROOT."admin/images/edit/{$params['image']->id}"  :  HREF_ROOT."admin/images/create" ?>" >
     <div class="form-element">
@@ -32,6 +32,10 @@
         <div>
             <label for="rename">Auto-rename file</label>
             <input type="checkbox" checked="checked" name="rename" id="rename" value="true">
+        </div>
+        <div>
+            <label for="overwrite">Overwrite exisiting file</label>
+            <input type="checkbox" name="overwrite" id="overwrite" value="true">
         </div>
         <span class="btn btn-file">
             <img src="<?= SCRIPTS . "content/icons8-plus-96.svg" ?>">

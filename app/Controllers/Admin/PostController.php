@@ -40,16 +40,19 @@ class PostController extends Controller {
         $post = new Post($this->getDB());
 
         $tags = array();
+        $media = array();
 
         // TODO: REPLACE WITH BETTER
         if (isset($_POST['tags'])) {
             $tags = $_POST['tags'];
             unset($_POST['tags']);
+        }
+        if(isset($_POST['media'])){
             $media = $_POST['media'];
             unset($_POST['media']);
         }
 
-        $result = $post->create($_POST, [$tags, $media]);
+        $result = $post->create($_POST, ["tags" => $tags, "media" => $media]);
 
         if ($result) {
             return header('Location: /admin/posts');
@@ -63,6 +66,16 @@ class PostController extends Controller {
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
         $image = (new Image($this->getDB()))->all();
+
+        $postTag = (new Post($this->getDB()))->getTagById($id);
+
+        foreach($tags as $tag){
+            foreach($postTag as $pTag){
+                if (in_array($tag->id, $pTag)){
+                    $tag->active = true;
+                }
+            }
+        }
         
         return $this->view('admin.post.form', compact('post', 'tags', 'image'));
     }
@@ -76,10 +89,13 @@ class PostController extends Controller {
         $post = new Post($this->getDB());
 
         $tags = array();
+        $media = array();
 
         if (isset($_POST['tags'])) {
             $tags = $_POST['tags'];
             unset($_POST['tags']);
+        }
+        if (isset($_POST['media'])){
             $media = $_POST['media'];
             unset($_POST['media']);
         }

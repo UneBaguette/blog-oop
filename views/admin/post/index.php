@@ -26,7 +26,7 @@
                 <td><?= $post->title; ?></td>
                 <td class="table-tags">
                     <?php foreach($post->tags as $tag): ?>
-                        <span class="tag"><?= $tag ?></span>
+                        <span class="tag"><?= $tag['name'] ?></span>
                     <?php endforeach; ?>
                 </td>
                 <td><?= $post->getCreatedAt(); ?></td>

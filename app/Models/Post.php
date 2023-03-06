@@ -5,21 +5,32 @@ namespace App\Models;
 use DateTime;
 
 class Post extends Model {
-
+    /**
+     * Table de la base de donnée
+     * @var string
+     */
     protected $table = 'posts';
+    /**
+     * La date de création de l'article
+     * @var string
+     */
     public $created_at;
+    /**
+     * Le contenu de l'article
+     * @var string
+     */
     public $content;
-
     public function getCreatedAt(): string
     {
         return (new DateTime($this->created_at))->format('d/m/Y à H:i');
     }
-
     public function getExcerpt(): string
     {
-        return substr($this->content, 0, 200) . '...';
+        if (strlen($this->content) > 200){
+            return substr($this->content, 0, 200) . '...';
+        }
+        return $this->content;
     }
-
     public function getButton(): string
     {
         return '<a href="'.HREF_ROOT.'posts/'.$this->id.'" class="btn btn-post">Lire l\'article</a>';
@@ -27,6 +38,7 @@ class Post extends Model {
 
     public function getImage(): string
     {
+        //TODO: Choose image instead of first image of array
         $imgs = $this->getImages();
         if (!empty($imgs)){
             foreach($imgs as $img){
@@ -35,12 +47,6 @@ class Post extends Model {
         }
         return "";
     }
-
-    /**
-     * Summary of getTags
-     * 
-     * @return mixed
-     */
     public function getTags()
     {
         return $this->query("
@@ -57,7 +63,6 @@ class Post extends Model {
             WHERE pt.post_id = ?
         ", [$this->id]);
     }
-
     public function getTagById(int $id)
     {
         $st = $this->query("
@@ -67,7 +72,7 @@ class Post extends Model {
         ", [$id]);
         $tags = array();
         foreach ($st as $v){
-            array_push($tags, $v->name);
+            array_push($tags, ["id" => $v->id, "name" => $v->name]);
         }
         return $tags;
     }
@@ -78,11 +83,21 @@ class Post extends Model {
 
         $id = $this->db->getPDO()->lastInsertId();
 
-        //TODO: Finish tag/images relations
-        foreach ($relations as $tagId) {
-            
-            // $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
-            // $stmt->execute([$id, $tagId]);
+        //TODO: Better code
+        foreach ($relations as $k => $v) {
+            if ($k === "tags"){
+                foreach($v as $v) {
+                    $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
+                    $stmt->execute([$id, $v]);
+                }
+            } else if ($k === "media"){
+                foreach($v as $v) {
+                    if ($v !== ""){
+                        $stmt = $this->db->getPDO()->prepare("INSERT post_media (post_id, media_id) VALUES (?, ?)");
+                        $stmt->execute([$id, $v]);
+                    }
+                }
+            }
         }
 
         return true;
@@ -95,6 +110,7 @@ class Post extends Model {
         $stmt = $this->db->getPDO()->prepare("DELETE FROM post_tag WHERE post_id = ?; DELETE FROM post_media WHERE post_id = ?;");
         $result = $stmt->execute([$id, $id]);
 
+        //TODO: Better code
         foreach ($relations as $k => $v){
             if ($k == "tags"){
                 foreach($v as $v) {

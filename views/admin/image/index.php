@@ -17,14 +17,12 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($params['images'] as $img) : ?>
+        <?php foreach($params['images'] as $img): ?>
             <tr>
                 <th scope="row" class="id"><?= $img->id; ?></th>
                 <td><?= $img->name; ?></td>
-                <td><?= $img->alt; ?></td>
-                <td>
-                    <?= file_exists($img->getpath() . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. $img->filename .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?>
-                </td>
+                <td><?= ($img->alt ?? "") ?></td>
+                <td><?= file_exists($img->getpath() . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. trim($img->filename) .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?></td>
                 <td class="actions">
                     <button data-id="<?= $img->id ?>" class="btn warning" id="edit">Modifier</button>
                     <button data-id="<?= $img->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>

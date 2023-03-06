@@ -1,4 +1,4 @@
-// 0.1
+// 0.2
 
 (() => {
     'use strict';
@@ -25,8 +25,6 @@
     
     imgPreview.id = "img-preview";
     imgText.className = "uploaded-filename";
-    imgText.style.width = "100%";
-    imgText.style.textAlign = "center";
     imgDelete.className = "img-trash";
     imgDelete.textContent = "Delete";
 
