@@ -96,11 +96,6 @@ $navbarAdminLink = [
     </div>
     <footer>
         <span>Copyright &#169;	&#174;	&#8482; 2023</span>
-        <!-- WIP -->
-        <!-- <div class="theme">
-            <button class="change-theme"></button>
-        </div> -->
-        <!-- WIP -->
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
     <?php if ($adminPage){ echo '<script src="'.SCRIPTS.'js/panel.js"></script>';} ?>
