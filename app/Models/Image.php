@@ -114,6 +114,17 @@ class Image extends Model {
         return true;
     }
 
+    public function renameAllFilesOnPaths(string $oldFilename, string $newFilename, string $homepath, array $allpaths): bool
+    {
+        $success = true;
+        foreach($allpaths as $path){
+            $del = rename($path . $oldFilename, $path . $newFilename);
+            if (!$del)
+                $success = false;
+        }
+        return $success;
+    }
+
     public function deleteAllFilesOnPaths(string $filename, string $homepath, array $allpaths): bool
     {
         $success = true;

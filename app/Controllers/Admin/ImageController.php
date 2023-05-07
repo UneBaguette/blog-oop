@@ -69,12 +69,13 @@ class ImageController extends Controller {
 
         $image = new Image($this->getDB());
         $path = $image->getfullpath();
+        $paths = [$path, $path . "thumb/large/", $path . "thumb/small/"];
 
         $ogName = $_POST['filename'];
         $newName = $image->getNewFileName($_POST['filename']);
         $_POST["filename"] = $newName;
 
-        if (rename($path . $ogName, $path . $newName)) {
+        if ($image->renameAllFilesOnPaths($ogName, $newName, $path, $paths)) {
             $result = $image->update($id, $_POST);
 
             if ($result) {
