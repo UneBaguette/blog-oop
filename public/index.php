@@ -17,7 +17,7 @@ define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 define('DB_NAME', 'blog_oop');
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
-define('DB_PWD', '');
+define('DB_PWD', '2341');
 
 $router = new Router($_GET['url']);
 

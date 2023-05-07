@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2023 at 10:22 PM
+-- Generation Time: May 07, 2023 at 10:24 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -34,6 +34,13 @@ CREATE TABLE `media` (
   `filename` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`id`, `name`, `alt`, `filename`) VALUES
+(106, 'jehan rictus', 'jehan rictus de profil', 'jehan_rictus.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +65,7 @@ INSERT INTO `posts` (`id`, `title`, `content`, `created_at`) VALUES
 (14, 'Franz Schubert', '   Compositeur emblématique de la musique romantique allemande, il est reconnu comme le maître incontesté du lied. Il s\'est particulièrement consacré à la musique de chambre, et a aussi écrit de nombreuses œuvres pour piano, une dizaine de symphonies, ainsi que de la musique chorale et sacrée.\r\n\r\nBien qu\'il soit mort précocement, à 31 ans, Schubert est l\'un des compositeurs les plus prolifiques du xixe siècle. Le catalogue de ses œuvres compte plus de mille compositions, dont une partie importante est publiée après sa mort et révèle des chefs-d\'œuvre qui contribuent à sa renommée posthume. ', '2022-12-05 10:10:07'),
 (25, 'Léonard de Vinci', 'Léonard de Vinci (italien : Leonardo di ser Piero da VinciÉcouter, dit Leonardo da Vinci), né le 14 avril 1452 du calendrier actuel à Vinci (Toscane) et mort le 2 mai 1519 à Amboise (Touraine), est un peintre italien polymathe, à la fois artiste, organisateur de spectacles et de fêtes, scientifique, ingénieur, inventeur, anatomiste, sculpteur, peintre, architecte, urbaniste, botaniste, musicien, philosophe et écrivain.\r\n\r\nEnfant naturel d\'une paysanne, Caterina di Meo Lippi et d\'un notaire, Pierre de Vinci, il est élevé auprès de ses grands-parents paternels dans la maison familiale de Vinci jusqu’à l’âge de dix ans. À Florence, son père l\'inscrit pour deux ans d’apprentissage dans une scuola d’abaco et ensuite à l\'atelier d\'Andrea del Verrocchio où il côtoie Botticelli, Le Pérugin et Domenico Ghirlandaio.\r\n\r\nIl quitte l’atelier en 1482 et se présente principalement comme ingénieur au duc de Milan Ludovic Sforza. Introduit à la cour, il obtient quelques commandes de peinture et ouvre un atelier. Il étudie les mathématiques et le corps humain. Il rencontre également Gian Giacomo Caprotti, dit Salai, un enfant de dix ans, turbulent élève de son atelier, qu’il prend sous son aile.\r\n\r\nEn septembre 1499, Léonard part à Mantoue, à Venise et retourne à Florence. Il y repeint et s\'adonne à l’architecture ainsi qu\'à l\'ingénierie militaire. Pendant un an, il confectionne des cartes géographiques pour César Borgia.\r\n\r\nEn 1503, la ville de Florence lui commande une fresque, mais il en est déchargé par le roi de France Louis XII qui l\'appelle à Milan où, de 1506 à 1511, il est « peintre et ingénieur ordinaire » du souverain. Il rencontre Francesco Melzi, son élève, ami et exécuteur testamentaire. En 1504, son père meurt, mais il est exclu du testament. En 1507, il est usufruitier des terres de son oncle décédé.', '2023-01-27 11:25:27'),
 (26, 'Giorgio Vasari', 'Giorgio Vasari (30 juillet 1511 à Arezzo - 27 juin 1574 à Florence) est un peintre, architecte et écrivain toscan. Son recueil biographique Les Vies des meilleurs peintres, sculpteurs et architectes, particulièrement sa seconde édition de 1568, est considéré comme une des publications fondatrices de l\'histoire de l\'art.\r\n\r\n...', '2023-01-27 11:26:46'),
-(27, 'Jehan-Rictus', 'Gabriel Randon de Saint-Amand, initialement Gabriel Randon, qui prit le pseudonyme de Jehan Rictus ([ʒeã ʁiktys] ou [ʒøã ʁiktys] ou [ʒã ʁiktys]) (Jehan-Rictus avec un trait d\'union à partir de 19221), est né à Boulogne-sur-Mer le 21 septembre 1867 et mort à Paris le 6 novembre 1933. C\'est un poète français, célèbre pour ses œuvres composées dans la langue du peuple du Paris de son époque.\r\n</br></br>\r\nSes poèmes se trouvent principalement réunis dans deux livres, Les Soliloques du pauvre et ... le Cœur populaire. Le premier fait soliloquer un sans-logis contraint d\'errer dans Paris, le second divers personnages : prostituées, enfants battus, ouvriers, cambrioleurs, etc.\r\n</br></br>\r\nhttps://fr.wikipedia.org/wiki/Jehan-Rictus', '2023-01-27 11:35:40');
+(27, 'Jehan-Rictus', 'Gabriel Randon de Saint-Amand, initialement Gabriel Randon, qui prit le pseudonyme de Jehan Rictus ([ʒeã ʁiktys] ou [ʒøã ʁiktys] ou [ʒã ʁiktys]) (Jehan-Rictus avec un trait d\'union à partir de 19221), est né à Boulogne-sur-Mer le 21 septembre 1867 et mort à Paris le 6 novembre 1933. C\'est un poète français, célèbre pour ses œuvres composées dans la langue du peuple du Paris de son époque.\r\n</br></br>\r\nSes poèmes se trouvent principalement réunis dans deux livres, Les Soliloques du pauvre et ... le Cœur populaire. Le premier fait soliloquer un sans-logis contraint d\'errer dans Paris, le second divers personnages : prostituées, enfants battus, ouvriers, cambrioleurs, etc.\r\n</br></br>\r\n<a href=\"https://fr.wikipedia.org/wiki/Jehan-Rictus\" target=\"_blank\">https://fr.wikipedia.org/wiki/Jehan-Rictus</a>', '2023-01-27 11:35:40');
 
 -- --------------------------------------------------------
 
@@ -70,6 +77,13 @@ CREATE TABLE `post_media` (
   `post_id` int(11) NOT NULL,
   `media_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `post_media`
+--
+
+INSERT INTO `post_media` (`post_id`, `media_id`) VALUES
+(27, 106);
 
 -- --------------------------------------------------------
 
@@ -140,7 +154,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `admin`) VALUES
 (1, 'admin', '$2y$10$x1HaLhyop9TKKX3DzcCgCO./OZQNwgL9jzffWF49jN85dDwtx31C6', 1),
-(2, 'user1', '$2y$10$sin9mDJwXNtkA0g5krhbsOCxAV/I74KKEbuC1z5ErQzoFaOYyK7Fm', 0);
+(2, 'user1', '$2y$10$sin9mDJwXNtkA0g5krhbsOCxAV/I74KKEbuC1z5ErQzoFaOYyK7Fm', 0),
+(5, 'test', '$2y$10$t/W1HErK/XC3Z4FEJi0O5urV5YoFA7ZYq1WnGwqvcXOfRkktQnTne', 1),
+(6, 'new', '$2y$10$REBj.peoiZLlr9FmPoxNM.lyBVtxfy.nv762hVCW06JotvBjrBCdi', 0),
+(7, 'hello', '$2y$10$nMkPD98BgDpzNB0arxTmuO7cx7EMFIVXj8W4hVzD2UM9k9KmqDh.u', 0);
 
 --
 -- Indexes for dumped tables
@@ -192,25 +209,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -220,8 +237,8 @@ ALTER TABLE `users`
 -- Constraints for table `post_media`
 --
 ALTER TABLE `post_media`
-  ADD CONSTRAINT `post_media_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
-  ADD CONSTRAINT `post_media_ibfk_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`);
+  ADD CONSTRAINT `post_media_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_media_ibfk_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `post_tag`
