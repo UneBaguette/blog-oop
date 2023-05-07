@@ -1,4 +1,4 @@
-// Version 0.5
+// Version 0.6
 
 (() => {
     'use strict';
@@ -108,16 +108,34 @@
         return str;
     };
 
+    document.querySelectorAll('#text').forEach((el) => {
+        const maxLengthTxt = 35;
+        if (el.className.length || el.textContent.length < maxLengthTxt) return;
+        const textoverlay = document.createElement('div');
+        const fulltext = document.createElement('p');
+        el.textContent = window.start_and_end(el.textContent, maxLengthTxt);
+        el.addEventListener('mouseover', (e) => {
+            const item = e.target;
+            const filename = item.dataset.text ?? item.textContent;
+            if (!filename){
+                return;
+            }
+            textoverlay.className = "textoverlay";
+            fulltext.className = "fulltext";
+            fulltext.textContent = filename;
+            textoverlay.appendChild(fulltext);
+            item.appendChild(textoverlay);
+        });
+        el.addEventListener('mouseout', (e) => {
+            textoverlay.remove();
+        });
+    });
+
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("overlay-container")) {
             showDeleteOverlay();
         };
     });
-
-    const edit = (e) => {
-        e.preventDefault();
-        window.location.href =  window.location.pathname + "/edit/" + e.target.dataset.id;
-    };
 
     const del = (e) => {
         e.preventDefault();
@@ -130,11 +148,15 @@
     document.querySelectorAll(".actions #delete").forEach((btn) => {
         btn.addEventListener("click", del);
     });
-
-    document.querySelectorAll("td").forEach((t) => {
-        if (!t.className.length) {
-            t.textContent = window.start_and_end(t.textContent, 35);
-        }
-    });
+    // DEL AMA MAAAARDE
+    // document.querySelectorAll('input').forEach((input) => {
+    //     input.addEventListener('change', (e) => {
+    //         if (e.target.value !== ''){
+    //             window.onbeforeunload = () => {
+    //                 return confirm("Es-tu sûr de vouloir annuler les changements ?");
+    //             };
+    //         };
+    //     });
+    // });
 
 })();

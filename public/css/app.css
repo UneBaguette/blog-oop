@@ -149,12 +149,15 @@ form {
 .form-input {
     overflow: hidden;
     margin: 10px 0;
-    padding: 7px 10px;
+    padding: 15px 10px;
     font-size: 1.1rem;
     border-radius: 3px;
     background: none;
     border: 2px solid #242424;
     outline: 0;
+    max-height: 490px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .form-input:focus-within {
@@ -254,12 +257,97 @@ form {
     transition: all ease 150ms;
 }
 
-.post-img img {
+.post-imgs {
+    display: flex;
+    max-width: 340px;
     min-width: 340px;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-imgs .img {
+    display: none;
+}
+
+.post-imgs .primary {
+    display: inline;
+}
+
+.post-imgs .first {
+    transform: translateX(100%);
+}
+
+.post-imgs .last {
+    transform: translateX(-100%);
+}
+
+.post-imgs img {
+    min-width: 340px;
+    border-radius: inherit;
     height: 100%;
     object-fit: cover;
+}
+
+.post-imgs .thumbnail-container {
+    display: inherit;
+    max-width: 340px;
+}
+
+.post-imgs .thumbnail-container.transition {
+    animation: transition .5s ease-out forwards;
+}
+
+
+@keyframes transition {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.post-imgs .actions-dot {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    padding: 20px 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity ease 130ms;
+}
+
+.post-imgs:hover .actions-dot {
+    opacity: 1;
+}
+
+.post-imgs .actions-dot > span {
+    border: 2px solid #fff;
+    border-radius: 50px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0 3px;
+    transition: all ease 150ms;
+}
+
+.post-imgs .actions-dot > .selected {
+    animation: fade 1s ease-out forwards;
+}
+
+.post-imgs .actions-dot > .fade {
+    animation: fade .6s ease-out backwards;
+}
+
+@keyframes fade {
+    0% {
+        background: #ffffff00;
+    }
+    100% {
+        background: #ffffff;
+    }
 }
 
 .tag:hover {

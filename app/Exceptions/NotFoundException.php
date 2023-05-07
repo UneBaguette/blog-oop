@@ -12,8 +12,12 @@ class NotFoundException extends Exception {
         parent::__construct($message, $code, $previous);
     }
 
-    public function error404()
+    public static function error404()
     {   
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         ob_start();
         http_response_code(404);
       

@@ -1,4 +1,4 @@
-// 0.2
+// Version 0.2
 
 (() => {
     'use strict';
@@ -21,11 +21,14 @@
     const imgPreview = document.createElement("img");
     const imgText = document.createElement("p");
     const imgDelete = document.createElement("button");
+    const imgEdit = document.createElement("button");
     const parentEl = document.getElementById("img-container");
     
     imgPreview.id = "img-preview";
     imgText.className = "uploaded-filename";
+    imgEdit.className = "img-edit";
     imgDelete.className = "img-trash";
+    imgEdit.textContent = "Edit";
     imgDelete.textContent = "Delete";
 
     const loadFile = (ev) => {
@@ -37,6 +40,7 @@
         imgContent.prepend(imgInfos);
         imgInfos.appendChild(imgPreview);
         imgInfos.appendChild(imgText);
+        imgInfos.appendChild(imgEdit);
         imgInfos.appendChild(imgDelete);
 
         imgInfos.style.display = "none";
@@ -61,10 +65,16 @@
                 inputImg.value = "";
                 imgInfos.prepend(noImage);
                 imgDelete.removeEventListener('click', deleteImg);
+                imgEdit.removeEventListener('click', editImg);
             }
+        }
+        const editImg = function(e) {
+            e.preventDefault();
+            //flemme
         }
 
         imgDelete.addEventListener('click', deleteImg);
+        imgEdit.addEventListener('click', editImg);
     };
 
     inputImg.addEventListener("change", loadFile);

@@ -16,7 +16,7 @@
                 <th scope="row" class="id"><?= $tag->id; ?></th>
                 <td><?= $tag->name; ?></td>
                 <td class="actions">
-                    <button data-id="<?= $tag->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <a href="<?= HREF_ROOT ?>admin/tags/edit/<?= $tag->id ?>" data-id="<?= $tag->id ?>" class="btn warning" id="edit">Modifier</a>
                     <button data-id="<?= $tag->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>

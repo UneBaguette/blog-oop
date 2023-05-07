@@ -20,11 +20,11 @@
         <?php foreach($params['images'] as $img): ?>
             <tr>
                 <th scope="row" class="id"><?= $img->id; ?></th>
-                <td><?= $img->name; ?></td>
-                <td><?= ($img->alt ?? "") ?></td>
-                <td><?= file_exists($img->getpath() . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. trim($img->filename) .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?></td>
+                <td id="text" data-text="<?= $img->name ?>"><?= $img->name; ?></td>
+                <td id="text" data-text="<?= $img->alt ?>"><?= ($img->alt ?? "") ?></td>
+                <td id="text" data-text="<?= $img->filename ?>"><?= file_exists($img->getfullpath() . $img->filename) ? $img->filename : '<span style="text-decoration: line-through;">'. trim($img->filename) .'</span>'. '<span style="color: var(--danger); font-weight: bold; margin: 0 5px;">NOT_FOUND</span>' ?></td>
                 <td class="actions">
-                    <button data-id="<?= $img->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <a href="<?= HREF_ROOT ?>admin/images/edit/<?= $img->id ?>" data-id="<?= $img->id ?>" class="btn warning" id="edit">Modifier</a>
                     <button data-id="<?= $img->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>

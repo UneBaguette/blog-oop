@@ -20,6 +20,15 @@ class Post extends Model {
      * @var string
      */
     public $content;
+    /**
+     * Id de l'article
+     * @var string
+     */
+    public $id;
+    /**
+     * Récupère la date de création de l'article
+     * @return string La date de création de l'article
+     */
     public function getCreatedAt(): string
     {
         return (new DateTime($this->created_at))->format('d/m/Y à H:i');
@@ -38,12 +47,9 @@ class Post extends Model {
 
     public function getImage(): string
     {
-        //TODO: Choose image instead of first image of array
         $imgs = $this->getImages();
         if (!empty($imgs)){
-            foreach($imgs as $img){
-                return '<img width="200" alt="'. $img->alt .'" src="'.SCRIPTS.'images/'.$img->filename.'" >';
-            }
+            return '<img width="200" alt="'. $imgs[0]->alt .'" src="'.(new Image($this->db))->getthumbnail("large").''.$imgs[0]->filename.'" >';
         }
         return "";
     }
@@ -63,7 +69,7 @@ class Post extends Model {
             WHERE pt.post_id = ?
         ", [$this->id]);
     }
-    public function getTagById(int $id)
+    public function getTagById(int $id): Array
     {
         $st = $this->query("
             SELECT t.* FROM tags t
@@ -77,7 +83,7 @@ class Post extends Model {
         return $tags;
     }
 
-    public function create(array $data, ?array $relations = null)
+    public function create(array $data, ?array $relations = null): bool
     {
         parent::create($data);
 
@@ -103,7 +109,7 @@ class Post extends Model {
         return true;
     }
 
-    public function update(int $id, mixed $data, ?array $relations = null)
+    public function update(int $id, mixed $data, ?array $relations = null): bool
     {
         parent::update($id, $data);
 

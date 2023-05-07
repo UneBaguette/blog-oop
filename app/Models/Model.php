@@ -13,7 +13,6 @@ abstract class Model {
      */
     protected $db;
     protected $table;
-    private $id;
 
     public function __construct(DBConnection $db)
     {

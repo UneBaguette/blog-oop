@@ -21,8 +21,9 @@ class ImageController extends Controller {
         $this->isAdmin();
 
         $images = (new Image($this->getDB()))->all();
+        $path = (new Image($this->getDB()))->getthumbnail();
 
-        return $this->view('admin.image.form', compact('images'));
+        return $this->view('admin.image.form', compact('images', 'path'));
     }
 
     public function createImage()
@@ -32,28 +33,16 @@ class ImageController extends Controller {
         $fileIsUploaded = isset($_FILES['file']) && (file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']));
 
         $image = new Image($this->getDB());
-        $path = $image->getpath();
+        $path = $image->getfullpath();
 
         if ($fileIsUploaded) {
-            $name = $filename = $_FILES["file"]["name"];
-            $extension = pathinfo($filename, PATHINFO_EXTENSION);
-            if (isset($_POST['rename'])){
-                unset($_POST['rename']);
-                $lowerName = strtolower(basename($_POST["name"])) . "." . $extension;
-                $name = str_replace(" ", "_", $lowerName);
-            }
-            if (!isset($_POST['overwrite']) && file_exists($path . $name)) {
-                $increment = 0;
-                while(file_exists($path . $name)) {
-                    $name = $lowerName;
-                    $increment++;
-                    $name = explode(".", $name)[0] . + $increment . "." . $extension;
-                }
-            }
-            unset($_POST['overwrite']);
-            $_POST["filename"] = $name;
+            $newName = $image->getNewFileName($_FILES["file"]["name"]);
+            $_POST["filename"] = $newName;
 
-            move_uploaded_file($_FILES["file"]["tmp_name"], $path . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"], $path . $newName);
+
+            $image->resizeImage($newName, $path, 0.2);
+            $image->resizeImage($newName, $path, 0.65, "large");
 
             $result = $image->create($_POST);
 
@@ -69,8 +58,9 @@ class ImageController extends Controller {
         $this->isAdmin();
 
         $image = (new Image($this->getDB()))->findById($id);
+        $path = (new Image($this->getDB()))->getthumbnail();
 
-        return $this->view('admin.image.form', compact('image'));
+        return $this->view('admin.image.form', compact('image', 'path'));
     }
 
     public function update(int $id)
@@ -78,14 +68,21 @@ class ImageController extends Controller {
         $this->isAdmin();
 
         $image = new Image($this->getDB());
+        $path = $image->getfullpath();
 
-        //TODO: update image when new one is uploaded
+        $ogName = $_POST['filename'];
+        $newName = $image->getNewFileName($_POST['filename']);
+        $_POST["filename"] = $newName;
 
-        $result = $image->update($id, $_POST);
+        if (rename($path . $ogName, $path . $newName)) {
+            $result = $image->update($id, $_POST);
 
-        if ($result) {
-            return header('Location: /admin/images');
+            if ($result) {
+                return header('Location: /admin/images');
+            }
+            return header('Location: /admin/images?error=true');
         }
+        return header('Location: /admin/images?error=true');
     }
 
     public function destroy(int $id)
@@ -96,7 +93,8 @@ class ImageController extends Controller {
 
         $image = new Image($this->getDB());
         $filename = isset($image->getFilenameById($id)->filename) ? $image->getFilenameById($id)->filename : NULL;
-        $path = $image->getpath();
+        $path = $image->getfullpath();
+        $paths = [$path, $path . "thumb/large/", $path . "thumb/small/"];
 
         if (!isset($filename)){
             echo json_encode(["error" => true, "msg" => "L'image n'a pas été trouvé"]);
@@ -105,8 +103,8 @@ class ImageController extends Controller {
         }
         
         if ($image->destroy($id)) {
-            if (file_exists($path . $filename)){
-                if (unlink($path . $filename)){
+            if ($image->fileExistsOnAllPaths($filename, $path, $paths)){
+                if ($image->deleteAllFilesOnPaths($filename, $path, $paths)){
                     http_response_code(200);
                     echo json_encode(["error" => false, "msg" => "L'image et son fichier ont été supprimé avec succès !"]);
                     exit();
@@ -135,8 +133,15 @@ class ImageController extends Controller {
             echo json_encode($images);
             exit;
         }
-        http_response_code(403);
+        http_response_code(404);
         echo json_encode(["error" => "Les images n'ont pas été trouvés !"]);
         exit(1);
+    }
+
+    public function getFullImagesPath()
+    {
+        $image = (new Image($this->getDB()));
+        echo json_encode(['path' => $image->getpath(), 'fullpath' => $image->getfullpath(), "thumb" => array("large" => $image->getthumbnail("large"), "small" => $image->getthumbnail())]);
+        exit();
     }
 }

@@ -17,7 +17,7 @@
             <div class="img-content">
                 <div class="img-infos">
                     <?php if (isset($params['image'])) { ?>
-                            <img src="<?= SCRIPTS . "images/" . $params['image']->filename  ?>">
+                            <img src="<?= ($params['path'] ?? SCRIPTS . "images/") . $params['image']->filename  ?>">
                             <p class="uploaded-filename" style="width: 100%; text-align:center;"><?= $params['image']->filename ?></p>
                             <button class="img-trash trash">
                                 Delete
@@ -31,7 +31,7 @@
         </div>
         <div>
             <label for="rename">Auto-rename file</label>
-            <input type="checkbox" checked="checked" name="rename" id="rename" value="true">
+            <input type="checkbox" name="rename" id="rename" value="true">
         </div>
         <div>
             <label for="overwrite">Overwrite exisiting file</label>

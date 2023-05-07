@@ -197,6 +197,29 @@ table .id {
     margin-right: 5px;
 }
 
+.table #text {
+    position: relative;
+}
+
+.table .textoverlay {
+    z-index: 9;
+    background: #0e0e0efa;
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    padding: 0 30px;
+    border-radius: 6px;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    animation: show .1s ease-out forwards;
+}
+
+.table .fulltext {
+    color: var(--white);
+    margin: 10px 0;
+}
+
 /* EDIT -- ADMIN */
 
 .form-element.img {
@@ -364,7 +387,7 @@ input[type="file"]{
     align-items: center;
     border: 2px solid #86868656;
     padding: 10px;
-    margin: 2px 0;
+    margin: 4px 0;
 }
 
 .img-content img {
@@ -384,6 +407,10 @@ input[type="file"]{
     cursor: pointer;
     border-radius: 3px;
     transition: 150ms all ease;
+}
+
+.img-infos .actions {
+    display: flex;
 }
 
 .img-content .img-trash {
@@ -407,6 +434,17 @@ input[type="file"]{
     margin-left: 10px;
     margin-right: 2px;
     content: "\01F5D1";
+}
+
+.img-content .img-edit {
+    margin-right: 5px;
+}
+
+.img-content .img-edit::after {
+    font-size: 1.3rem;
+    margin-left: 10px;
+    margin-right: 2px;
+    content: "\2692";
 }
 
 .img-content .img-infos {
@@ -447,7 +485,7 @@ input[type="file"]{
 
 .popup {
     position: fixed;
-    top: 45%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -80%);
     background: var(--white);
@@ -508,7 +546,7 @@ input[type="file"]{
     min-width: 650px;
     max-width: 700px;
     min-height: 300px;
-    max-height: 600px;
+    max-height: 615px;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 3px;
@@ -525,6 +563,7 @@ input[type="file"]{
 .img-display {
     display: flex;
     flex-direction: column;
+    position: relative;
     user-select: none;
     cursor: pointer;
     border-radius: 3px;
@@ -536,7 +575,7 @@ input[type="file"]{
 }
 
 .img-display:hover {
-    opacity: 0.4;
+    opacity: 0.7;
 }
 
 .img-display:active {
@@ -554,6 +593,52 @@ input[type="file"]{
     font-size: 0.7rem;
     margin: 20px 5px;
     overflow-wrap: break-word;
+}
+
+.img-display > input {
+    width: 10px;
+    display: none;
+}
+
+.img-display > span {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    transition: all ease 150ms;
+    opacity: 0;
+    animation: show .23s ease-out forwards;
+}
+
+.img-display > span::before {
+    content: '';
+    background: url('../content/checkmark.svg');
+    width: 50px;
+    height: 50px;
+}
+
+.img-display > .checkmark {
+    opacity: 1;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 /* OVERLAY - LOADING */

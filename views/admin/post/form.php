@@ -45,7 +45,7 @@ function submitPostLink()
                 <?php foreach ($params['post']->getImages() as $postImg): ?>
                     <div class="img-content">
                         <div class="img-infos">
-                            <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= SCRIPTS . "images/" . $postImg->filename  ?>">
+                            <img id="<?= $postImg->id ?>" alt="<?= htmlspecialchars($postImg->alt) ?>" src="<?= ($params['path'] ?? SCRIPTS . "images/") . $postImg->filename  ?>">
                             <p class="uploaded-filename"><?= $postImg->filename ?></p>
                             <div class="actions">
                                 <button class="img-edit">

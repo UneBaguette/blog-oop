@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Database\DBConnection;
+use App\Exceptions\NotFoundException;
 // TODO:remove
 require __DIR__ . '/../Models/User.php';
 
@@ -36,10 +37,10 @@ abstract class Controller {
     protected function isAdmin()
     {
         if (isset($_SESSION['auth'])) {
-            if ($_SESSION['auth'] === 1){
+            if ($_SESSION['auth'] >= 1){
                 return true;
             }
-            return header('Location: /');
+            return NotFoundException::error404();
         }
         return header('Location: /login');
     }

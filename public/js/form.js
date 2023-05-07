@@ -1,4 +1,4 @@
-// Version 0.2
+// Version 0.5
 
 (() => {
     'use strict';
@@ -32,10 +32,11 @@
         const actions = document.createElement("div");
         const buttonCancel = document.createElement("button");
         const buttonConfirm = document.createElement("button");
-        const imgPath = "/public/images/";
+        const imgPath = await getPathImages();
         const images = await getAllImages();
+        const imgError = images.error;
         let selectedImages = [];
-        
+
         document.body.appendChild(imgOverlay);
 
         popup.className = "popup";
@@ -55,36 +56,47 @@
 
         popup.appendChild(imgContainer);
 
+        if (imgError){
+            return console.error(images.error);
+        }
+
         images.forEach((i) => {
             const imgDisplay = document.createElement("div");
             const img = document.createElement("img");
             const imgText = document.createElement("p");
             const input = document.createElement("input");
+            const panelSelect = document.createElement("span");
             imgDisplay.className = "img-display";
-            img.src = imgPath + i.filename;
+            img.src = (imgPath ?? "/public/images/") + i.filename;
             img.alt = i.alt;
             imgText.textContent = window.start_and_end(i.filename, 80);
             document.querySelectorAll(".img-content > input").forEach((imageId) => {
                 if (+(imageId.value) === i.id) {
                     input.checked = true;
                     selectedImages.push(i.id);
+                    imgDisplay.appendChild(panelSelect);
                 }
             });
             input.type = "checkbox";
             input.value = i.id;
             input.name = "media[]";
+            panelSelect.className = "checkmark";
             imgContainer.appendChild(imgDisplay);
             imgDisplay.appendChild(img);
             imgDisplay.appendChild(imgText);
             imgDisplay.appendChild(input);
-            input.addEventListener("change", (e) => {
-                const value = e.target.value;
-                if (e.target.checked){
-                    if (!selectedImages.includes(value)) {
-                        selectedImages.push(+(value));
+            imgDisplay.addEventListener('click', function() {
+                const inputImg = input;
+                const inputValue = input.value;
+                input.checked = !input.checked; 
+                if (input.checked){
+                    if (!selectedImages.includes(inputValue)) {
+                        selectedImages.push(+(inputValue));
+                        imgDisplay.appendChild(panelSelect);
                     }
                 } else {
-                    selectedImages = selectedImages.filter(i => i !== +(value));
+                    selectedImages = selectedImages.filter(i => i !== +(inputValue));
+                    panelSelect.remove();
                 }
             });
         });
@@ -241,10 +253,18 @@
         const res = await fetch("/admin/images/all").catch((err) => {
             console.error(err);
             showOverlay(loading, loader);
-        }).finally(() => {setTimeout(() => {
-            showOverlay(loading, loader);
-        }, 250)});
+        }).finally(() => {
+            setTimeout(() => {
+                showOverlay(loading, loader);
+            }, 250)}
+        );
         return await res.json();
+    }
+
+    async function getPathImages(){
+        const res = await fetch('/admin/images/fullpath').catch(err => console.error(err));
+        const data = await res.json();
+        return data.thumb.small ?? data.path;
     }
 
 })();

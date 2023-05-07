@@ -45,9 +45,6 @@ $navbarAdminLink = [
     <?php endif; ?>
 </head>
 <body>
-    <noscript>
-        <p style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; background: #F2F2F2; z-index: 100; font-size: 1.6rem; text-align: center; display: flex; justify-content:center; align-items: center;" >Ce site a besoin de JavaScript pour fonctionner!</p>
-    </noscript>
     <header>
         <nav class="navbar">
             <a class="navbar-title" href="<?= HREF_ROOT ?>">Blog</a>
@@ -91,11 +88,14 @@ $navbarAdminLink = [
         </nav>
     <?php endif; ?>
     </header>
+    <noscript>
+        <p style="background: #B20000; z-index: 100; font-size: 1.6rem; text-align: center; margin: 0; color: white; padding: 10px 0;" >Ce site a besoin de JavaScript pour fonctionner!</p>
+    </noscript>
     <div class="container">
         <?= $content ?>
     </div>
     <footer>
-        <span>Copyright &#169;	&#174;	&#8482; 2023</span>
+        <span>Copyright &copy;	&#174;	&#8482; 2023</span>
     </footer>
     <script src="<?= SCRIPTS . 'js/app.js' ?>" ></script>
     <?php if ($adminPage){ echo '<script src="'.SCRIPTS.'js/panel.js"></script>';} ?>

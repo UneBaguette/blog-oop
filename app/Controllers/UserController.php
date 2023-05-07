@@ -65,9 +65,10 @@ class UserController extends Controller {
 
         if ($pass === $_POST['passwordverify']){
             $hashpwd = password_hash($pass, PASSWORD_BCRYPT);
-            if ($user->register($username, $hashpwd)) {
+            $admin = 0;
+            if ($user->register($username, $hashpwd, $admin)) {
                 $_SESSION['connectedas'] = $_POST['username'];
-                $_SESSION['auth'] = (int) $user->getAdminByUsername($username);
+                $_SESSION['auth'] = $admin;
                 if ($_SESSION['auth'] === 1) {
                     return header('Location: /admin/posts?success=true&registered=true');
                 }
@@ -80,8 +81,9 @@ class UserController extends Controller {
 
     public function logout()
     {
-        session_destroy();
-
-        return header('Location: /');
+        if (session_destroy())
+        {
+            return header('Location: /');
+        }
     }
 }

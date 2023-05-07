@@ -6,6 +6,12 @@ class Tag extends Model
 {
     protected $table = 'tags';
 
+    /**
+     * Id du tag
+     * @var string
+     */
+    public $id;
+
     public function getPosts()
     {
         return $this->query("

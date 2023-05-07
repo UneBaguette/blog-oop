@@ -29,8 +29,9 @@ class PostController extends Controller {
         $this->isAdmin();
 
         $tags = (new Tag($this->getDB()))->all();
+        $path = (new Image($this->getDB()))->getthumbnail();
 
-        return $this->view('admin.post.form', compact('tags'));
+        return $this->view('admin.post.form', compact('tags', 'path'));
     }
 
     public function createPost()
@@ -42,7 +43,7 @@ class PostController extends Controller {
         $tags = array();
         $media = array();
 
-        // TODO: REPLACE WITH BETTER
+        // TODO: Better code
         if (isset($_POST['tags'])) {
             $tags = $_POST['tags'];
             unset($_POST['tags']);
@@ -66,6 +67,7 @@ class PostController extends Controller {
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
         $image = (new Image($this->getDB()))->all();
+        $path = (new Image($this->getDB()))->getthumbnail();
 
         $postTag = (new Post($this->getDB()))->getTagById($id);
 
@@ -77,7 +79,7 @@ class PostController extends Controller {
             }
         }
         
-        return $this->view('admin.post.form', compact('post', 'tags', 'image'));
+        return $this->view('admin.post.form', compact('post', 'tags', 'image', 'path'));
     }
 
     public function update(int $id)

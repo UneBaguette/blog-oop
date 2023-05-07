@@ -55,9 +55,10 @@ $router->get('/admin/images/edit/:id', 'App\Controllers\Admin\ImageController@ed
 $router->post('/admin/images/edit/:id', 'App\Controllers\Admin\ImageController@update');
 $router->delete('/admin/images/delete/:id', 'App\Controllers\Admin\ImageController@destroy');
 $router->get('/admin/images/all', 'App\Controllers\Admin\ImageController@allImages');
+$router->get('/admin/images/fullpath', 'App\Controllers\Admin\ImageController@getFullImagesPath');
 
 try {
     $router->run();
 } catch (NotFoundException $e) {
-    return $e->error404();
+    return $e::error404();
 }

@@ -1,6 +1,11 @@
 <h1><?= $params['post']->title ?></h1>
 
-<?php $imgs = ($params['post']->getImages() ?? false); ?>
+<?php 
+
+$imgs = ($params['post']->getImages() ?? false);
+$path = ($params['path'] ?? "");
+
+?>
 
 <div>
     <?php foreach($params['post']->getTags() as $tag): ?>
@@ -23,7 +28,7 @@
     <ul class="img-container">
         <?php foreach($imgs as $img): ?>
             <li>
-                <img alt="<?= $img->alt ?>" src="/public/images/<?= $img->filename ?>">
+                <img alt="<?= $img->alt ?>" src="<?= $path . $img->filename ?>">
                 <div class="overlay-vignette">
                     <p><?= $img->name ?></p>
                 </div>
@@ -35,7 +40,7 @@
         <ul>
             <?php for($i = 0; $i < count($imgs); $i++): ?>
                 <li data-id="<?= $i + 1 ?>">
-                    <img alt="<?= $imgs[$i]->alt ?>" src="/public/images/<?= $imgs[$i]->filename ?>">
+                    <img alt="<?= $imgs[$i]->alt ?>" src="<?= $path . $imgs[$i]->filename ?>">
                     <div class="overlay-vignette">
                         <p><?= $imgs[$i]->name ?></p>
                     </div>

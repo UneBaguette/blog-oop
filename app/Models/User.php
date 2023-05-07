@@ -8,6 +8,15 @@ class User extends Model {
 
     protected $table = 'users';
 
+    /**
+     * @var string Mot de passe hashé de l'utilisateur
+     */
+    public $password;
+    /**
+     * @var int Valeur par défaut 0, admin si la valeur est supérieur à 0
+     */
+    public $admin;
+
     public function getByUsername(string $username): User
     {
         return $this->query("SELECT * FROM {$this->table} WHERE username = ?", [$username], true);
@@ -26,15 +35,13 @@ class User extends Model {
     public function exist(string $username): bool
     {
         $st = $this->query("SELECT id, username as user FROM {$this->table} WHERE username = ?", [$username], true);
-        foreach($st as $v){
-            if ($v === $username){
-                return true;
-            }
+        if ((bool)$st){
+            return true;
         }
         return false;
     }
 
-    public function register($user, $pass, $admin = 1): bool{
+    public function register($user, $pass, $admin = 0): bool{
         if ($this->exist($user)){
             return false;
         }

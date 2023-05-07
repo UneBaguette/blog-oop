@@ -31,7 +31,7 @@
                 </td>
                 <td><?= $post->getCreatedAt(); ?></td>
                 <td class="actions">
-                    <button data-id="<?= $post->id ?>" class="btn warning" id="edit">Modifier</button>
+                    <a href="<?= HREF_ROOT ?>admin/posts/edit/<?= $post->id ?>" data-id="<?= $post->id ?>" class="btn warning" id="edit">Modifier</a>
                     <button data-id="<?= $post->id; ?>" type="submit" class="btn danger" id="delete">Supprimer</button>
                 </td>
             </tr>
