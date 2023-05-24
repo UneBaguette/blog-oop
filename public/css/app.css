@@ -1,5 +1,6 @@
 :root {
     --white: #F5F5F5;
+    --whiter: #FAFAFA;
     --white-black: #ffffff;
     --grey: #585858;
     --light-black: #242424;
@@ -235,6 +236,7 @@ form {
     box-shadow: 2px 2px 5px #0f0f0f36;
     margin: 25px 0;
     height: 280px;
+    background: var(--whiter);
 }
 
 .post.row {

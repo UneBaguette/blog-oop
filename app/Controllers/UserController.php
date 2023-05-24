@@ -85,5 +85,7 @@ class UserController extends Controller {
         {
             return header('Location: /');
         }
+        echo 'no logout for you';
+        exit(1);
     }
 }

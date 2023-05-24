@@ -70,7 +70,7 @@ class TagController extends Controller {
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $this->isAdmin();
         header('Access-Control-Allow-Methods: DELETE');

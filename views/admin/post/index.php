@@ -7,6 +7,10 @@
     <?php endif; ?>
 <?php endif; ?>
 
+<?php if ((bool)filter_var(($_GET['error'] ?? false), FILTER_VALIDATE_BOOLEAN)): ?>
+    <div class="msg error">No working, no cookie for you</div>
+<?php endif; ?>
+
 <a href="<?= HREF_ROOT ?>admin/posts/create" class="btn">Créer un nouvel article</a>
 
 <table class="table" cellspacing="0">

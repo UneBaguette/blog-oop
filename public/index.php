@@ -8,16 +8,12 @@ require_once '../vendor/autoload.php';
 
 define('ROOT',  dirname(__DIR__));
 define('HREF_ROOT', '/' );
-// Not in use now. J'ai utilisé cette constante pour trouvé des bugs dans le les formulaire. Est peut remplacer HREF_ROOT
-define('VIEWS_FORM_ROOT', '../../../' );
-
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
-//define('SCRIPTS', 'public/');
 define('DB_NAME', 'blog_oop');
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
-define('DB_PWD', '2341');
+define('DB_PWD', '');
 
 $router = new Router($_GET['url']);
 

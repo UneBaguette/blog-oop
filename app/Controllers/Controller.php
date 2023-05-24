@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Database\DBConnection;
 use App\Exceptions\NotFoundException;
-// TODO:remove
+// TODO:remove this line if it is working without it
 require __DIR__ . '/../Models/User.php';
 
 abstract class Controller {
@@ -29,7 +29,7 @@ abstract class Controller {
         require VIEWS . 'layout.php';
     }
 
-    protected function getDB()
+    protected function getDB(): DBConnection
     {
         return $this->db;
     }

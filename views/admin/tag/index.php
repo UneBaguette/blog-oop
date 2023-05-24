@@ -1,5 +1,9 @@
 <h1>Administration des tags</h1>
 
+<?php if ((bool)filter_var(($_GET['error'] ?? false), FILTER_VALIDATE_BOOLEAN)): ?>
+    <div class="msg error">No working, no cookie for you</div>
+<?php endif; ?>
+
 <a href="<?= HREF_ROOT ?>admin/tags/create" class="btn">Créer un nouveau tag</a>
 
 <table class="table" cellspacing="0">

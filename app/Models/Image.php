@@ -69,20 +69,6 @@ class Image extends Model {
         return $name;
     }
 
-    // OLD -- WIP
-    public function resizeImageOld(string $filename, string $pathfile, float $percent = 0.5, string $folder = "small")
-    {
-        $pathFileName = $pathfile . $filename;
-        list($width, $height) = getimagesize($pathFileName);
-        $newwidth = $width * $percent;
-        $newheight = $height * $percent;
-        $thumb = imagecreatetruecolor($newwidth, $newheight);
-        $source = imagecreatefromstring(file_get_contents($pathFileName));
-        var_dump($pathFileName);
-        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        imagegd2($thumb, ROOT . $this->getthumbnail($folder) . $filename);
-    }
-
     // WIP
     public function resizeImage(string $filename, string $pathfile, float $percent = 0.5, string $folder = "small"): bool
     {

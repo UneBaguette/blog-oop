@@ -58,6 +58,7 @@ class PostController extends Controller {
         if ($result) {
             return header('Location: /admin/posts');
         }
+        return header('Location: /admin/posts?error=true');
     }
 
     public function edit(int $id)
@@ -110,9 +111,10 @@ class PostController extends Controller {
             }
             return header('Location: /admin/posts');
         }
+        return header('Location: /admin/posts?error=true');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $this->isAdmin();
         header('Access-Control-Allow-Methods: DELETE');

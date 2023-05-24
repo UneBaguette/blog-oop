@@ -30,7 +30,8 @@ class ImageController extends Controller {
     {
         $this->isAdmin();
 
-        $fileIsUploaded = isset($_FILES['file']) && (file_exists($_FILES['file']['tmp_name']) || is_uploaded_file($_FILES['file']['tmp_name']));
+        $tmpFile = $_FILES["file"]["tmp_name"];
+        $fileIsUploaded = isset($_FILES['file']) && (file_exists($tmpFile) || is_uploaded_file($tmpFile));
 
         $image = new Image($this->getDB());
         $path = $image->getfullpath();
@@ -39,7 +40,13 @@ class ImageController extends Controller {
             $newName = $image->getNewFileName($_FILES["file"]["name"]);
             $_POST["filename"] = $newName;
 
-            move_uploaded_file($_FILES["file"]["tmp_name"], $path . $newName);
+            // Check file type, not really necessary because only admin can upload
+            if (explode('/', mime_content_type($tmpFile))[0] !== 'image') {
+                echo json_encode(['msg' => 'unauthorized file type, also f u']);
+                exit(1);
+            }
+
+            move_uploaded_file($tmpFile, $path . $newName);
 
             $image->resizeImage($newName, $path, 0.2);
             $image->resizeImage($newName, $path, 0.65, "large");
@@ -86,7 +93,7 @@ class ImageController extends Controller {
         return header('Location: /admin/images?error=true');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): void
     {
         $this->isAdmin();
         header('Access-Control-Allow-Methods: DELETE');
@@ -139,7 +146,7 @@ class ImageController extends Controller {
         exit(1);
     }
 
-    public function getFullImagesPath()
+    public function getFullImagesPath(): void
     {
         $image = (new Image($this->getDB()));
         echo json_encode(['path' => $image->getpath(), 'fullpath' => $image->getfullpath(), "thumb" => array("large" => $image->getthumbnail("large"), "small" => $image->getthumbnail())]);
