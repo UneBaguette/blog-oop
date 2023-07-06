@@ -156,20 +156,24 @@
     //     });
     // });
 
-    document.querySelector('form').addEventListener('submit', () => {
-        const loading = document.createElement("div");
-        const loader = document.createElement("div");
-        loading.className = "loading-overlay";
-        loader.className = "lds-dual-ring";
-        loading.appendChild(loader);
-        document.body.appendChild(loading);
-        loading.classList.toggle("show");
-        setTimeout(() => {
-            loading.classList.toggle("transition");
+    const form = document.querySelector('form');
+
+    if (form) {
+        form.addEventListener('submit', () => {
+            const loading = document.createElement("div");
+            const loader = document.createElement("div");
+            loading.className = "loading-overlay";
+            loader.className = "lds-dual-ring";
+            loading.appendChild(loader);
+            document.body.appendChild(loading);
+            loading.classList.toggle("show");
             setTimeout(() => {
-                return loader.classList.toggle("show");
-            }, 50)
-        }, 100);
-    })
+                loading.classList.toggle("transition");
+                setTimeout(() => {
+                    return loader.classList.toggle("show");
+                }, 50)
+            }, 100);
+        });
+    };
 
 })();

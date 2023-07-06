@@ -132,6 +132,7 @@
         actions.appendChild(buttonConfirm);
 
         popup.appendChild(actions);
+        popup.classList.add("img");
 
         showImgOverlay();
     };
