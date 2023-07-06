@@ -1,5 +1,3 @@
-<?php session_destroy(); ?>
-
 <h1>Se connecter</h1>
 
 <?php if (isset($_SESSION['errors'])): ?>
@@ -9,12 +7,12 @@
         <div class="alert">
             <?php foreach($errors as $error): ?>
                 <li><?= $error ?></li>
-            <?php endforeach ?>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach ?>
-<?php endforeach ?>
+    <?php endforeach; ?>
+<?php endforeach; $_SESSION['errors'] = [] ?>
 
-<?php endif ?>
+<?php endif; ?>
 
 <?php if (isset($_GET['error'])): ?>
 
@@ -25,11 +23,11 @@
 <form action="<?= HREF_ROOT ?>login" method="POST">
     <div class="form-element">
         <label for="username">Nom d'utilisateur</label>
-        <input type="text" class="form-input" name="username" id="username">
+        <input type="text" required="required" class="form-input" name="username" id="username">
     </div>
     <div class="form-element">
         <label for="password">Mot de passe</label>
-        <input type="password" class="form-input" name="password" id="password">
+        <input type="password" required="required" class="form-input" name="password" id="password">
     </div>
     <button type="submit" class="btn-form">Se connecter</button>
 </form>

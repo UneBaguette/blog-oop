@@ -34,14 +34,21 @@ abstract class Controller {
         return $this->db;
     }
 
+    protected static function defaultPageUser(): string {
+        return (($_SESSION['auth'] ?? 0) >= 1) ? '/admin' : '/posts';
+    }
+
+    protected static function redirectToMainPage() {
+        return isset($_SESSION['auth']) && header('Location: ' . self::defaultPageUser());
+    }
+
     protected function isAdmin()
     {
         if (isset($_SESSION['auth'])) {
             if ($_SESSION['auth'] >= 1){
                 return true;
             }
-            return NotFoundException::error404();
         }
-        return header('Location: /login');
+        return NotFoundException::error404();
     }
 }

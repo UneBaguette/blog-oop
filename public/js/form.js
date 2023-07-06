@@ -86,7 +86,6 @@
             imgDisplay.appendChild(imgText);
             imgDisplay.appendChild(input);
             imgDisplay.addEventListener('click', function() {
-                const inputImg = input;
                 const inputValue = input.value;
                 input.checked = !input.checked; 
                 if (input.checked){

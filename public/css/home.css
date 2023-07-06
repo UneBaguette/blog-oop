@@ -125,6 +125,10 @@ h1 {
     opacity: 1;
 }
 
+.img-container .overlay-vignette > p {
+    margin: 15px 10px;
+}
+
 @keyframes beat {
     0% {
         transform: scale(1);

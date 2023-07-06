@@ -81,11 +81,11 @@ class TagController extends Controller {
 
         if ($result) {
             http_response_code(200);
-            echo json_encode(["success" => 0]);
+            echo json_encode(["error" => false, "msg" => "Supprimé avec succès!"]);
             exit;
         }
         http_response_code(403);
-        echo json_encode(["error" => 0]);
+        echo json_encode(["error" => true, "msg" => "Ouch! Marche pas, tu es nul au passage!"]);
         exit(1);
     }
 }

@@ -24,14 +24,14 @@
                 </noscript>
                 <div class="thumbnail-container">
                     <?php for ($i = 0; $i < $limit; $i++): $img = $imgs[$i]; ?>
-                        <span class="img <?= $i === 0 ? 'primary': '' ?>">
+                        <span class="img<?= $i === 0 ? ' primary': '' ?>">
                             <img width="200" src="<?= $path . $img->filename ?>" alt="<?= $img->alt ?>">
                         </span>
                     <?php endfor; ?>
                 </div>
                 <div class="actions-dot">
                     <?php for($i = 0; $i < $limit; $i++): ?>
-                        <span class="<?= $i === 0 ? 'selected': '' ?>"></span>
+                        <span <?= $i === 0 ? 'class="selected"' : ''; ?>></span>
                     <?php endfor; ?>
                 </div>
             </div>

@@ -8,11 +8,13 @@ use App\Validation\Validator;
 class UserController extends Controller {
     public function login()
     {
+        parent::redirectToMainPage();
         return $this->view('auth.login');
     }
 
     public function register()
     {
+        parent::redirectToMainPage();
         return $this->view('auth.register');
     }
 

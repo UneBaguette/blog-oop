@@ -82,7 +82,7 @@ class ImageController extends Controller {
         $newName = $image->getNewFileName($_POST['filename']);
         $_POST["filename"] = $newName;
 
-        if ($image->renameAllFilesOnPaths($ogName, $newName, $path, $paths)) {
+        if ($image->renameAllFilesOnPaths($ogName, $newName, $paths)) {
             $result = $image->update($id, $_POST);
 
             if ($result) {
@@ -111,8 +111,8 @@ class ImageController extends Controller {
         }
         
         if ($image->destroy($id)) {
-            if ($image->fileExistsOnAllPaths($filename, $path, $paths)){
-                if ($image->deleteAllFilesOnPaths($filename, $path, $paths)){
+            if ($image->fileExistsOnAllPaths($filename, $paths)){
+                if ($image->deleteAllFilesOnPaths($filename, $paths)){
                     http_response_code(200);
                     echo json_encode(["error" => false, "msg" => "L'image et son fichier ont été supprimé avec succès !"]);
                     exit();
@@ -133,6 +133,8 @@ class ImageController extends Controller {
     public function allImages()
     {
         $this->isAdmin();
+        header('Access-Control-Allow-Methods: GET');
+        header('Content-Type: application/json; charset=utf-8');
 
         $images = (new Image($this->getDB()))->all();
 
@@ -142,7 +144,7 @@ class ImageController extends Controller {
             exit;
         }
         http_response_code(404);
-        echo json_encode(["error" => "Les images n'ont pas été trouvés !"]);
+        echo json_encode(["error" => true,"msg" => "Les images n'ont pas été trouvés !"]);
         exit(1);
     }
 

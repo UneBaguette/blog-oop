@@ -1,20 +1,20 @@
-<h1>S'enregistrer</h1>
+<?php $registered_permitted = false; if ($registered_permitted){ ?>
 
-<?php $registered_permitted = false; if (isset($_SESSION['errors'])):?>
+    <h1>S'enregistrer</h1>
 
-<?php foreach($_SESSION['errors'] as $errorsArray): ?>
-    <?php foreach($errorsArray as $errors): ?>
-        <div class="alert">
-            <?php foreach($errors as $error): ?>
-                <li><?= $error ?></li>
-            <?php endforeach ?>
-        </div>
-    <?php endforeach ?>
-<?php endforeach ?>
+    <?php if (isset($_SESSION['errors'])): ?>
 
-<?php endif ?>
+    <?php foreach($_SESSION['errors'] as $errorsArray): ?>
+        <?php foreach($errorsArray as $errors): ?>
+            <div class="alert">
+                <?php foreach($errors as $error): ?>
+                    <li><?= $error ?></li>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endforeach; $_SESSION['errors'] = [] ?>
 
-<?php if ($registered_permitted){ ?>
+    <?php endif; ?>
 
     <?php if (isset($_GET['error'])): ?>
 
@@ -25,15 +25,15 @@
 <form action="" method="POST">
     <div class="form-element">
         <label for="username">Nom d'utilisateur</label>
-        <input type="text" class="form-input" name="username" id="username">
+        <input type="text" required="required" class="form-input" name="username" id="username">
     </div>
     <div class="form-element">
         <label for="password">Mot de passe</label>
-        <input type="password" class="form-input" name="password" id="password">
+        <input type="password" required="required" class="form-input" name="password" id="password">
     </div>
     <div class="form-element">
         <label for="passwordverify">Confirmez le mot de passe</label>
-        <input type="password" class="form-input" name="passwordverify" id="passwordverify">
+        <input type="password" required="required" class="form-input" name="passwordverify" id="passwordverify">
     </div>
     <button type="submit" class="btn-form">S'enregistrer</button>
 </form>

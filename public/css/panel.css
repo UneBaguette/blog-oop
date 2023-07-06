@@ -495,6 +495,9 @@ input[type="file"]{
     opacity: 0;
     transition: 200ms ease opacity,  200ms ease transform;
     padding-right: 50px;
+    height: 80vh;
+    overflow: hidden;
+    /* overflow-y: auto; */
 }
 
 .popup > span {
@@ -545,13 +548,13 @@ input[type="file"]{
     border: 2px solid #00000089;
     min-width: 650px;
     max-width: 700px;
-    min-height: 300px;
-    max-height: 615px;
+    height: calc(100% - 200px);
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 3px;
     gap: 10px;
-    grid: repeat(auto-fill, minmax(150px,200px)) / repeat(3, minmax(150px,200px));
+    /* grid: repeat(auto-fill, minmax(150px,200px)) / repeat(3, minmax(150px,200px)); */
+    grid: repeat(auto-fill, minmax(180px,1000px)) / repeat(3, minmax(50px,220px));
     padding: 30px 0px;
     margin: 20px 0;
 }

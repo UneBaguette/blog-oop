@@ -16,7 +16,7 @@ $navbarLink = [
 if (isset($_SESSION['auth'])) {
     $authlink = array();
     if ($_SESSION['auth'] === 1 && (!$adminPage || (isset($_GET['onpage']) && $_GET['onpage']))) {
-        $authlink = array(HREF_ROOT . "admin/posts" => array("class" => "", "title" => "Panneau Administrateur")) + $authlink;
+        $authlink = array(HREF_ROOT . "admin" => array("class" => "", "title" => "Panneau Administrateur")) + $authlink;
     }
     $authlink += array(HREF_ROOT . "logout" => array("class" => "disconnect", "title" => "Se déconnecter"));
     $navbarLink['right'] = $authlink;
@@ -26,7 +26,7 @@ $navbarAdminLink = [
     HREF_ROOT . "admin/posts" => "Posts",
     HREF_ROOT . "admin/tags" => "Tags",
     HREF_ROOT . "admin/images" => "Images"
-];
+];  
 
 ?>
 <!DOCTYPE html>

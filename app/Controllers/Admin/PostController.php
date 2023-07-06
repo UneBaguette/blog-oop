@@ -13,6 +13,12 @@ class PostController extends Controller {
     {
         $this->isAdmin();
 
+        // TODO: There may be a better way to do it! :O
+        // if url is 'admin' redirect to 'posts' page
+        if (!(explode("/", strtok($_SERVER["REQUEST_URI"], "?"))[2] ?? "") && $this->isAdmin()) {
+            return header('Location: /admin/posts');
+        }
+
         $post = new Post($this->getDB());
 
         $posts = $post->all();
