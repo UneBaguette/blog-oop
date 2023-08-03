@@ -25,4 +25,15 @@
         });
     };
 
+    document.querySelector('.change-theme').addEventListener('click', changeTheme);
+
+    /**
+     * Change le thème ouah!
+     * @param {string} ev ZEOIKJZEIOKJT
+     * @returns vide
+     */
+    function changeTheme(ev) {
+        return localStorage.setItem("blog-theme", localStorage.getItem("blog-theme") === 'dark' ? 'light' : 'dark');
+    } 
+
 })();

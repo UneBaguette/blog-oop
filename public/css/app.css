@@ -10,7 +10,6 @@
     --border-rose: #ffacf8;
     --red: #910000;
 
-
     --error: #d60000;
     --error-transparent: #d60000bb;
     --success: #2fff3a;
@@ -416,33 +415,36 @@ footer span {
 /* WIP */
 
 .change-theme {
-    background: url(/public/content/sun-60.png) no-repeat;
     background-size: contain;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 15px;
     border-radius: 3px;
     margin: 0 10px;
     width: 30px;
     height: 30px;
-    background-color: #e4e4e4;
+    background-color: var(--white);
     transition: 300ms all ease;
 }
 
 .change-theme:hover {
-    background: url(/public/content/moon-symbol-60.png) no-repeat;
-    background-color: #cacaca;
+    background-color: #dddddd;
     background-size: contain;
 }
 
 .change-theme:active {
-    background: url(/public/content/moon-symbol-60.png) no-repeat;
-    background-color: #e4e4e4;
+    background-color: var(--white);
     background-size: contain;
 }
 
 .change-theme::before {
-    width: 30px;
-    height: 30px;
+    content: '';
+    background: url(/public/content/sun-60.png) no-repeat center center/cover;
+    width: 5px;
+    height: 5px;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    position:relative;
 }
